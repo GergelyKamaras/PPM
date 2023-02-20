@@ -1,0 +1,309 @@
+@startuml
+	package PropertyEntities
+	{
+		Interface IProperty
+		{
+			+ Name : string +<<get>> +<<set>>
+			+ readonly Address : Addres +<<get>>
+			- readonly PurchasePrice : decimal -<<get>>
+			- readonly PurchaseDate : DateTime +<<get>>
+			+ readonly Owner : IUser +<<get>>
+			+ Transactions : List<ITransaction> +<<get>> +<<set>>
+			+ ValueChanges : List<IValueChange> +<<get>> +<<set>>
+			+ FixedCosts : List<IYearlyFixedCost> +<<get>> +<<set>>
+			+ AmortizationRate : double +<<get>> +<<set>>
+		}
+		
+		Interface IRentable
+		{
+			+ Tenant : ITenant +<<get>> +<<set>>
+			+ RentalFee : decimal +<<get>> +<<set>>
+			+ YearlyFixedCosts : decimal +<<get>> +<<set>>
+			+ GenerateInvoice() : void
+		}
+		
+		Interface IRentableProperty
+		{
+		}
+		
+		Class Property
+		{
+		}
+		
+		Class RentableProperty
+		{
+		}
+	}
+	
+	package DTOs
+	{
+		package Properties
+		{
+			Interface IPropertyDTO
+			{
+				+ readonly Value : decimal +<<get>>
+				+ readonly AdjustedValue : decimal +<<get>>
+				+ readonly CurrentBalance : decimal +<<get>>
+				+ readonly CurrentBalanceAdjusted : decimal +<<get>>
+				+ PropertyDTO(IProperty) : PropertyDTO
+				- CalculateValue() : void
+				- CalculateAdjustedValue() : void
+				- CalculateBalance() : void
+				- CalculateBalanceAdjusted() : void
+			}
+			
+			Class PropertyDTO
+			{
+			}
+			
+			Interface IRentablePropertyDTO
+			{
+				+ IRentablePropertyDto(IRentableProperty) : IRentablePropertyDto
+				+ readonly YearlyRentalYield : double +<<get>>
+				+ readonly YearlyRentalYieldAdjusted : double +<<get>>
+				- CalculateYearlyRentalYield() : void
+				- CalculateYearlyRentalYieldAdjusted() : void
+			}
+			
+			Class RentablePropertyDTO
+			{
+			}
+		}
+		
+		package Portfolio
+		{
+			Interface IPortfolioValuator
+			{
+				+ readonly PortfolioValue : decimal
+				+ readonly PortfolioValueAdjusted : decimal
+				+ readonly PortfolioBalance : decimal
+				+ readonly PortfolioBalanceAdjusted : decimal
+				+ IPortfolioValuator(IOwner) : IPortfolioValuator
+				- CalculatePortfolioValue() : decimal
+				- CalculatePortfolioValueAdjusted() : decimal
+				- CalculatePortfolioBalance() : decimal
+				- CalculatePortfolioBalanceAdjusted() : decimal
+			}
+			
+			Class PortfolioValuator
+			{
+			}
+		}
+		
+		package UserDTOs
+		{
+			Interface IOwnerDTO
+			{
+				+ PropertyDTOs : List<IPropertyDTO> +<<get>> +<<set>>
+				+ PortfolioValuator : IPortfolioValuator +<<get>> +<<set>>
+				+ IOwnerDTO(IOwner) : IOwnerDTO
+			}
+		}
+	}
+	
+	package UtilityModels
+	{
+		Interface IAddress
+		{
+			+ Country : string +<<get>> +<<set>>
+			+ ZipCode : int +<<get>> +<<set>>
+			+ City : string +<<get>> +<<set>>
+			+ Street : string +<<get>> +<<set>>
+			+ StreetNumber: int +<<get>> +<<set>>
+			+ AdditionalInfo : string +<<get>> +<<set>>
+		}
+		
+		Class Address
+		{
+		}
+		
+		Interface IReminder
+		{
+			+ Title : string +<<get>> +<<set>>
+			+ Description : string +<<get>> +<<set>>
+			+ StartDate : DateTime +<<get>> +<<set>>
+			+ RecurrenceIntervalType : RecurrenceType +<<get>> +<<set>>
+			+ RecurrenceInterval : int +<<get>> +<<set>>
+		}
+		
+		Class Reminder
+		{
+		}
+		
+		Interface IYearlyFixedCost
+		{
+			+ Title : string +<<get>> +<<set>>
+			+ Description : string +<<get>> +<<set>>
+			+ Value : decimal +<<get>> +<<set>>
+		}
+		
+		Class YearlyFixedCost
+		{
+		}
+	}
+	
+	package ValueModifiers
+	{
+		Interface IValueChange
+		{
+			+ Title : string +<<get>> +<<set>>
+			+ Descriprion : string +<<get>> +<<set>>
+			+ Value : decimal +<<get>> +<<set>>
+			+ Date : DateTime +<<get>> +<<set>>
+		}
+		
+		Interface IValueIncrease
+		{
+		}
+		
+		Class ValueIncrease
+		{
+		}
+		
+		Interface IValueDecrease
+		{
+		}
+		
+		Class ValueDecrease
+		{
+		}
+	}
+	
+	
+	package Transactions
+	{
+		Interface ITransaction
+		{
+			+ Title : string +<<get>> +<<set>>
+			+ Description : string +<<get>> +<<set>>
+			+ Value : decimal +<<get>> +<<set>>
+			+ AdjustedValue : decimal +<<get>> +<<set>>
+			+ Date : DateTime +<<get>> +<<set>>
+		}
+		
+		Interface ICost
+		{
+		}
+		
+		class Cost
+		{
+		}
+		
+		class IRevenue
+		{
+		}
+		
+		class Revenue
+		{
+		}
+		
+		class RentalIncome
+		{
+		}
+	}
+	
+	package Users
+	{
+	
+		Interface IUser
+		{
+			+ readonly Role : Role +<<get>>
+			+ EmailAddress : string +<<get>> +<<set>>
+			+ Reminders : List<IReminder> +<<get>> +<<set>>
+		}
+		
+		Interface IOwner
+		{
+			+ Properties : List<IProperty> +<<get>> +<<set>>
+		}
+		
+		Class Owner
+		{
+		}
+		
+		Interface ITenant
+		{
+			+ Property : IRentable +<<get>> +<<set>>
+		}
+		
+		Class Tenant
+		{
+		}
+		
+		Interface IAdministrator
+		{
+		}
+		
+		Class Administrator
+		{
+		}
+	}
+	
+	Enum Role
+	{
+		Admin,
+		Owner,
+		Tenant
+	}
+	
+	Enum RecurrenceIntervalType
+	{
+		Day,
+		Week,
+		Month,
+		Year
+	}
+	
+	IOwner *- IProperty
+	IOwner *- IPortfolioValuator
+	ITenant - IRentable
+	IUser -- IReminder
+	
+	IProperty -- IPropertyDTO
+	IRentableProperty -- IRentablePropertyDTO
+	IOwner -- IOwnerDTO
+	
+	IProperty -- IValueChange
+	IProperty -- ITransaction
+	IProperty - IYearlyFixedCost
+	IProperty - IAddress
+	
+	IReminder - RecurrenceIntervalType
+	Role - IUser
+	
+	Reminder -[hidden]-> IValueChange
+	Address -[hidden]-> ITransaction
+	
+	Class Address implements IAddress
+	Class Reminder implements IReminder
+	Class YearlyFixedCost implements IYearlyFixedCost
+	
+	Class ValueIncrease implements IValueIncrease
+	Class ValueDecrease implements IValueDecrease
+	
+	Class PropertyDTO implements IPropertyDTO
+	Class RentablePropertyDTO implements IRentablePropertyDTO 
+	Class PortfolioValuator implements IPortfolioValuator
+	
+	Interface IValueIncrease implements IValueChange
+	Interface IValueDecrease implements IValueChange
+	
+	Interface IRentableProperty implements IRentable
+	Interface IRentableProperty implements IProperty
+	Class Property implements IProperty
+	Class RentableProperty implements IRentableProperty
+	
+	Interface ICost implements ITransaction
+	Interface IRevenue implements ITransaction
+	Class RentalIncome implements IRevenue
+	Class Cost implements ICost
+	Class Revenue implements IRevenue
+	
+	Interface IOwner implements IUser
+	Interface ITenant implements IUser
+	Interface IAdministrator implements IUser
+	Class Owner implements IOwner
+	Class Tenant implements ITenant
+	Class Administrator implements IAdministrator
+	
+@enduml
