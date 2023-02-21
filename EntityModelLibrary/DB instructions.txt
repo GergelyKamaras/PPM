@@ -1,3 +1,3 @@
-﻿On Model change run in PowerShell: 
-dotnet ef migration "MigrationName"
-dotnet database-update
+﻿On Model change run in Package manager console: 
+Add-Migration "MigrationName"
+Update-Database
