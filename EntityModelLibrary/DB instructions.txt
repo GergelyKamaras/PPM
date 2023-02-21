@@ -1,0 +1,3 @@
+﻿On Model change run in PowerShell: 
+dotnet ef migration "MigrationName"
+dotnet database-update
