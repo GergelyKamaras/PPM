@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityModelLibrary.Models.Users.Owner
+namespace DataAccess.Models.Users.Owner
 {
     public interface IOwner : IUser
     {

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityModelLibrary.Enums;
+using DataAccess.Enums;
 
-namespace EntityModelLibrary.Models.Users
+namespace DataAccess.Models.Users.Tenant
 {
-    public interface IUser
+    public class Tenant : ITenant
     {
-        public int Id { get; set; }
+        [Key]
         public ApplicationUser User { get; set; }
     }
 }

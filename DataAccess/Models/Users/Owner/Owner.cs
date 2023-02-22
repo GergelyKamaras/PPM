@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityModelLibrary.Enums;
+using DataAccess.Enums;
 
-namespace EntityModelLibrary.Models.Users.Administrator
+namespace DataAccess.Models.Users.Owner
 {
-    public class Administrator : IAdministrator
+    public class Owner : IOwner
     {
-        public int Id { get; set; }
+        [Key]
         public ApplicationUser User { get; set; }
     }
 }

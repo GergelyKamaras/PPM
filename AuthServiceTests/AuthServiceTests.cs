@@ -1,4 +1,4 @@
-namespace TestSuite
+namespace AuthServiceTests
 {
     public class Tests
     {

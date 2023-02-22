@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityModelLibrary.Enums;
+using DataAccess.Enums;
 
-namespace EntityModelLibrary.Models.Users.Tenant
+namespace DataAccess.Models.Users
 {
-    public class Tenant : ITenant
+    public interface IUser
     {
-        public int Id { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

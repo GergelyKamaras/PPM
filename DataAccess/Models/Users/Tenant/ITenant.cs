@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityModelLibrary.Models.Users.Administrator
+namespace DataAccess.Models.Users.Tenant
 {
-    public interface IAdministrator : IUser
+    public interface ITenant : IUser
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace EntityModelLibrary.Enums;
+﻿namespace DataAccess.Enums;
 
 public enum UserRole
 {

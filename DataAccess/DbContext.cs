@@ -1,13 +1,13 @@
-﻿using EntityModelLibrary.Models.Users;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
-using EntityModelLibrary.Models.Users.Administrator;
-using EntityModelLibrary.Models.Users.Owner;
-using EntityModelLibrary.Models.Users.Tenant;
+using DataAccess.Models.Users;
+using DataAccess.Models.Users.Administrator;
+using DataAccess.Models.Users.Owner;
+using DataAccess.Models.Users.Tenant;
 
-namespace EntityModelLibrary
+namespace DataAccess
 {
     internal class DbContext : IdentityDbContext<ApplicationUser>
     {

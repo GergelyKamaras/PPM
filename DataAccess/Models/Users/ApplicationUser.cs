@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityModelLibrary.Enums;
+using DataAccess.Enums;
 using Microsoft.AspNetCore.Identity;
 
-namespace EntityModelLibrary.Models.Users
+namespace DataAccess.Models.Users
 {
     public class ApplicationUser : IdentityUser
     {
