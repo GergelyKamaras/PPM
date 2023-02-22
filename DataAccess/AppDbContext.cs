@@ -9,7 +9,7 @@ using DataAccess.Models.Users.Tenant;
 
 namespace DataAccess
 {
-    internal class DbContext : IdentityDbContext<ApplicationUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         // for checking that DI is getting a different instance each time when the dbcontext is injected in the context of a web request
         private Guid _instanceId = Guid.NewGuid();
@@ -19,7 +19,7 @@ namespace DataAccess
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
 
-        public DbContext(DbContextOptions<DbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
@@ -60,7 +60,7 @@ namespace DataAccess
                 .ToTable("UserTokens", "Authentication");
         }
 
-        public static void AddBaseOptions(DbContextOptionsBuilder<DbContext> builder, string connectionString)
+        public static void AddBaseOptions(DbContextOptionsBuilder<AppDbContext> builder, string connectionString)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));

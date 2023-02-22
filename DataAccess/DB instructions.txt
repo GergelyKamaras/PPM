@@ -1,3 +1,4 @@
-﻿On Model change run in Package manager console: 
+﻿! Make sure the default project in PM console is the DataAccess project
+On Model change run in Package manager console: 
 Add-Migration "MigrationName"
 Update-Database

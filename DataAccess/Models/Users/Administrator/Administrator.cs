@@ -11,6 +11,7 @@ namespace DataAccess.Models.Users.Administrator
     public class Administrator : IAdministrator
     {
         [Key]
+        public int Id { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

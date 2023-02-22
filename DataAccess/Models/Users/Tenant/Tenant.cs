@@ -11,6 +11,7 @@ namespace DataAccess.Models.Users.Tenant
     public class Tenant : ITenant
     {
         [Key]
+        public int Id { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

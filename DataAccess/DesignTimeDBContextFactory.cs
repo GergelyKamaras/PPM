@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccess
 {
-    internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DbContext>
+    internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        public DbContext CreateDbContext(string[] args)
+        public AppDbContext CreateDbContext(string[] args)
         {
             string path = Directory.GetCurrentDirectory();
 
@@ -29,12 +29,12 @@ namespace DataAccess
                 throw new InvalidOperationException("Could not find connection string named 'ConnString'");
             }
 
-            DbContextOptionsBuilder<DbContext> dbContextOptionsBuilder =
-                new DbContextOptionsBuilder<DbContext>();
+            DbContextOptionsBuilder<AppDbContext> dbContextOptionsBuilder =
+                new DbContextOptionsBuilder<AppDbContext>();
 
-            DbContext.AddBaseOptions(dbContextOptionsBuilder, connectionString);
+            AppDbContext.AddBaseOptions(dbContextOptionsBuilder, connectionString);
 
-            return new DbContext(dbContextOptionsBuilder.Options);
+            return new AppDbContext(dbContextOptionsBuilder.Options);
         }
     }
 }
