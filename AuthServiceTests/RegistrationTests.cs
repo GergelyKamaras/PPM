@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AuthServiceTests
 {
     [TestFixture]
-    public class AuthServiceTests
+    public class RegistrationTests
     {
         private AppDbContext _dbContext;
         private IAuthQueries _queries;
