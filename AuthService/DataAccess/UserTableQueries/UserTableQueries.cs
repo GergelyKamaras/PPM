@@ -1,12 +1,12 @@
-﻿using DataAccess.Models.Users;
+﻿using PPMModelLibrary.Models.Users;
 
-namespace DataAccess.DbQueries.Users
+namespace AuthService.DataAccess.UserTableQueries
 {
     public class UserTableQueries : IUserTableQueries
     {
-        private readonly AppDbContext _db;
+        private readonly AuthDbContext _db;
 
-        public UserTableQueries(AppDbContext db)
+        public UserTableQueries(AuthDbContext db)
         {
             _db = db;
         }

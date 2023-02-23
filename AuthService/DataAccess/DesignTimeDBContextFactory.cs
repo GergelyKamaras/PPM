@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
-namespace DataAccess
+namespace AuthService.DataAccess
 {
-    internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AuthDbContext>
     {
-        public AppDbContext CreateDbContext(string[] args)
+        public AuthDbContext CreateDbContext(string[] args)
         {
             string path = Directory.GetCurrentDirectory();
 
@@ -29,12 +23,12 @@ namespace DataAccess
                 throw new InvalidOperationException("Could not find connection string named 'ConnString'");
             }
 
-            DbContextOptionsBuilder<AppDbContext> dbContextOptionsBuilder =
-                new DbContextOptionsBuilder<AppDbContext>();
+            DbContextOptionsBuilder<AuthDbContext> dbContextOptionsBuilder =
+                new DbContextOptionsBuilder<AuthDbContext>();
 
-            AppDbContext.AddBaseOptions(dbContextOptionsBuilder, connectionString);
+            AuthDbContext.AddBaseOptions(dbContextOptionsBuilder, connectionString);
 
-            return new AppDbContext(dbContextOptionsBuilder.Options);
+            return new AuthDbContext(dbContextOptionsBuilder.Options);
         }
     }
 }

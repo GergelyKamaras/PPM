@@ -1,6 +1,6 @@
 ﻿using System.Web.Helpers;
 
-namespace AuthService
+namespace AuthService.Authentication
 {
     public class SecurityUtil : ISecurityUtil
     {

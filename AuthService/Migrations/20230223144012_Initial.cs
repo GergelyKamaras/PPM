@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DataAccess.Migrations
+namespace AuthService.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -68,63 +68,6 @@ namespace DataAccess.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Administrators",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrators", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Administrators_Users_UserId",
-                        column: x => x.UserId,
-                        principalSchema: "Authentication",
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Owners",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Owners", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Owners_Users_UserId",
-                        column: x => x.UserId,
-                        principalSchema: "Authentication",
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tenants",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tenants", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tenants_Users_UserId",
-                        column: x => x.UserId,
-                        principalSchema: "Authentication",
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -222,16 +165,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Administrators_UserId",
-                table: "Administrators",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Owners_UserId",
-                table: "Owners",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 schema: "Authentication",
                 table: "RoleClaims",
@@ -244,11 +177,6 @@ namespace DataAccess.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tenants_UserId",
-                table: "Tenants",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -273,17 +201,8 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Administrators");
-
-            migrationBuilder.DropTable(
-                name: "Owners");
-
-            migrationBuilder.DropTable(
                 name: "RoleClaims",
                 schema: "Authentication");
-
-            migrationBuilder.DropTable(
-                name: "Tenants");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",

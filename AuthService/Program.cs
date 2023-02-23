@@ -1,10 +1,10 @@
-using AuthService;
-using DataAccess;
+using AuthService.Authentication;
+using AuthService.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AuthDbContext>();
 
 builder.Services.AddTransient<ISecurityUtil, SecurityUtil>();
 

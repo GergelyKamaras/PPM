@@ -1,24 +1,24 @@
-using DataAccess;
-using DataAccess.DbQueries.Users;
-using DataAccess.Enums;
-using DataAccess.Models.Users;
+using AuthService.DataAccess;
+using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
+using PPMModelLibrary.Enums;
+using PPMModelLibrary.Models.Users;
 
-namespace DataAcessTests
+namespace AuthServiceTests
 {
-    public class Tests
+    public class UserTableQueryTests
     {
-        private AppDbContext _dbContext;
+        private AuthDbContext _dbContext;
         private IUserTableQueries _queries;
 
         [SetUp]
         public void Setup()
         {
             var dbName = "testdb_" + DateTime.Now.ToFileTimeUtc();
-            var options = new DbContextOptionsBuilder<AppDbContext>()
+            var options = new DbContextOptionsBuilder<AuthDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
                 .Options;
-            _dbContext = new AppDbContext(options);
+            _dbContext = new AuthDbContext(options);
 
             _queries = new UserTableQueries(_dbContext);
         }

@@ -1,4 +1,4 @@
-﻿namespace AuthService;
+﻿namespace AuthService.Authentication;
 
 public interface ISecurityUtil
 {

@@ -1,25 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
-using DataAccess.Models.Users;
-using DataAccess.Models.Users.Administrator;
-using DataAccess.Models.Users.Owner;
-using DataAccess.Models.Users.Tenant;
+using PPMModelLibrary.Models.Users;
 
-namespace DataAccess
+namespace AuthService.DataAccess
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser>
+    public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         // for checking that DI is getting a different instance each time when the dbcontext is injected in the context of a web request
         private Guid _instanceId = Guid.NewGuid();
 
-        // DbSets for entity tables
-        public DbSet<Administrator> Administrators { get; set; }
-        public DbSet<Owner> Owners { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
-
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
         }
 
@@ -60,7 +51,7 @@ namespace DataAccess
                 .ToTable("UserTokens", "Authentication");
         }
 
-        public static void AddBaseOptions(DbContextOptionsBuilder<AppDbContext> builder, string connectionString)
+        public static void AddBaseOptions(DbContextOptionsBuilder<AuthDbContext> builder, string connectionString)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));

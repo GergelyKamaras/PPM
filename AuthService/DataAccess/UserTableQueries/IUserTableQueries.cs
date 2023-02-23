@@ -1,6 +1,6 @@
-﻿using DataAccess.Models.Users;
+﻿using PPMModelLibrary.Models.Users;
 
-namespace DataAccess.DbQueries.Users;
+namespace AuthService.DataAccess.UserTableQueries;
 
 public interface IUserTableQueries
 {
