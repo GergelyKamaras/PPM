@@ -1,5 +1,6 @@
 using AuthService.Authentication;
 using AuthService.DataAccess;
+using AuthService.ModelConverter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AuthDbContext>();
 
 builder.Services.AddTransient<ISecurityUtil, SecurityUtil>();
+builder.Services.AddTransient<IApplicationUserFactory, ApplicationUserFactory>();
 
 var app = builder.Build();
 
