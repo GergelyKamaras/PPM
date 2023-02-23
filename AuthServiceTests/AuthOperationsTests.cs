@@ -1,27 +1,30 @@
-using AuthService;
-using DataAccess;
-using DataAccess.Enums;
-using DataAccess.Models.Users;
+using AuthService.Authentication;
+using AuthService.DataAccess;
+using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
+using PPMModelLibrary.Enums;
+using PPMModelLibrary.Models.Users;
 
 namespace AuthServiceTests
 {
     [TestFixture]
-    public class RegistrationTests
+    public class AuthOperationsTests
     {
-        private AppDbContext _dbContext;
-        private IAuthQueries _queries;
+        private AuthDbContext _dbContext;
+        private IUserTableQueries _queries;
+        private IAuthOperations _operations;
 
         [SetUp]
         public void Setup()
         {
             var dbName = "testdb_" + DateTime.Now.ToFileTimeUtc();
-            var options = new DbContextOptionsBuilder<AppDbContext>()
+            var options = new DbContextOptionsBuilder<AuthDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
                 .Options;
-            _dbContext = new AppDbContext(options);
+            _dbContext = new AuthDbContext(options);
+            _queries = new UserTableQueries(_dbContext);
 
-            _queries = new AuthQueries(_dbContext);
+            _operations = new AuthOperations(_queries);
         }
 
         [Test]
@@ -42,8 +45,7 @@ namespace AuthServiceTests
                 };
                 
                 // Assert
-                Assert.IsTrue(_queries.Register(user));
-
+                Assert.IsTrue(_operations.Register(user));
             }
         }
 
@@ -63,12 +65,12 @@ namespace AuthServiceTests
                     Salt = "123",
                     Role = UserRole.Admin
                 };
-                
+
                 // Act 
-                _queries.Register(user);
+                _operations.Register(user);
 
                 // Assert
-                Assert.Throws<System.ArgumentException>(() => _queries.Register(user));
+                Assert.Throws<System.ArgumentException>(() => _operations.Register(user));
             }
         }
 
@@ -81,7 +83,7 @@ namespace AuthServiceTests
                 ApplicationUser user = new ApplicationUser();
 
                 // Assert
-                Assert.Throws<DbUpdateException>(() => _queries.Register(user));
+                Assert.Throws<DbUpdateException>(() => _operations.Register(user));
             }
         }
 
@@ -101,9 +103,9 @@ namespace AuthServiceTests
                     Salt = "123",
                     Role = UserRole.Admin
                 };
-                
+
                 // Act
-                _queries.Register(user);
+                _operations.Register(user);
 
                 // Assert
                 Assert.AreEqual(user, _dbContext.Users.FirstOrDefault(u => u.UserName == user.UserName));
@@ -138,8 +140,8 @@ namespace AuthServiceTests
                     Role = UserRole.Admin
                 };
 
-                _queries.Register(user1);
-                Assert.Throws<ArgumentException>(() => _queries.Register(user2));
+                _operations.Register(user1);
+                Assert.Throws<ArgumentException>(() => _operations.Register(user2));
             }
         }
 
@@ -170,12 +172,12 @@ namespace AuthServiceTests
                     Salt = "1232",
                     Role = UserRole.Admin
                 };
-                
+
                 // Act
-                _queries.Register(user1);
+                _operations.Register(user1);
 
                 // Assert
-                Assert.Throws<ArgumentException>(() => _queries.Register(user2));
+                Assert.Throws<ArgumentException>(() => _operations.Register(user2));
             }
         }
     }
