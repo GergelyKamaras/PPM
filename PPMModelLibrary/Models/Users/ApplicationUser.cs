@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DataAccess.Enums;
+using PPMModelLibrary.Enums;
 using Microsoft.AspNetCore.Identity;
 
-namespace DataAccess.Models.Users
+namespace PPMModelLibrary.Models.Users
 {
     public class ApplicationUser : IdentityUser
     {

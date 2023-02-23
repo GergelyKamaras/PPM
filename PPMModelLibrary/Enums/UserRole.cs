@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Enums;
+﻿namespace PPMModelLibrary.Enums;
 
 public enum UserRole
 {

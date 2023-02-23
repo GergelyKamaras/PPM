@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceTests", "AuthSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAcessTests", "DataAcessTests\DataAcessTests.csproj", "{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMModelLibrary", "PPMModelLibrary\PPMModelLibrary.csproj", "{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
