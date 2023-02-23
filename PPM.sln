@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{FB699C0C-2C7D-4DBE-B515-52486134E381}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPI", "PPMAPI\PPMAPI.csproj", "{64912FDA-188B-4FD1-A33E-5708A89DFF11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "AuthService\AuthService.csproj", "{6F244402-AC61-4349-B97D-8986CBEF562B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceTests", "AuthServiceTests\AuthServiceTests.csproj", "{1866639B-7352-47DA-83BB-02BF86DE6423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAcessTests", "DataAcessTests\DataAcessTests.csproj", "{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMModelLibrary", "PPMModelLibrary\PPMModelLibrary.csproj", "{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB699C0C-2C7D-4DBE-B515-52486134E381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB699C0C-2C7D-4DBE-B515-52486134E381}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB699C0C-2C7D-4DBE-B515-52486134E381}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB699C0C-2C7D-4DBE-B515-52486134E381}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64912FDA-188B-4FD1-A33E-5708A89DFF11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64912FDA-188B-4FD1-A33E-5708A89DFF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64912FDA-188B-4FD1-A33E-5708A89DFF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +29,10 @@ Global
 		{1866639B-7352-47DA-83BB-02BF86DE6423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1866639B-7352-47DA-83BB-02BF86DE6423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1866639B-7352-47DA-83BB-02BF86DE6423}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F26B0DE-69F5-47A6-8EEF-CFD747064C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
