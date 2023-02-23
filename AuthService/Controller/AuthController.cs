@@ -1,8 +1,8 @@
 ﻿using AuthService.Authentication;
 using AuthService.ModelConverter;
 using Microsoft.AspNetCore.Mvc;
-using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.InputDTOs;
+using PPMModelLibrary.Models.Users;
 
 namespace AuthService.Controller
 {
@@ -10,19 +10,32 @@ namespace AuthService.Controller
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IApplicationUserFactory _converter;
+        private readonly IApplicationUserFactory _factory;
         private readonly ISecurityUtil _secutil;
-        public AuthController(IApplicationUserFactory converter, ISecurityUtil secutil)
+        private readonly IAuthOperations _ops;
+        public AuthController(IApplicationUserFactory factory, ISecurityUtil secutil, IAuthOperations ops)
         {
-            _converter = converter;
+            _factory = factory;
             _secutil = secutil;
+            _ops = ops;
         }
 
         [Route("register")]
         [HttpPost]
-        public IResult Register(UserRegistrationDTO user)
+        public IResult Register(UserRegistrationDTO userDTO)
         {
-            return Results.Ok();
+            ApplicationUser user = _factory.Converter(userDTO);
+            if (_ops.Register(user))
+            {
+                return Results.Ok();
+            }
+            return Results.Problem("Error registering user", statusCode:500);
+        }
+
+        [HttpGet]
+        public string Test()
+        {
+            return "Hello There";
         }
     }
 }
