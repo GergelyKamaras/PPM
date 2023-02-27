@@ -1,6 +1,6 @@
 ﻿using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
-using PPMModelLibrary.Models.Users;
+using AuthServiceModelLibrary.ApplicationUser;
 
 
 namespace AuthService.Authentication

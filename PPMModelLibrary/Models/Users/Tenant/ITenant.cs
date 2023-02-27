@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Models.Users.Tenant
+﻿namespace AuthServiceModelLibrary.ApplicationUser.Tenant
 {
     public interface ITenant : IUser
     {

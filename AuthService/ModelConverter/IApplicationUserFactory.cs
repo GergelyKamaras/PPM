@@ -1,5 +1,5 @@
-﻿using PPMModelLibrary.Models.InputDTOs;
-using PPMModelLibrary.Models.Users;
+﻿using AuthServiceModelLibrary.ApplicationUser;
+using AuthServiceModelLibrary.DTOs;
 
 namespace AuthService.ModelConverter;
 

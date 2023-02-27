@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PPMModelLibrary.Models.InputDTOs
+﻿namespace AuthServiceModelLibrary.DTOs
 {
-    public class UserRegistrationDTO
+    public class UserRegistrationDTO : IUserRegistrationDTO
     {
         public string Email { get; set; }
         public string Username { get; set; }

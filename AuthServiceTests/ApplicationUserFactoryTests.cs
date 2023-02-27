@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AuthService.Authentication;
 using AuthService.ModelConverter;
-using PPMModelLibrary.Models.InputDTOs;
-using PPMModelLibrary.Models.Users;
+using AuthServiceModelLibrary.DTOs;
+using AuthServiceModelLibrary.ApplicationUser;
 
 namespace AuthServiceTests
 {

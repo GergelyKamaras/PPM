@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.Users;
+﻿using AuthServiceModelLibrary.ApplicationUser;
 
 namespace AuthService.DataAccess.UserTableQueries
 {
