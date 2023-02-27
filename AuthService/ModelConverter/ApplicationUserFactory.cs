@@ -31,9 +31,11 @@ namespace AuthService.ModelConverter
                     throw new ArgumentException("Invalid user role!");
             }
 
+            Guid id = Guid.NewGuid();
+
             return new ApplicationUser()
             {
-                Id = new Guid().ToString(),
+                Id = id.ToString(),
                 Email = userDTO.Email,
                 UserName = userDTO.Username,
                 FirstName = userDTO.FirstName,
