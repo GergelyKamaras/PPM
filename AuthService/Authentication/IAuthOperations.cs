@@ -4,6 +4,6 @@ namespace AuthService.Authentication
 {
     public interface IAuthOperations
     {
-        bool Register(IApplicationUser user);
+        bool Register(ApplicationUser user);
     }
 }

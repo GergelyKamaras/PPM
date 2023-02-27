@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AuthServiceModelLibrary.ApplicationUser
 {
-    public class ApplicationUser : IdentityUser, IApplicationUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         public override string Email { get; set; }
