@@ -12,7 +12,7 @@ namespace AuthService.Authentication
         {
             _queries = queries;
         }
-        public bool Register(ApplicationUser user)
+        public bool Register(IApplicationUser user)
         {
             if (_queries.GetUserByEmail(user.Email) != null)
             {
