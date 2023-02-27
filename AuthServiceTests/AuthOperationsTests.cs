@@ -4,6 +4,7 @@ using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
 using AuthServiceModelLibrary.Enums;
 using AuthServiceModelLibrary.ApplicationUser;
+using AuthServiceModelLibrary.DTOs;
 
 namespace AuthServiceTests
 {
@@ -13,6 +14,7 @@ namespace AuthServiceTests
         private AuthDbContext _dbContext;
         private IUserTableQueries _queries;
         private IAuthOperations _operations;
+        private ISecurityUtil _securityUtil;
 
         [SetUp]
         public void Setup()
@@ -23,8 +25,8 @@ namespace AuthServiceTests
                 .Options;
             _dbContext = new AuthDbContext(options);
             _queries = new UserTableQueries(_dbContext);
-
-            _operations = new AuthOperations(_queries);
+            _securityUtil = new SecurityUtil();
+            _operations = new AuthOperations(_queries, _securityUtil);
         }
 
         [Test]
@@ -108,7 +110,7 @@ namespace AuthServiceTests
                 _operations.Register(user);
 
                 // Assert
-                Assert.AreEqual(user, _dbContext.Users.FirstOrDefault(u => u.UserName == user.UserName));
+                Assert.That(_dbContext.Users.FirstOrDefault(u => u.UserName == user.UserName), Is.EqualTo(user));
             }
         }
 
@@ -178,6 +180,82 @@ namespace AuthServiceTests
 
                 // Assert
                 Assert.Throws<ArgumentException>(() => _operations.Register(user2));
+            }
+        }
+
+        [Test]
+        public void Login_ExistingUser_ReturnSameUser()
+        {
+            // Arrange
+            using (_dbContext)
+            {
+                string password = "pw";
+                string salt = _securityUtil.CreateSalt();
+
+                ApplicationUser user = new ApplicationUser()
+                {
+                    FirstName = "Jolan",
+                    LastName = "Hegyi",
+                    UserName = "Hegyine",
+                    Email = "hegyine@hegy.com",
+                    Salt = salt,
+                    PasswordHash = _securityUtil.HashPassword(password, salt),
+                    Role = UserRole.Administrator
+                };
+
+                // Act
+                _dbContext.Users.Add(user);
+                _dbContext.SaveChanges();
+
+                IUserLoginDTO userDTO = new UserLoginDTO();
+                userDTO.Email = user.Email;
+                userDTO.Password = password;
+
+                // Assert
+                Assert.That(user, Is.SameAs(_operations.Login(userDTO)));
+            }
+        }
+
+        [Test]
+        public void Login_MissingUser_ThrowsError()
+        {
+            // Arrange
+            IUserLoginDTO userLoginDto = new UserLoginDTO();
+            userLoginDto.Email = "NotAnEmail";
+            userLoginDto.Password = "NotAPassword";
+
+            // Assert
+            Assert.Throws<ArgumentException>(() => _operations.Login(userLoginDto));
+        }
+
+        [Test]
+        public void Login_WrongPassword_ThrowsError()
+        {
+            // Arrange
+            using (_dbContext)
+            {
+                string password = "pw";
+                string salt = _securityUtil.CreateSalt();
+
+                ApplicationUser user = new ApplicationUser()
+                {
+                    FirstName = "Jolan",
+                    LastName = "Hegyi",
+                    UserName = "Hegyine",
+                    Email = "hegyine@hegy.com",
+                    Salt = salt,
+                    PasswordHash = _securityUtil.HashPassword(password, salt),
+                    Role = UserRole.Administrator
+                };
+
+                // Act
+                _dbContext.Users.Add(user);
+                IUserLoginDTO userDTO = new UserLoginDTO();
+                userDTO.Email = user.Email;
+                userDTO.Password = "WrongPassword";
+
+                // Assert
+                Assert.Throws<ArgumentException>(() => _operations.Login(userDTO));
             }
         }
     }

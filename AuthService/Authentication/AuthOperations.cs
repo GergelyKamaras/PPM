@@ -1,6 +1,7 @@
 ﻿using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
 using AuthServiceModelLibrary.ApplicationUser;
+using AuthServiceModelLibrary.DTOs;
 
 
 namespace AuthService.Authentication
@@ -8,9 +9,11 @@ namespace AuthService.Authentication
     public class AuthOperations : IAuthOperations
     {
         private readonly IUserTableQueries _queries;
-        public AuthOperations(IUserTableQueries queries)
+        private readonly ISecurityUtil _securityUtil;
+        public AuthOperations(IUserTableQueries queries, ISecurityUtil securityUtil)
         {
             _queries = queries;
+            _securityUtil = securityUtil;
         }
         public bool Register(ApplicationUser user)
         {
@@ -25,6 +28,22 @@ namespace AuthService.Authentication
 
             _queries.AddUser(user);
             return true;
+        }
+
+        public ApplicationUser Login(IUserLoginDTO loginDTO)
+        {
+            ApplicationUser user = _queries.GetUserByEmail(loginDTO.Email);
+            if (user == null)
+            {
+                throw new ArgumentException("No user with given email exists in database");
+            }
+
+            if (!_securityUtil.VerifyPassword(loginDTO.Password, user.Salt, user.PasswordHash))
+            {
+                throw new ArgumentException("Password verification error");
+            }
+
+            return user;
         }
     }
 }
