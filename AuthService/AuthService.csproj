@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PPMModelLibrary\PPMModelLibrary.csproj" />
+    <ProjectReference Include="..\AuthServiceModelLibrary\AuthServiceModelLibrary.csproj" />
   </ItemGroup>
 
 </Project>

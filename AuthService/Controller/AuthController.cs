@@ -1,8 +1,8 @@
 ﻿using AuthService.Authentication;
 using AuthService.ModelConverter;
 using Microsoft.AspNetCore.Mvc;
-using PPMModelLibrary.Models.InputDTOs;
-using PPMModelLibrary.Models.Users;
+using AuthServiceModelLibrary.ApplicationUser;
+using AuthServiceModelLibrary.DTOs;
 
 namespace AuthService.Controller
 {

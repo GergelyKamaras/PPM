@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Enums;
+﻿namespace AuthServiceModelLibrary.Enums;
 
 public enum UserRole
 {

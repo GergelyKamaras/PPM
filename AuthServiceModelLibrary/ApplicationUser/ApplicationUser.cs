@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PPMModelLibrary.Enums;
+using AuthServiceModelLibrary.Enums;
 using Microsoft.AspNetCore.Identity;
 
-namespace PPMModelLibrary.Models.Users
+namespace AuthServiceModelLibrary.ApplicationUser
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IApplicationUser
     {
         [Required]
         public override string Email { get; set; }

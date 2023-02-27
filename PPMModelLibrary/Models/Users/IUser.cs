@@ -1,8 +1,7 @@
-﻿namespace PPMModelLibrary.Models.Users
+﻿namespace AuthServiceModelLibrary.ApplicationUser
 {
     public interface IUser
     {
         public int Id { get; set; }
-        public ApplicationUser User { get; set; }
     }
 }

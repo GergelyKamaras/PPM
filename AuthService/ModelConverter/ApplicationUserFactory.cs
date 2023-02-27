@@ -1,7 +1,7 @@
 ﻿using AuthService.Authentication;
-using PPMModelLibrary.Enums;
-using PPMModelLibrary.Models.InputDTOs;
-using PPMModelLibrary.Models.Users;
+using AuthServiceModelLibrary.ApplicationUser;
+using AuthServiceModelLibrary.DTOs;
+using AuthServiceModelLibrary.Enums;
 
 namespace AuthService.ModelConverter
 {

@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Models.Users.Administrator
+﻿namespace AuthServiceModelLibrary.ApplicationUser.Administrator
 {
     public interface IAdministrator : IUser
     {
