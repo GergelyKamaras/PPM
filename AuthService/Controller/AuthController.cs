@@ -11,12 +11,10 @@ namespace AuthService.Controller
     public class AuthController : ControllerBase
     {
         private readonly IApplicationUserFactory _factory;
-        private readonly ISecurityUtil _secutil;
         private readonly IAuthOperations _ops;
-        public AuthController(IApplicationUserFactory factory, ISecurityUtil secutil, IAuthOperations ops)
+        public AuthController(IApplicationUserFactory factory, IAuthOperations ops)
         {
             _factory = factory;
-            _secutil = secutil;
             _ops = ops;
         }
 
@@ -32,10 +30,18 @@ namespace AuthService.Controller
             return Results.Problem("Error registering user", statusCode:500);
         }
 
-        [HttpGet]
-        public string Test()
+        [Route("login")]
+        [HttpPost]
+        public IResult Login(UserLoginDTO userDTO)
         {
-            return "Hello There";
+            try
+            {
+                return Results.Ok(_ops.Login(userDTO));
+            }
+            catch (ArgumentException ex)
+            {
+                return Results.Problem("Wrong email and/or password", statusCode:500);
+            }
         }
     }
 }
