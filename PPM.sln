@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceTests", "AuthSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMModelLibrary", "PPMModelLibrary\PPMModelLibrary.csproj", "{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceModelLibrary", "AuthServiceModelLibrary\AuthServiceModelLibrary.csproj", "{D995693B-A77A-4364-A175-AFC4C54529E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceModelLibrary", "AuthServiceModelLibrary\AuthServiceModelLibrary.csproj", "{D995693B-A77A-4364-A175-AFC4C54529E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25AEF28E-1D4F-408A-8C52-A7034ACFBAE3}"
+	ProjectSection(SolutionItems) = preProject
+		DockerReadme.txt = DockerReadme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
