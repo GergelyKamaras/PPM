@@ -3,13 +3,15 @@
 version: "3"
 services:
   authservice:
-    build: ./
+    env_file:
+        - .env
+    build: 
+        context: .
+        dockerfile: Dockerfile.authservice
     ports:
-      - 7200:7200
       - 80:80
-      - 44315:44315
     environment:
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "Secretopatronum_47"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERT_PASSWORD}
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/PPM.pfx"
       ASPNETCORE_ENVIRONMENT: "Development"
     volumes:
