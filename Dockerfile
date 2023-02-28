@@ -7,8 +7,8 @@ EXPOSE 7200
 # Needs to be run from parent PPM directory, routes need to be added as such
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["../AuthService/AuthService.csproj", "AuthService/"]
-COPY ["../AuthServiceModelLibrary/AuthServiceModelLibrary.csproj", "AuthServiceModelLibrary/"]
+COPY ["AuthService/AuthService.csproj", "AuthService/"]
+COPY ["AuthServiceModelLibrary/AuthServiceModelLibrary.csproj", "AuthServiceModelLibrary/"]
 RUN dotnet restore "AuthService/AuthService.csproj"
 COPY . .
 WORKDIR "/src/AuthService"

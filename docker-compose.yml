@@ -1,0 +1,16 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+version: "3"
+services:
+  authservice:
+    build: ./
+    ports:
+      - 7200:7200
+      - 80:80
+      - 44315:44315
+    environment:
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Secretopatronum_47"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/PPM.pfx"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/https/
