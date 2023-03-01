@@ -4,6 +4,7 @@ using AuthService.ModelConverter;
 using Microsoft.AspNetCore.Mvc;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuthService.Controller
 {
@@ -14,11 +15,15 @@ namespace AuthService.Controller
         private readonly IApplicationUserFactory _factory;
         private readonly IAuthOperations _ops;
         private readonly IRoleValidator _roleValidator;
-        public AuthController(IApplicationUserFactory factory, IAuthOperations ops, IRoleValidator roleValidator)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public AuthController(IApplicationUserFactory factory, IAuthOperations ops, 
+            IRoleValidator roleValidator, UserManager<ApplicationUser> userManager)
         {
             _factory = factory;
             _ops = ops;
             _roleValidator = roleValidator;
+            _userManager = userManager;
         }
 
         [Route("register")]
@@ -32,8 +37,12 @@ namespace AuthService.Controller
             }
             
             ApplicationUser user = _factory.Converter(userDTO);
-            
-            if (_ops.Register(user))
+
+            bool userRegResult = _ops.Register(user);
+
+            IdentityResult roleRegResult = await _userManager.AddToRoleAsync(user, user.Role);
+
+            if (userRegResult && roleRegResult == IdentityResult.Success)
             {
                 return Results.Ok();
             }
