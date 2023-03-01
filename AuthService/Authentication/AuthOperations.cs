@@ -1,5 +1,4 @@
-﻿using AuthService.DataAccess;
-using AuthService.DataAccess.UserTableQueries;
+﻿using AuthService.DataAccess.UserTableQueries;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 
@@ -27,6 +26,7 @@ namespace AuthService.Authentication
             }
 
             _queries.AddUser(user);
+
             return true;
         }
 

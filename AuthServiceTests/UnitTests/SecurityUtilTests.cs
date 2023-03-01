@@ -1,6 +1,6 @@
 ﻿using AuthService.Authentication;
 
-namespace AuthServiceTests
+namespace AuthServiceTests.UnitTests
 {
     [TestFixture]
     internal class SecurityUtilTests
@@ -48,6 +48,6 @@ namespace AuthServiceTests
 
             Assert.That(hashedPassword1, Is.Not.EqualTo(hashedPassword2));
         }
-        
+
     }
 }

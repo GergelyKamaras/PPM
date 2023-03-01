@@ -8,7 +8,7 @@ using AuthService.ModelConverter;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceModelLibrary.ApplicationUser;
 
-namespace AuthServiceTests
+namespace AuthServiceTests.UnitTests
 {
     internal class ApplicationUserFactoryTests
     {
