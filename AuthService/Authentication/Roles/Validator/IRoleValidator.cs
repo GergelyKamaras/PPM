@@ -2,5 +2,5 @@
 
 public interface IRoleValidator
 {
-    Task<bool> validate(string roleName);
+    Task<bool> Validate(string roleName);
 }

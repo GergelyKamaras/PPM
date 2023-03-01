@@ -30,7 +30,7 @@ namespace AuthService.Controller
         [HttpPost]
         public async Task<IResult> Register(UserRegistrationDTO userDTO)
         {
-            bool validRole = await _roleValidator.validate(userDTO.Role);
+            bool validRole = await _roleValidator.Validate(userDTO.Role);
             if (!validRole)
             {
                 return Results.Problem("Error, invalid user role!", statusCode: 500);

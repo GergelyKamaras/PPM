@@ -9,7 +9,7 @@ namespace AuthService.Authentication.Roles.Validator
         {
             _roleManager = roleManager;
         }
-        public async Task<bool> validate(string roleName)
+        public async Task<bool> Validate(string roleName)
         {
             return await _roleManager.RoleExistsAsync(roleName);
         }
