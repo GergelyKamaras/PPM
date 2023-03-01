@@ -1,5 +1,6 @@
 using AuthService.Authentication;
 using AuthService.Authentication.Roles;
+using AuthService.Authentication.Roles.Validator;
 using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
 using AuthService.ModelConverter;
@@ -29,6 +30,7 @@ builder.Services.AddTransient<ISecurityUtil, SecurityUtil>();
 builder.Services.AddTransient<IApplicationUserFactory, ApplicationUserFactory>();
 builder.Services.AddTransient<IAuthOperations, AuthOperations>();
 builder.Services.AddTransient<IUserTableQueries, UserTableQueries>();
+builder.Services.AddTransient<IRoleValidator, RoleValidator>();
 
 var app = builder.Build();
 
