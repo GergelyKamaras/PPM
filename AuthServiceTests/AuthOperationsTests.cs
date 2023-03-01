@@ -43,7 +43,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
                 
                 // Assert
@@ -65,7 +65,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act 
@@ -103,7 +103,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -128,7 +128,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 ApplicationUser user2 = new ApplicationUser()
@@ -139,7 +139,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw2",
                     Salt = "1232",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 _operations.Register(user1);
@@ -161,7 +161,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 ApplicationUser user2 = new ApplicationUser()
@@ -172,7 +172,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com2",
                     PasswordHash = "pw2",
                     Salt = "1232",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -200,7 +200,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     Salt = salt,
                     PasswordHash = _securityUtil.HashPassword(password, salt),
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -245,7 +245,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     Salt = salt,
                     PasswordHash = _securityUtil.HashPassword(password, salt),
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act

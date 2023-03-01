@@ -15,6 +15,6 @@ namespace AuthServiceModelLibrary.ApplicationUser
         public string Salt { get; set; }
         [Required]
         public override string PasswordHash { get; set; }
-        public UserRole Role { get; set; }
+        public string Role { get; set; }
     }
 }

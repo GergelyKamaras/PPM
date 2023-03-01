@@ -83,23 +83,5 @@ namespace AuthServiceTests
             // Assert
             Assert.That(appUser.PasswordHash, Is.Not.EqualTo(user.Password));
         }
-
-        [Test]
-        public void Converter_InvalidRole_ThrowsError()
-        {
-            // Arrange
-            UserRegistrationDTO user = new UserRegistrationDTO()
-            {
-                Email = "hegyiember@hegy.com",
-                FirstName = "Mr.",
-                LastName = "Hegyi",
-                Password = "SzeretemAHegyeket",
-                Role = "NotAValidRole",
-                Username = "Hegyiember"
-            };
-
-            // Assert
-            Assert.Throws<ArgumentException>(() => _factory.Converter(user));
-        }
     }
 }
