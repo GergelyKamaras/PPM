@@ -37,6 +37,18 @@ namespace AuthService.DataAccess
 
             builder.Entity<IdentityUserRole<string>>()
                 .ToTable("UserRoles", "Authentication");
+
+            builder.Entity<IdentityUserLogin<string>>()
+                .ToTable("UserLogins", "Authentication");
+
+            builder.Entity<IdentityUserClaim<string>>()
+                .ToTable("UserClaims", "Authentication");
+
+            builder.Entity<IdentityRoleClaim<string>>()
+                .ToTable("RoleClaims", "Authentication");
+
+            builder.Entity<IdentityUserToken<string>>()
+                .ToTable("UserTokens", "Authentication");
         }
 
         public static void AddBaseOptions(DbContextOptionsBuilder<AuthDbContext> builder, string connectionString)
