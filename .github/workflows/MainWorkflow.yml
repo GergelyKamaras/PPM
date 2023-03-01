@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: BackendTesting
+name: MainWorkflow
 
 on:
   push:
@@ -15,9 +15,8 @@ on:
 
 jobs:
   Testing:
-
+    name: Testing
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -30,3 +29,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+  Deployment:
+    name: Deployment
+    needs: Testing
+    if: github.ref == 'refs/heads/release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build images
+        run: echo Deploying...
