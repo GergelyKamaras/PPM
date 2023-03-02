@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AuthService.Authentication;
+﻿using AuthService.Authentication.SecurityUtil;
 using AuthService.ModelConverter;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceModelLibrary.ApplicationUser;

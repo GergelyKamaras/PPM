@@ -1,4 +1,4 @@
-﻿using AuthService.Authentication;
+﻿using AuthService.Authentication.SecurityUtil;
 
 namespace AuthServiceTests.UnitTests
 {

@@ -1,7 +1,6 @@
 using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
-using AuthServiceModelLibrary.Enums;
 using AuthServiceModelLibrary.ApplicationUser;
 
 namespace AuthServiceTests.UnitTests

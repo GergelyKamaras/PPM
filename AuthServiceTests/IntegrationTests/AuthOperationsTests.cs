@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using AuthService.Authentication.AuthOperations;
+using AuthService.Authentication.SecurityUtil;
 
 namespace AuthServiceTests.IntegrationTests
 {
