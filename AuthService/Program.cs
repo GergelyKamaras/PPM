@@ -1,3 +1,4 @@
+using System.Text;
 using AuthService.Authentication;
 using AuthService.Authentication.Roles;
 using AuthService.Authentication.Roles.Validator;
@@ -7,8 +8,10 @@ using AuthService.DataAccess.UserTableQueries;
 using AuthService.DataSeed;
 using AuthService.ModelConverter;
 using AuthServiceModelLibrary.ApplicationUser;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +28,36 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
+
+// Auth, JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true
+    };
+});
+
+builder.Services.AddAuthorization();
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+// Register own services
 builder.Services.AddTransient<ISecurityUtil, SecurityUtil>();
 builder.Services.AddTransient<IApplicationUserFactory, ApplicationUserFactory>();
 builder.Services.AddTransient<IAuthOperations, AuthOperations>();
@@ -57,5 +86,8 @@ SeedUser.Init(controller, seedService.GetRequiredService<IUserTableQueries>(), s
 app.MapControllers();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

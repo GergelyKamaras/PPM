@@ -1,4 +1,5 @@
-﻿using AuthService.Authentication;
+﻿using System.IdentityModel.Tokens.Jwt;
+using AuthService.Authentication;
 using AuthService.Authentication.Roles.Validator;
 using AuthService.ModelConverter;
 using Microsoft.AspNetCore.Mvc;
@@ -68,7 +69,13 @@ namespace AuthService.Controller
                 return Results.Problem("Wrong email and/or password" + ex, statusCode:500);
             }
 
-            return Results.Ok(_jwtService.GenerateLoginJWT(user));
+            JwtSecurityToken token = _jwtService.GenerateLoginJWT(user);
+
+            return Results.Ok(new
+            {
+                message = "Success",
+                token = new JwtSecurityTokenHandler().WriteToken(token)
+            });
         }
     }
 }

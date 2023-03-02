@@ -1,24 +1,51 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using AuthServiceModelLibrary.ApplicationUser;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Authentication
 {
     public class JWTService : IJWTService
     {
-        public JsonWebToken GenerateLoginJWT(ApplicationUser user)
+        private readonly IConfiguration _config;
+        public JWTService(IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _config = configuration;
+        }
+        
+        public JwtSecurityToken GenerateLoginJWT(ApplicationUser user)
+        {
+            List <Claim> claims = RetrieveUserClaims(user);
+            return CreateToken(claims);
         }
 
-        public List<ClaimsIdentity> RetrieveUserClaims(ApplicationUser user)
+        public List<Claim> RetrieveUserClaims(ApplicationUser user)
         {
-            throw new NotImplementedException();
+            List<Claim> claims = new List<Claim>();
+
+            claims.Add(new Claim(ClaimTypes.Role, user.Role));
+            claims.Add(new Claim("Id", user.Id));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+
+            return claims;
         }
 
-        public JsonWebToken CreateToken(List<ClaimsIdentity> claims)
+        public JwtSecurityToken CreateToken(List<Claim> claims)
         {
-            throw new NotImplementedException();
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
+
+            var token = new JwtSecurityToken(
+                issuer: _config["JWT:ValidIssuer"],
+                audience: _config["JWT:ValidAudience"],
+                expires: DateTime.Now.AddHours(3),
+                claims: claims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            return token;
         }
     }
 }
