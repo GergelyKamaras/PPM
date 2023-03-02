@@ -225,7 +225,7 @@ namespace AuthServiceTests.IntegrationTests
             userLoginDto.Password = "NotAPassword";
 
             // Assert
-            Assert.Throws<ArgumentException>(() => _operations.Login(userLoginDto));
+            Assert.Throws<ArgumentException>(() => _operations.VerifyLoginDTO(userLoginDto));
         }
 
         [Test]
@@ -255,7 +255,7 @@ namespace AuthServiceTests.IntegrationTests
                 userDTO.Password = "WrongPassword";
 
                 // Assert
-                Assert.Throws<ArgumentException>(() => _operations.Login(userDTO));
+                Assert.Throws<ArgumentException>(() => _operations.VerifyLoginDTO(userDTO));
             }
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace AuthService.Controller
 {
@@ -16,14 +17,17 @@ namespace AuthService.Controller
         private readonly IAuthOperations _ops;
         private readonly IRoleValidator _roleValidator;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IJWTService _jwtService;
 
         public AuthController(IApplicationUserFactory factory, IAuthOperations ops, 
-            IRoleValidator roleValidator, UserManager<ApplicationUser> userManager)
+            IRoleValidator roleValidator, UserManager<ApplicationUser> userManager,
+            IJWTService jwtService)
         {
             _factory = factory;
             _ops = ops;
             _roleValidator = roleValidator;
             _userManager = userManager;
+            _jwtService = jwtService;
         }
 
         [Route("register")]
@@ -61,8 +65,10 @@ namespace AuthService.Controller
             }
             catch (ArgumentException ex)
             {
-                return Results.Problem("Wrong email and/or password", statusCode:500);
+                return Results.Problem("Wrong email and/or password" + ex, statusCode:500);
             }
+
+            return Results.Ok(_jwtService.GenerateLoginJWT(user));
         }
     }
 }
