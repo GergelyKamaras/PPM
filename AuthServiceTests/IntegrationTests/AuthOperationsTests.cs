@@ -212,7 +212,7 @@ namespace AuthServiceTests.IntegrationTests
                 userDTO.Password = password;
 
                 // Assert
-                Assert.That(user, Is.SameAs(_operations.Login(userDTO)));
+                Assert.That(user, Is.SameAs(_operations.VerifyLoginDTO(userDTO)));
             }
         }
 

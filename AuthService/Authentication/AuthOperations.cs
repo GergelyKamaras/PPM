@@ -30,7 +30,7 @@ namespace AuthService.Authentication
             return true;
         }
 
-        public ApplicationUser Login(IUserLoginDTO loginDTO)
+        public ApplicationUser VerifyLoginDTO(IUserLoginDTO loginDTO)
         {
             ApplicationUser user = _queries.GetUserByEmail(loginDTO.Email);
             if (user == null)

@@ -6,6 +6,6 @@ namespace AuthService.Authentication
     public interface IAuthOperations
     {
         bool Register(ApplicationUser user);
-        ApplicationUser Login(IUserLoginDTO loginDTO);
+        ApplicationUser VerifyLoginDTO(IUserLoginDTO loginDTO);
     }
 }

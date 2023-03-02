@@ -54,9 +54,10 @@ namespace AuthService.Controller
         [HttpPost]
         public IResult Login(UserLoginDTO userDTO)
         {
+            ApplicationUser user;
             try
             {
-                return Results.Ok(_ops.Login(userDTO));
+                user = _ops.VerifyLoginDTO(userDTO);
             }
             catch (ArgumentException ex)
             {
