@@ -24,7 +24,6 @@ namespace AuthService.DataAccess
                 .Ignore(u => u.LockoutEnabled)
                 .Ignore(u => u.LockoutEnd)
                 .Ignore(u => u.TwoFactorEnabled)
-                .Ignore(u => u.NormalizedUserName)
                 .Ignore(u => u.NormalizedEmail)
                 .Ignore(u => u.EmailConfirmed)
                 .Ignore(u => u.SecurityStamp)

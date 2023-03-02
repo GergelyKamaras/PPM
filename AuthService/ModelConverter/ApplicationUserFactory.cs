@@ -1,7 +1,6 @@
-﻿using AuthService.Authentication;
+﻿using AuthService.Authentication.SecurityUtil;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
-using AuthServiceModelLibrary.Enums;
 
 namespace AuthService.ModelConverter
 {
@@ -15,21 +14,6 @@ namespace AuthService.ModelConverter
         public ApplicationUser Converter(UserRegistrationDTO userDTO)
         {
             string salt = _secUtil.CreateSalt();
-            UserRole role;
-            switch (userDTO.Role)
-            {
-                case "Administrator":
-                    role = UserRole.Administrator;
-                    break;
-                case "Owner":
-                    role = UserRole.Owner;
-                    break;
-                case "Tenant":
-                    role = UserRole.Tenant;
-                    break;
-                default:
-                    throw new ArgumentException("Invalid user role!");
-            }
 
             Guid id = Guid.NewGuid();
 
@@ -42,7 +26,7 @@ namespace AuthService.ModelConverter
                 LastName = userDTO.LastName,
                 Salt = salt,
                 PasswordHash = _secUtil.HashPassword(userDTO.Password, salt),
-                Role = role
+                Role = userDTO.Role
             };
         }
     }

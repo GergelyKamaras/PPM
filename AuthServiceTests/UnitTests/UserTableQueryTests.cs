@@ -1,10 +1,9 @@
 using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
-using AuthServiceModelLibrary.Enums;
 using AuthServiceModelLibrary.ApplicationUser;
 
-namespace AuthServiceTests
+namespace AuthServiceTests.UnitTests
 {
     public class UserTableQueryTests
     {
@@ -37,7 +36,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -75,7 +74,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -100,7 +99,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -131,7 +130,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Assert 
@@ -153,7 +152,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -192,7 +191,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -218,7 +217,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -244,7 +243,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -262,7 +261,7 @@ namespace AuthServiceTests
             // Assert
             Assert.That(_queries.GetUserById("NotAnId"), Is.Null);
         }
-        
+
         [Test]
         public void GetUserByEmail_NotInDb_ReturnsNull()
         {

@@ -2,11 +2,12 @@ using AuthService.Authentication;
 using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
-using AuthServiceModelLibrary.Enums;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using AuthService.Authentication.AuthOperations;
+using AuthService.Authentication.SecurityUtil;
 
-namespace AuthServiceTests
+namespace AuthServiceTests.IntegrationTests
 {
     [TestFixture]
     public class AuthOperationsTests
@@ -26,6 +27,7 @@ namespace AuthServiceTests
             _dbContext = new AuthDbContext(options);
             _queries = new UserTableQueries(_dbContext);
             _securityUtil = new SecurityUtil();
+
             _operations = new AuthOperations(_queries, _securityUtil);
         }
 
@@ -43,9 +45,9 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
-                
+
                 // Assert
                 Assert.IsTrue(_operations.Register(user));
             }
@@ -65,14 +67,14 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act 
                 _operations.Register(user);
 
                 // Assert
-                Assert.Throws<System.ArgumentException>(() => _operations.Register(user));
+                Assert.Throws<ArgumentException>(() => _operations.Register(user));
             }
         }
 
@@ -103,7 +105,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -128,7 +130,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 ApplicationUser user2 = new ApplicationUser()
@@ -139,7 +141,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw2",
                     Salt = "1232",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 _operations.Register(user1);
@@ -161,7 +163,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     PasswordHash = "pw",
                     Salt = "123",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 ApplicationUser user2 = new ApplicationUser()
@@ -172,7 +174,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com2",
                     PasswordHash = "pw2",
                     Salt = "1232",
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -200,7 +202,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     Salt = salt,
                     PasswordHash = _securityUtil.HashPassword(password, salt),
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -212,7 +214,7 @@ namespace AuthServiceTests
                 userDTO.Password = password;
 
                 // Assert
-                Assert.That(user, Is.SameAs(_operations.Login(userDTO)));
+                Assert.That(user, Is.SameAs(_operations.VerifyLoginDTO(userDTO)));
             }
         }
 
@@ -225,7 +227,7 @@ namespace AuthServiceTests
             userLoginDto.Password = "NotAPassword";
 
             // Assert
-            Assert.Throws<ArgumentException>(() => _operations.Login(userLoginDto));
+            Assert.Throws<ArgumentException>(() => _operations.VerifyLoginDTO(userLoginDto));
         }
 
         [Test]
@@ -245,7 +247,7 @@ namespace AuthServiceTests
                     Email = "hegyine@hegy.com",
                     Salt = salt,
                     PasswordHash = _securityUtil.HashPassword(password, salt),
-                    Role = UserRole.Administrator
+                    Role = "Administrator"
                 };
 
                 // Act
@@ -255,7 +257,7 @@ namespace AuthServiceTests
                 userDTO.Password = "WrongPassword";
 
                 // Assert
-                Assert.Throws<ArgumentException>(() => _operations.Login(userDTO));
+                Assert.Throws<ArgumentException>(() => _operations.VerifyLoginDTO(userDTO));
             }
         }
     }

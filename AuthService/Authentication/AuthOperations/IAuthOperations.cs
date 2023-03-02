@@ -1,11 +1,11 @@
 ﻿using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 
-namespace AuthService.Authentication
+namespace AuthService.Authentication.AuthOperations
 {
     public interface IAuthOperations
     {
         bool Register(ApplicationUser user);
-        ApplicationUser Login(IUserLoginDTO loginDTO);
+        ApplicationUser VerifyLoginDTO(IUserLoginDTO loginDTO);
     }
 }

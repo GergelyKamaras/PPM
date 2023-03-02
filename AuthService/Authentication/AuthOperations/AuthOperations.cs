@@ -1,10 +1,10 @@
-﻿using AuthService.DataAccess;
-using AuthService.DataAccess.UserTableQueries;
+﻿using AuthService.DataAccess.UserTableQueries;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using AuthService.Authentication.SecurityUtil;
 
 
-namespace AuthService.Authentication
+namespace AuthService.Authentication.AuthOperations
 {
     public class AuthOperations : IAuthOperations
     {
@@ -27,10 +27,11 @@ namespace AuthService.Authentication
             }
 
             _queries.AddUser(user);
+
             return true;
         }
 
-        public ApplicationUser Login(IUserLoginDTO loginDTO)
+        public ApplicationUser VerifyLoginDTO(IUserLoginDTO loginDTO)
         {
             ApplicationUser user = _queries.GetUserByEmail(loginDTO.Email);
             if (user == null)

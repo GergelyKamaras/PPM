@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AuthService.Authentication;
+﻿using AuthService.Authentication.SecurityUtil;
 using AuthService.ModelConverter;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceModelLibrary.ApplicationUser;
 
-namespace AuthServiceTests
+namespace AuthServiceTests.UnitTests
 {
     internal class ApplicationUserFactoryTests
     {
@@ -82,24 +77,6 @@ namespace AuthServiceTests
 
             // Assert
             Assert.That(appUser.PasswordHash, Is.Not.EqualTo(user.Password));
-        }
-
-        [Test]
-        public void Converter_InvalidRole_ThrowsError()
-        {
-            // Arrange
-            UserRegistrationDTO user = new UserRegistrationDTO()
-            {
-                Email = "hegyiember@hegy.com",
-                FirstName = "Mr.",
-                LastName = "Hegyi",
-                Password = "SzeretemAHegyeket",
-                Role = "NotAValidRole",
-                Username = "Hegyiember"
-            };
-
-            // Assert
-            Assert.Throws<ArgumentException>(() => _factory.Converter(user));
         }
     }
 }
