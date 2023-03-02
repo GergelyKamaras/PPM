@@ -8,6 +8,4 @@ namespace AuthService.Authentication;
 public interface IJWTService
 {
     JwtSecurityToken GenerateLoginJWT(ApplicationUser user);
-    List<Claim> RetrieveUserClaims(ApplicationUser user);
-    JwtSecurityToken CreateToken(List<Claim> claims);
 }

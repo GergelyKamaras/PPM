@@ -21,7 +21,7 @@ namespace AuthService.Authentication
             return CreateToken(claims);
         }
 
-        public List<Claim> RetrieveUserClaims(ApplicationUser user)
+        private List<Claim> RetrieveUserClaims(ApplicationUser user)
         {
             List<Claim> claims = new List<Claim>();
 
@@ -33,7 +33,7 @@ namespace AuthService.Authentication
             return claims;
         }
 
-        public JwtSecurityToken CreateToken(List<Claim> claims)
+        private JwtSecurityToken CreateToken(List<Claim> claims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
 
