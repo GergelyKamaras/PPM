@@ -1,5 +1,4 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using AuthService.Authentication;
 using AuthService.Authentication.Roles.Validator;
 using AuthService.ModelConverter;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.IIS.Core;
+using AuthService.Authentication.AuthOperations;
 
 namespace AuthService.Controller
 {

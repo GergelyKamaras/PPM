@@ -3,7 +3,7 @@ using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 
 
-namespace AuthService.Authentication
+namespace AuthService.Authentication.AuthOperations
 {
     public class AuthOperations : IAuthOperations
     {

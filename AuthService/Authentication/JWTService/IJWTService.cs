@@ -3,7 +3,7 @@ using System.Security.Claims;
 using AuthServiceModelLibrary.ApplicationUser;
 using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace AuthService.Authentication;
+namespace AuthService.Authentication.JWTService.JWTService;
 
 public interface IJWTService
 {

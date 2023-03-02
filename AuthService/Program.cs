@@ -1,7 +1,9 @@
 using System.Text;
-using AuthService.Authentication;
+using AuthService.Authentication.AuthOperations;
+using AuthService.Authentication.JWTService;
 using AuthService.Authentication.Roles;
 using AuthService.Authentication.Roles.Validator;
+using AuthService.Authentication.SecurityUtil;
 using AuthService.Controller;
 using AuthService.DataAccess;
 using AuthService.DataAccess.UserTableQueries;

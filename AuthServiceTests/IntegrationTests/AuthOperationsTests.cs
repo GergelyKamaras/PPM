@@ -4,6 +4,7 @@ using AuthService.DataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using AuthService.Authentication.AuthOperations;
 
 namespace AuthServiceTests.IntegrationTests
 {

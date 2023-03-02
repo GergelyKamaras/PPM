@@ -1,5 +1,4 @@
-﻿using AuthService.Authentication;
-using AuthServiceModelLibrary.ApplicationUser;
+﻿using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceModelLibrary.Enums;
 

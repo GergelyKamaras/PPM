@@ -5,7 +5,7 @@ using AuthServiceModelLibrary.ApplicationUser;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AuthService.Authentication
+namespace AuthService.Authentication.JWTService
 {
     public class JWTService : IJWTService
     {
@@ -14,10 +14,10 @@ namespace AuthService.Authentication
         {
             _config = configuration;
         }
-        
+
         public JwtSecurityToken GenerateLoginJWT(ApplicationUser user)
         {
-            List <Claim> claims = RetrieveUserClaims(user);
+            List<Claim> claims = RetrieveUserClaims(user);
             return CreateToken(claims);
         }
 
