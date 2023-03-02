@@ -1,6 +1,6 @@
-﻿using AuthServiceModelLibrary.ApplicationUser;
+﻿using AuthService.Authentication.SecurityUtil;
+using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
-using AuthServiceModelLibrary.Enums;
 
 namespace AuthService.ModelConverter
 {

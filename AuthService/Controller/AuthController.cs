@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using AuthService.Authentication.AuthOperations;
+using AuthService.Authentication.JWTService;
 
 namespace AuthService.Controller
 {

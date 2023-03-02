@@ -1,6 +1,7 @@
 ﻿using AuthService.DataAccess.UserTableQueries;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using AuthService.Authentication.SecurityUtil;
 
 
 namespace AuthService.Authentication.AuthOperations

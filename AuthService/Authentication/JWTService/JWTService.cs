@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Text;
 using AuthServiceModelLibrary.ApplicationUser;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Authentication.JWTService

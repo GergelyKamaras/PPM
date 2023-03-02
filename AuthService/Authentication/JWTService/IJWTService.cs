@@ -1,9 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using AuthServiceModelLibrary.ApplicationUser;
-using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace AuthService.Authentication.JWTService.JWTService;
+namespace AuthService.Authentication.JWTService;
 
 public interface IJWTService
 {
