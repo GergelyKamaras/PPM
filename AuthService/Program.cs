@@ -21,6 +21,17 @@ builder.Configuration.AddJsonFile("appsettings.json");
 string connString = builder.Configuration.GetConnectionString("ConnString");
 string seedUserPassword = builder.Configuration["SeedAdminPassword"];
 
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy(name: "CorsPolicy",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 // Add services to the container.
 builder.Services.AddDbContext<AuthDbContext>(options =>
 {
@@ -91,5 +102,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.Run();
