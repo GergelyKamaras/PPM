@@ -1,4 +1,4 @@
-export default function registerUser(url, data)
+export default function loginUser(url, data)
 {
     let domain = "https://" + window.location.hostname;
 
@@ -8,11 +8,13 @@ export default function registerUser(url, data)
         .then(response => {
             if (response.status === 200)
             {
-                alert("Successfully registered user!");
+                response.json()
+                    .then(r => console.log(r));
+                alert("You have logged in!");
             }
             else
             {
-                alert("Error while registering user!");
+                alert("Error Logging in!");
             }
         })
 }

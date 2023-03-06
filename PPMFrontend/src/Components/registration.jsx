@@ -1,9 +1,10 @@
+import registerUser from "../DataCommunication/RegisterUser.js";
 export default function Registration()
 {
     function handleSubmit(e){
         e.preventDefault();
-        let form = document.querySelector('#registrationForm');
-        console.log(new FormData(form));
+        let form = new FormData(document.querySelector('#registrationForm'));
+        registerUser(':8000/api/authentication/register', form);
     }
 
     return (
