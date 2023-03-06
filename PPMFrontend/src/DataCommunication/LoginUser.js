@@ -9,7 +9,10 @@ export default function loginUser(url, data)
             if (response.status === 200)
             {
                 response.json()
-                    .then(r => console.log(r));
+                    .then(r =>
+                        {
+                            localStorage.setItem("AccessToken", `bearer: ${r.token}`);
+                        });
                 alert("You have logged in!");
             }
             else
