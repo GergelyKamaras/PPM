@@ -33,7 +33,7 @@ namespace AuthService.Controller
 
         [Route("register")]
         [HttpPost]
-        public async Task<IResult> Register(UserRegistrationDTO userDTO)
+        public async Task<IResult> Register([FromForm] UserRegistrationDTO userDTO)
         {
             bool validRole = await _roleValidator.Validate(userDTO.Role);
             if (!validRole)
@@ -49,7 +49,7 @@ namespace AuthService.Controller
 
             if (userRegResult && roleRegResult == IdentityResult.Success)
             {
-                return Results.Ok();
+                return Results.Ok("Successfully registered user!");
             }
             
             return Results.Problem("Error registering user", statusCode:500);
@@ -57,7 +57,7 @@ namespace AuthService.Controller
 
         [Route("login")]
         [HttpPost]
-        public IResult Login(UserLoginDTO userDTO)
+        public IResult Login([FromForm] UserLoginDTO userDTO)
         {
             ApplicationUser user;
             try
