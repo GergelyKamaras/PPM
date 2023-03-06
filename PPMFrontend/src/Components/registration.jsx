@@ -1,10 +1,11 @@
 import registerUser from "../DataCommunication/RegisterUser.js";
+import { registrationEndpoint } from "../Config.js";
 export default function Registration()
 {
     function handleSubmit(e){
         e.preventDefault();
         let form = new FormData(document.querySelector('#registrationForm'));
-        registerUser(':8000/api/authentication/register', form);
+        registerUser(registrationEndpoint, form);
     }
 
     return (

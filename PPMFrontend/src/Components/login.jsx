@@ -1,11 +1,12 @@
 import loginUser from "../DataCommunication/LoginUser";
+import { loginEndpoint } from "../Config";
 
 export default function Login()
 {
     function handleSubmit(e){
         e.preventDefault();
         let form = new FormData(document.querySelector('#loginForm'));
-        loginUser(':8000/api/authentication/login', form);
+        loginUser(loginEndpoint, form);
     }
 
     return (
