@@ -78,7 +78,7 @@
 				+ readonly PortfolioValueAdjusted : decimal
 				+ readonly PortfolioBalance : decimal
 				+ readonly PortfolioBalanceAdjusted : decimal
-				+ IPortfolioValuator(IOwner) : IPortfolioValuator
+				+ IPortfolioValuator(Owner) : IPortfolioValuator
 				- CalculatePortfolioValue() : decimal
 				- CalculatePortfolioValueAdjusted() : decimal
 				- CalculatePortfolioBalance() : decimal
@@ -96,7 +96,7 @@
 			{
 				+ PropertyDTOs : List<IPropertyDTO> +<<get>> +<<set>>
 				+ PortfolioValuator : IPortfolioValuator +<<get>> +<<set>>
-				+ IOwnerDTO(IOwner) : IOwnerDTO
+				+ IOwnerDTO(Owner) : IOwnerDTO
 			}
 		}
 	}
@@ -207,43 +207,18 @@
 	
 		Interface IUser
 		{
-			+ readonly Role : Role +<<get>>
-			+ EmailAddress : string +<<get>> +<<set>>
-			+ Reminders : List<IReminder> +<<get>> +<<set>>
-		}
-		
-		Interface IOwner
-		{
-			+ Properties : List<IProperty> +<<get>> +<<set>>
+			+ UserId : string +<<get>> +<<set>>
 		}
 		
 		Class Owner
 		{
+			+ Properties : List<IProperty> +<<get>> +<<set>>
 		}
-		
-		Interface ITenant
+
+		Class Tenant
 		{
 			+ Property : IRentable +<<get>> +<<set>>
 		}
-		
-		Class Tenant
-		{
-		}
-		
-		Interface IAdministrator
-		{
-		}
-		
-		Class Administrator
-		{
-		}
-	}
-	
-	Enum Role
-	{
-		Admin,
-		Owner,
-		Tenant
 	}
 	
 	Enum RecurrenceIntervalType
@@ -254,14 +229,14 @@
 		Year
 	}
 	
-	IOwner *- IProperty
-	IOwner *- IPortfolioValuator
-	ITenant - IRentable
+	Owner *- IProperty
+	Owner *- IPortfolioValuator
+	Tenant - IRentable
 	IUser -- IReminder
 	
 	IProperty -- IPropertyDTO
 	IRentableProperty -- IRentablePropertyDTO
-	IOwner -- IOwnerDTO
+	Owner -- IOwnerDTO
 	
 	IProperty -- IValueChange
 	IProperty -- ITransaction
@@ -269,7 +244,6 @@
 	IProperty - IAddress
 	
 	IReminder - RecurrenceIntervalType
-	Role - IUser
 	
 	Reminder -[hidden]-> IValueChange
 	Address -[hidden]-> ITransaction
@@ -299,11 +273,7 @@
 	Class Cost implements ICost
 	Class Revenue implements IRevenue
 	
-	Interface IOwner implements IUser
-	Interface ITenant implements IUser
-	Interface IAdministrator implements IUser
-	Class Owner implements IOwner
-	Class Tenant implements ITenant
-	Class Administrator implements IAdministrator
+	Class Owner implements IUser
+	Class Tenant implements IUser
 	
 @enduml
