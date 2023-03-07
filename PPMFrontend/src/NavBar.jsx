@@ -38,6 +38,15 @@ export default function NavBar() {
                     <li>
                         <button id="test" onClick={handleClick} data-url=":8000">Test</button>
                     </li>
+                    <li>
+                        <button id="PPMAPITest" onClick={handleClick} data-url=":7001">PPMAPITest</button>
+                    </li>
+                    <li>
+                        <button id="PPMAPIAdminTest" onClick={handleClick} data-url=":7001/admintest">PPMAPIAdminTest</button>
+                    </li>
+                    <li>
+                        <button id="PPMAPIAuthTest" onClick={handleClick} data-url=":7001/authtest">PPMAPIAuthTest</button>
+                    </li>
                 </ul>
             </nav>
         </div>
