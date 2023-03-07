@@ -13,7 +13,7 @@ export default function AuthFetch(url, data, login = false)
                     response.json()
                         .then(r =>
                             {
-                                localStorage.setItem("AccessToken", `bearer: ${r.token}`);
+                                localStorage.setItem("AccessToken", `Bearer ${r.token}`);
                             });
                 }
             }
