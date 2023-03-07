@@ -9,25 +9,25 @@ namespace AuthService.Controller
     public class TestController : ControllerBase
     {
         [HttpGet]
-        public string TestGet()
+        public IResult TestGet()
         {
-            return "Hello there!";
+            return Results.Ok("Hello there!");
         }
 
         [HttpGet]
         [Route("admintest")]
         [Authorize(Roles = nameof(UserRoles.Administrator))]
-        public string AdminTest()
+        public IResult AdminTest()
         {
-            return "You're an admin Harry!";
+            return Results.Ok("You're an admin Harry!");
         }
 
         [HttpGet]
         [Route("authtest")]
         [Authorize]
-        public string AuthTest()
+        public IResult AuthTest()
         {
-            return "You're authorized Harry!";
+            return Results.Ok("You're authorized Harry!");
         }
     }
 }
