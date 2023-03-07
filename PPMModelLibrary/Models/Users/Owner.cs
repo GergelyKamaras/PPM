@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AuthServiceModelLibrary.ApplicationUser;
+using PPMModelLibrary.Models.Properties;
+using PPMModelLibrary.Users;
 
 namespace PPMModelLibrary.Models.Users
 {

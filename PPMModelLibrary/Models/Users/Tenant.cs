@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AuthServiceModelLibrary.ApplicationUser;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PPMModelLibrary.Models.Properties;
+using PPMModelLibrary.Users;
 
 namespace PPMModelLibrary.Models.Users
 {

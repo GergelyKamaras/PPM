@@ -1,4 +1,4 @@
-﻿namespace AuthServiceModelLibrary.ApplicationUser
+﻿namespace PPMModelLibrary.Users
 {
     public interface IUser
     {
