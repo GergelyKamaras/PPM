@@ -1,11 +1,11 @@
-import registerUser from "../DataCommunication/RegisterUser.js";
+import AuthFetch from "../DataCommunication/AuthFetch";
 import { registrationEndpoint } from "../Config.js";
 export default function Registration()
 {
     function handleSubmit(e){
         e.preventDefault();
         let form = new FormData(document.querySelector('#registrationForm'));
-        registerUser(registrationEndpoint, form);
+        AuthFetch(registrationEndpoint, form);
     }
 
     return (

@@ -1,4 +1,4 @@
-import loginUser from "../DataCommunication/LoginUser";
+import AuthFetch from "../DataCommunication/AuthFetch";
 import { loginEndpoint } from "../Config";
 
 export default function Login()
@@ -6,7 +6,7 @@ export default function Login()
     function handleSubmit(e){
         e.preventDefault();
         let form = new FormData(document.querySelector('#loginForm'));
-        loginUser(loginEndpoint, form);
+        AuthFetch(loginEndpoint, form, true);
     }
 
     return (
