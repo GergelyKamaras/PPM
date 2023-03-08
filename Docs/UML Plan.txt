@@ -103,7 +103,7 @@
 	
 	package UtilityModels
 	{
-		Interface IAddress
+		Class Address
 		{
 			+ Country : string +<<get>> +<<set>>
 			+ ZipCode : int +<<get>> +<<set>>
@@ -111,10 +111,6 @@
 			+ Street : string +<<get>> +<<set>>
 			+ StreetNumber: int +<<get>> +<<set>>
 			+ AdditionalInfo : string +<<get>> +<<set>>
-		}
-		
-		Class Address
-		{
 		}
 		
 		Interface IReminder
@@ -152,15 +148,7 @@
 			+ Date : DateTime +<<get>> +<<set>>
 		}
 		
-		Interface IValueIncrease
-		{
-		}
-		
 		Class ValueIncrease
-		{
-		}
-		
-		Interface IValueDecrease
 		{
 		}
 		
@@ -181,23 +169,11 @@
 			+ Date : DateTime +<<get>> +<<set>>
 		}
 		
-		Interface ICost
-		{
-		}
-		
 		class Cost
 		{
 		}
 		
-		class IRevenue
-		{
-		}
-		
-		class Revenue
-		{
-		}
-		
-		class RentalIncome
+		class Income
 		{
 		}
 	}
@@ -241,37 +217,30 @@
 	IProperty -- IValueChange
 	IProperty -- ITransaction
 	IProperty - IYearlyFixedCost
-	IProperty - IAddress
+	IProperty - Address
 	
 	IReminder - RecurrenceIntervalType
 	
 	Reminder -[hidden]-> IValueChange
 	Address -[hidden]-> ITransaction
 	
-	Class Address implements IAddress
 	Class Reminder implements IReminder
 	Class YearlyFixedCost implements IYearlyFixedCost
-	
-	Class ValueIncrease implements IValueIncrease
-	Class ValueDecrease implements IValueDecrease
 	
 	Class PropertyDTO implements IPropertyDTO
 	Class RentablePropertyDTO implements IRentablePropertyDTO 
 	Class PortfolioValuator implements IPortfolioValuator
 	
-	Interface IValueIncrease implements IValueChange
-	Interface IValueDecrease implements IValueChange
+	Class ValueIncrease implements IValueChange
+	Class ValueDecrease implements IValueChange
 	
 	Interface IRentableProperty implements IRentable
 	Interface IRentableProperty implements IProperty
 	Class Property implements IProperty
 	Class RentableProperty implements IRentableProperty
 	
-	Interface ICost implements ITransaction
-	Interface IRevenue implements ITransaction
-	Class RentalIncome implements IRevenue
-	Class Cost implements ICost
-	Class Revenue implements IRevenue
+	Class Cost implements ITransaction
+	Class Income implements ITransaction
 	
 	Class Owner implements IUser
 	Class Tenant implements IUser
