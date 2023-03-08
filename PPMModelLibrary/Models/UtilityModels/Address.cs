@@ -1,6 +1,6 @@
 ﻿namespace PPMModelLibrary.Models.UtilityModels
 {
-    internal class Address : IAddress
+    public class Address : IAddress
     {
         public int Id { get; set; }
         public string Country { get; set; }

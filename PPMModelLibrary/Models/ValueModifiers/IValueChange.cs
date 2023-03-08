@@ -1,6 +1,6 @@
 ﻿namespace PPMModelLibrary.Models.ValueModifiers
 {
-    internal class IValueChange
+    internal interface IValueChange
     {
         public string Title { get; set; }
         public string Description { get; set; }

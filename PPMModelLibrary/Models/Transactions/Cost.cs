@@ -1,6 +1,6 @@
 ﻿namespace PPMModelLibrary.Models.Transactions
 {
-    internal class Cost : ITransaction
+    public class Cost : ITransaction
     {
         public string Title { get; set; }
         public string Description { get; set; }

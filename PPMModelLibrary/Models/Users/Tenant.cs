@@ -8,7 +8,6 @@ namespace PPMModelLibrary.Models.Users
     {
         [Key]
         public string UserId { get; set; }
-
         private IRentable Property { get; set; }
     }
 }
