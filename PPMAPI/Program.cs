@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
+using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services.AddControllers();
 
 // Register own services
 builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
+builder.Services.AddTransient<ICostsQueries, CostsQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
