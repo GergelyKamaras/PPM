@@ -6,7 +6,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
     {
         public void AddCost(Cost cost);
         public Cost GetCostById(int id);
-        public List<Cost> GetCostByPropertyId(string id);
+        public List<Cost> GetCostByPropertyId(Guid id);
         public void UpdateCost(Cost cost);
         public void DeleteCost(int id);
     }

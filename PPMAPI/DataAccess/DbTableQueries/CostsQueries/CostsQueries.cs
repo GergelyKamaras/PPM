@@ -22,14 +22,15 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
             return _db.Costs.FirstOrDefault(c => c.Id == id);
         }
 
-        public List<Cost> GetCostByPropertyId(string id)
+        public List<Cost> GetCostByPropertyId(Guid id)
         {
-            throw new NotImplementedException();
+            return _db.Costs.Where(c => c.Property.Id == id || c.RentableProperty.Id == id).ToList();
         }
 
         public void UpdateCost(Cost cost)
         {
-            throw new NotImplementedException();
+            _db.Costs.Update(cost);
+            _db.SaveChanges();
         }
 
         public void DeleteCost(int id)

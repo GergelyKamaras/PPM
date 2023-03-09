@@ -3,8 +3,10 @@ using NUnit.Framework.Interfaces;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
+using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.UtilityModels;
+using Microsoft.Extensions.Hosting;
 
 namespace PPMAPITests
 {
@@ -75,31 +77,118 @@ namespace PPMAPITests
         [Test]
         public void GetCostByPropertyId_UsePropertyIsInDb_GetsCost()
         {
-            Assert.Pass();
+            Property property = new Property()
+            {
+                Id = Guid.NewGuid(),
+                Address = new Address()
+                    {
+                        Id = 1,
+                        Country = "VeryCountry",
+                        City = "Verycity",
+                        ZipCode = "9783",
+                        Street = "VeryStreet",
+                        Number = 973,
+                        AdditionalInfo = "Nothing Much"
+                },
+                Name = "RealProperty"
+            };
+
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50,
+                Property = property
+            };
+
+
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
+
+            Assert.That(_queries.GetCostByPropertyId(property.Id).Any(c => c.Id == cost.Id), Is.True);
         }
 
         [Test]
         public void GetCostByPropertyId_UseRentablePropertyIsInDb_GetsCost()
         {
-            Assert.Pass();
+            RentableProperty property = new RentableProperty()
+            {
+                Id = Guid.NewGuid(),
+                Address = new Address()
+                {
+                    Id = 1,
+                    Country = "VeryCountry",
+                    City = "Verycity",
+                    ZipCode = "9783",
+                    Street = "VeryStreet",
+                    Number = 973,
+                    AdditionalInfo = "Nothing Much"
+                },
+                Name = "RealProperty"
+            };
+
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50,
+                RentableProperty = property
+            };
+
+
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
+
+            Assert.That(_queries.GetCostByPropertyId(property.Id).Any(c => c.Id == cost.Id), Is.True);
         }
 
         [Test]
-        public void GetCostByPropertyId_InvalidId_ReturnsNull()
+        public void GetCostByPropertyId_InvalidId_ReturnsEmptyList()
         {
-            Assert.Pass();
+            Assert.That(_queries.GetCostByPropertyId(Guid.NewGuid()), Is.Empty);
         }
 
         [Test]
         public void UpdateCost_IsInDb_UpdatesSuccessfully()
         {
-            Assert.Pass();
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50
+            };
+
+
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
+            
+            string newTitle = "ReallyNotAScam";
+            cost.Title = newTitle;
+
+            _queries.UpdateCost(cost);
+
+            Assert.That(_db.Costs.FirstOrDefault(c => c.Id == cost.Id).Title, Is.SameAs(newTitle));
         }
 
         [Test]
         public void UpdateCost_NotInDb_ThrowsError()
         {
-            Assert.Pass();
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50
+            };
+
+            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateCost(cost));
         }
 
         [Test]
