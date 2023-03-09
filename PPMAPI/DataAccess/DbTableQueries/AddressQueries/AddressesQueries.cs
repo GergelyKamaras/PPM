@@ -12,7 +12,8 @@ namespace PPMAPI.DataAccess.DbTableQueries.AddressQueries
         }
         public void AddAddress(Address address)
         {
-            throw new NotImplementedException();
+            _db.Addresses.Add(address);
+            _db.SaveChanges();
         }
 
         public Address GetAddressById(int id)
