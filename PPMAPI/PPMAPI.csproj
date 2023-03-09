@@ -25,6 +25,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataAccess\DbTableQueries\AddressQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\CostsQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\ValueIncreasesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\ValueDecreasesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\TenantsQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\RevenuesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\RentablePropertiesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\PropertiesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\OwnerQueries\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
