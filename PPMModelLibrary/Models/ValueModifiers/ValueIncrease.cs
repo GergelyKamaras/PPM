@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PPMModelLibrary.Models.Properties;
+using System.ComponentModel.DataAnnotations;
 
 namespace PPMModelLibrary.Models.ValueModifiers
 {
@@ -10,5 +11,7 @@ namespace PPMModelLibrary.Models.ValueModifiers
         public string Description { get; set; }
         public decimal Value { get; set; }
         public DateTime Date { get; set; }
+        public Property? Property { get; set; }
+        public RentableProperty? RentableProperty { get; set; }
     }
 }

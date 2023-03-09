@@ -1,4 +1,6 @@
-﻿namespace PPMModelLibrary.Models.Transactions
+﻿using PPMModelLibrary.Models.Properties;
+
+namespace PPMModelLibrary.Models.Transactions
 {
     internal interface ITransaction
     {
@@ -6,5 +8,7 @@
         public string Description { get; set; }
         public decimal Value { get; set; }
         public DateTime Date { get; set; }
+        public Property? Property { get; set; }
+        public RentableProperty? RentableProperty { get; set; }
     }
 }
