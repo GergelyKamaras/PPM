@@ -29,7 +29,8 @@ namespace PPMAPI.DataAccess.DbTableQueries.AddressQueries
 
         public void DeleteAddress(int id)
         {
-            throw new NotImplementedException();
+            _db.Addresses.Remove(_db.Addresses.FirstOrDefault(a => a.Id == id));
+            _db.SaveChanges();
         }
     }
 }

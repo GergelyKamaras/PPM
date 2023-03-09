@@ -130,13 +130,33 @@ namespace PPMAPITests
         [Test]
         public void DeleteAddress_IsInDb_Successful()
         {
-            Assert.Pass();
+            // Arrange
+            Address address = new Address()
+            {
+                Id = 1,
+                Country = "VeryCountry",
+                City = "Verycity",
+                ZipCode = "9783",
+                Street = "VeryStreet",
+                Number = 973,
+                AdditionalInfo = "Nothing Much"
+            };
+
+            _db.Addresses.Add(address);
+            _db.SaveChanges();
+
+            // Act
+            _queries.DeleteAddress(address.Id);
+
+            // Assert
+            Assert.That(_db.Addresses.FirstOrDefault(a => a.Id == address.Id), Is.Null);
         }
 
         [Test]
         public void DeleteAddress_NotInDb_ThrowsError()
         {
-            Assert.Pass();
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => _queries.DeleteAddress(1));
         }
 
     }
