@@ -36,50 +36,95 @@ namespace PPMAPITests
                 Number = 973,
                 AdditionalInfo = "Nothing Much"
             };
-            using (_db)
-            {
-                // Act
-                _queries.AddAddress(address);
 
-                // Assert
-                Assert.That(_db.Addresses.FirstOrDefault(a => a.Id == address.Id), Is.Not.Null);
+            // Act
+            _queries.AddAddress(address);
+
+            // Assert
+            Assert.That(_db.Addresses.FirstOrDefault(a => a.Id == address.Id), Is.Not.Null);
             }
-        }
         
         [Test]
         public void AddAddress_InvalidInput_ThrowsError()
         {
             // Arrange
             Address address = new Address();
-            using (_db)
-            {
-                // Assert
-                Assert.Throws<DbUpdateException>(() => _queries.AddAddress(address));
-            }
+            
+            // Assert
+            Assert.Throws<DbUpdateException>(() => _queries.AddAddress(address));
         }
 
         [Test]
         public void GetAddressById_IsInDb_GetsAddress()
         {
-            Assert.Pass();
+            // Arrange
+            Address address = new Address()
+            {
+                Id = 1,
+                Country = "VeryCountry",
+                City = "Verycity",
+                ZipCode = "9783",
+                Street = "VeryStreet",
+                Number = 973,
+                AdditionalInfo = "Nothing Much"
+            };
+            
+            _db.Addresses.Add(address);
+            _db.SaveChanges();
+
+            // Assert
+            Assert.That(_queries.GetAddressById(address.Id), Is.SameAs(address));
         }
 
         [Test]
         public void GetAddressById_NotInDb_ThrowsError()
         {
-            Assert.Pass();
+            Assert.That(_queries.GetAddressById(1), Is.Null);
         }
 
         [Test]
         public void UpdateAddress_IsInDb_UpdatesSuccessfully()
         {
-            Assert.Pass();
+            // Arrange
+            Address address = new Address()
+            {
+                Id = 1,
+                Country = "VeryCountry",
+                City = "Verycity",
+                ZipCode = "9783",
+                Street = "VeryStreet",
+                Number = 973,
+                AdditionalInfo = "Nothing Much"
+            };
+
+            _db.Addresses.Add(address);
+            _db.SaveChanges();
+
+            // Act
+            address.Country = "TotallyARealCountry";
+            _queries.UpdateAddress(address);
+
+            // Assert
+            Assert.That(_queries.GetAddressById(address.Id).Country, Is.SameAs(address.Country));
         }
 
         [Test]
         public void UpdateAddress_NotInDb_ThrowsError()
         {
-            Assert.Pass();
+            // Arrange
+            Address address = new Address()
+            {
+                Id = 1,
+                Country = "VeryCountry",
+                City = "Verycity",
+                ZipCode = "9783",
+                Street = "VeryStreet",
+                Number = 973,
+                AdditionalInfo = "Nothing Much"
+            };
+
+            // Assert
+            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateAddress(address));
         }
 
         [Test]

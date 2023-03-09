@@ -18,12 +18,13 @@ namespace PPMAPI.DataAccess.DbTableQueries.AddressQueries
 
         public Address GetAddressById(int id)
         {
-            throw new NotImplementedException();
+            return _db.Addresses.FirstOrDefault(a => a.Id == id);
         }
 
         public void UpdateAddress(Address address)
         {
-            throw new NotImplementedException();
+            _db.Addresses.Update(address);
+            _db.SaveChanges();
         }
 
         public void DeleteAddress(int id)
