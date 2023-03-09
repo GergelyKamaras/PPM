@@ -1,7 +1,10 @@
-﻿namespace PPMModelLibrary.Models.UtilityModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PPMModelLibrary.Models.UtilityModels
 {
     public class Address : IAddress
     {
+        [Key]
         public int Id { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

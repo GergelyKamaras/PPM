@@ -2,11 +2,14 @@
 using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;
 using PPMModelLibrary.Models.ValueModifiers;
+using System.ComponentModel.DataAnnotations;
 
 namespace PPMModelLibrary.Models.Properties
 {
     public class RentableProperty : IRentableProperty
     {
+        [Key]
+        public int Id { get; set; }
         public Tenant Tenant { get; set; }
         public decimal RentalFee { get; set; }
         public string Name { get; set; }
@@ -17,11 +20,5 @@ namespace PPMModelLibrary.Models.Properties
         public List<Income> Incomes { get; set; }
         public List<ValueIncrease> ValueIncreases { get; set; }
         public List<ValueDecrease> ValueDecreases { get; set; }
-        public RentableProperty(decimal price, DateTime date, Address address)
-        {
-            Address = address;
-            PurchasePrice = price;
-            PurchaseDate = date;
-        }
     }
 }
