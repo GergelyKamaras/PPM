@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PPMAPI.DataAccess;
+using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,9 @@ builder.Services.AddDbContext<PPMDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+// Register own services
+builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
