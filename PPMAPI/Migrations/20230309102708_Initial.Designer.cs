@@ -12,7 +12,7 @@ using PPMAPI.DataAccess;
 namespace PPMAPI.Migrations
 {
     [DbContext(typeof(PPMDbContext))]
-    [Migration("20230309095710_Initial")]
+    [Migration("20230309102708_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -131,7 +131,7 @@ namespace PPMAPI.Migrations
                     b.ToTable("Costs");
                 });
 
-            modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Income", b =>
+            modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Revenue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,7 +165,7 @@ namespace PPMAPI.Migrations
 
                     b.HasIndex("RentablePropertyId");
 
-                    b.ToTable("Incomes");
+                    b.ToTable("Revenues");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.Users.Owner", b =>
@@ -347,14 +347,14 @@ namespace PPMAPI.Migrations
                         .HasForeignKey("RentablePropertyId");
                 });
 
-            modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Income", b =>
+            modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Revenue", b =>
                 {
                     b.HasOne("PPMModelLibrary.Models.Properties.Property", null)
-                        .WithMany("Incomes")
+                        .WithMany("Revenues")
                         .HasForeignKey("PropertyId");
 
                     b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", null)
-                        .WithMany("Incomes")
+                        .WithMany("Revenues")
                         .HasForeignKey("RentablePropertyId");
                 });
 
@@ -384,7 +384,7 @@ namespace PPMAPI.Migrations
                 {
                     b.Navigation("Costs");
 
-                    b.Navigation("Incomes");
+                    b.Navigation("Revenues");
 
                     b.Navigation("ValueDecreases");
 
@@ -395,7 +395,7 @@ namespace PPMAPI.Migrations
                 {
                     b.Navigation("Costs");
 
-                    b.Navigation("Incomes");
+                    b.Navigation("Revenues");
 
                     b.Navigation("ValueDecreases");
 

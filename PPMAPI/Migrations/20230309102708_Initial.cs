@@ -142,7 +142,7 @@ namespace PPMAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Incomes",
+                name: "Revenues",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -156,14 +156,14 @@ namespace PPMAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incomes", x => x.Id);
+                    table.PrimaryKey("PK_Revenues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Incomes_Properties_PropertyId",
+                        name: "FK_Revenues_Properties_PropertyId",
                         column: x => x.PropertyId,
                         principalTable: "Properties",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Incomes_RentableProperties_RentablePropertyId",
+                        name: "FK_Revenues_RentableProperties_RentablePropertyId",
                         column: x => x.RentablePropertyId,
                         principalTable: "RentableProperties",
                         principalColumn: "Id");
@@ -236,16 +236,6 @@ namespace PPMAPI.Migrations
                 column: "RentablePropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Incomes_PropertyId",
-                table: "Incomes",
-                column: "PropertyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Incomes_RentablePropertyId",
-                table: "Incomes",
-                column: "RentablePropertyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Properties_AddressId",
                 table: "Properties",
                 column: "AddressId");
@@ -269,6 +259,16 @@ namespace PPMAPI.Migrations
                 name: "IX_RentableProperties_TenantUserId",
                 table: "RentableProperties",
                 column: "TenantUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Revenues_PropertyId",
+                table: "Revenues",
+                column: "PropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Revenues_RentablePropertyId",
+                table: "Revenues",
+                column: "RentablePropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ValueDecreases_PropertyId",
@@ -298,7 +298,7 @@ namespace PPMAPI.Migrations
                 name: "Costs");
 
             migrationBuilder.DropTable(
-                name: "Incomes");
+                name: "Revenues");
 
             migrationBuilder.DropTable(
                 name: "ValueDecreases");

@@ -2,7 +2,7 @@
 
 namespace PPMModelLibrary.Models.Transactions
 {
-    public class Income : ITransaction
+    public class Revenue : ITransaction
     {
         [Key]
         public int Id { get; set; }

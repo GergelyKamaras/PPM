@@ -13,7 +13,7 @@ namespace PPMAPI.DataAccess
         public DbSet<Property> Properties { get; set; }
         public DbSet<RentableProperty> RentableProperties { get; set; }
         public DbSet<Cost> Costs { get; set; }
-        public DbSet<Income> Incomes { get; set; }
+        public DbSet<Revenue> Revenues { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -45,7 +45,7 @@ namespace PPMAPI.DataAccess
                 .Property(c => c.Value)
                 .HasColumnType("decimal");
 
-            builder.Entity<Income>()
+            builder.Entity<Revenue>()
                 .Property(c => c.Value)
                 .HasColumnType("decimal");
 
