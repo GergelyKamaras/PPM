@@ -7,11 +7,13 @@ namespace PPMAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        [HttpGet]
         public IResult Test()
         {
             return Results.Ok("I'm working");
         }
 
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route("/admintest")]
         public IResult AdminTest()
@@ -19,6 +21,7 @@ namespace PPMAPI.Controllers
             return Results.Ok("You're and admin Harry!");
         }
 
+        [HttpGet]
         [Authorize]
         [Route("/authtest")]
         public IResult AuthTest()
