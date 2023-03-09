@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.env = .env
 		Config locations.txt = Config locations.txt
+		Docs\DB instructions.txt = Docs\DB instructions.txt
 		docker-compose.yml = docker-compose.yml
 		Dockerfile.authservice = Dockerfile.authservice
 		DockerReadme.txt = DockerReadme.txt
@@ -28,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPI", "PPMAPI\PPMAPI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMDTOModelLibrary", "PPMDTOModelLibrary\PPMDTOModelLibrary.csproj", "{EC2F9676-716E-49D7-8357-25CE550EAFB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMAPITests", "PPMAPITests\PPMAPITests.csproj", "{3B0C618F-49F2-405F-9C4C-FC726381F0C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPITests", "PPMAPITests\PPMAPITests.csproj", "{3B0C618F-49F2-405F-9C4C-FC726381F0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMDTOTests", "PPMDTOTests\PPMDTOTests.csproj", "{646480F5-1E4C-4C61-8645-4F789612375F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMDTOTests", "PPMDTOTests\PPMDTOTests.csproj", "{646480F5-1E4C-4C61-8645-4F789612375F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,15 +1,24 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PPMAPI.DataAccess;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json");
+string connString = builder.Configuration.GetConnectionString("APIConnString");
+
 // Add services to the container.
+builder.Services.AddDbContext<PPMDbContext>(options =>
+{
+    options.UseSqlServer(connString);
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Configuration.AddJsonFile("appsettings.json");
 
 // CORS
 builder.Services.AddCors(o =>
