@@ -5,7 +5,7 @@ using PPMModelLibrary.Models.UtilityModels;
 
 namespace PPMAPITests
 {
-    public class Tests
+    public class AddressesQueriesTests
     {
         private PPMDbContext _db;
         private IAddressesQueries _queries;
