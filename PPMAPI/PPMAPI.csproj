@@ -1,17 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>52e50ebc-d760-48cf-bc7d-79c87ce576cf</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <UserSecretsId>5984a8b0-2050-48ea-82ae-18dd3d7d47b3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PPMDTOModelLibrary\PPMDTOModelLibrary.csproj" />
+    <ProjectReference Include="..\PPMModelLibrary\PPMModelLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataAccess\DbTableQueries\ValueIncreasesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\ValueDecreasesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\TenantsQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\RevenuesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\RentablePropertiesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\PropertiesQueries\" />
+    <Folder Include="DataAccess\DbTableQueries\OwnerQueries\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

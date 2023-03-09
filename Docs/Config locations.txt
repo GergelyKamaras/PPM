@@ -1,0 +1,2 @@
+JWT token config: user secrets in AuthService and PPMAPI
+Ports: launchsettings in servers, config.js in frontend
