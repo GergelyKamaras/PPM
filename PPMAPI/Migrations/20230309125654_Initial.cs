@@ -55,8 +55,7 @@ namespace PPMAPI.Migrations
                 name: "Properties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
@@ -82,8 +81,7 @@ namespace PPMAPI.Migrations
                 name: "RentableProperties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenantUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RentalFee = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -123,8 +121,8 @@ namespace PPMAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    RentablePropertyId = table.Column<int>(type: "int", nullable: true)
+                    PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RentablePropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -151,8 +149,8 @@ namespace PPMAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    RentablePropertyId = table.Column<int>(type: "int", nullable: true)
+                    PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RentablePropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -179,8 +177,8 @@ namespace PPMAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    RentablePropertyId = table.Column<int>(type: "int", nullable: true)
+                    PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RentablePropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,8 +205,8 @@ namespace PPMAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    RentablePropertyId = table.Column<int>(type: "int", nullable: true)
+                    PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RentablePropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {

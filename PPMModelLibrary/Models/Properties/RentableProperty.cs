@@ -9,7 +9,7 @@ namespace PPMModelLibrary.Models.Properties
     public class RentableProperty : IRentableProperty
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Tenant Tenant { get; set; }
         public decimal RentalFee { get; set; }
         public string Name { get; set; }
