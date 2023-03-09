@@ -19,7 +19,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
 
         public Cost GetCostById(int id)
         {
-            throw new NotImplementedException();
+            return _db.Costs.FirstOrDefault(c => c.Id == id);
         }
 
         public List<Cost> GetCostByPropertyId(string id)

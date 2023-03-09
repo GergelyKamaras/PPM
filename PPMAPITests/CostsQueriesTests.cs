@@ -51,13 +51,25 @@ namespace PPMAPITests
         [Test]
         public void GetCostById_IsInDb_GetsCost()
         {
-            Assert.Pass();
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50
+            };
+
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
+
+            Assert.That(_queries.GetCostById(cost.Id), Is.SameAs(cost));
         }
 
         [Test]
         public void GetCostById_NotInDb_ReturnsNull()
         {
-            Assert.Pass();
+            Assert.That(_queries.GetCostById(1), Is.Null);
         }
 
         [Test]
