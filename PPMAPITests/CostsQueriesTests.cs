@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NUnit.Framework.Interfaces;
-using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.UtilityModels;
-using Microsoft.Extensions.Hosting;
 
 namespace PPMAPITests
 {
@@ -194,13 +191,29 @@ namespace PPMAPITests
         [Test]
         public void DeleteCost_IsInDb_Successful()
         {
-            Assert.Pass();
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50
+            };
+
+
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
+
+            _queries.DeleteCost(cost.Id);
+            _db.SaveChanges();
+
+            Assert.That(_db.Costs.FirstOrDefault(c => c.Id == cost.Id), Is.Null);
         }
 
         [Test]
         public void DeleteCost_NotInDb_ThrowsError()
         {
-            Assert.Pass();
+            Assert.Throws<ArgumentNullException>(() => _queries.DeleteCost(0));
         }
     }
 }

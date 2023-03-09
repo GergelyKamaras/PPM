@@ -35,7 +35,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
 
         public void DeleteCost(int id)
         {
-            throw new NotImplementedException();
+            _db.Costs.Remove(_db.Costs.FirstOrDefault(c => c.Id == id));
         }
     }
 }
