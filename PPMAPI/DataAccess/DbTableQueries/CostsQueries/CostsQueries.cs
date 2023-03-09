@@ -13,7 +13,8 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
 
         public void AddCost(Cost cost)
         {
-            throw new NotImplementedException();
+            _db.Costs.Add(cost);
+            _db.SaveChanges();
         }
 
         public Cost GetCostById(int id)

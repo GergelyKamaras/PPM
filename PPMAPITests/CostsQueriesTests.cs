@@ -3,6 +3,7 @@ using NUnit.Framework.Interfaces;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
+using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.UtilityModels;
 
 namespace PPMAPITests
@@ -27,13 +28,24 @@ namespace PPMAPITests
         [Test]
         public void AddCost_ValidInput_IsInDb()
         {
-            Assert.Pass();
+            Cost cost = new Cost()
+            {
+                Id = 1,
+                Title = "TotallyValidCost",
+                Date = DateTime.Now,
+                Description = "NotAFictitiousExpense",
+                Value = 50
+            };
+
+            _queries.AddCost(cost);
+
+            Assert.That(_db.Costs.FirstOrDefault(c => c.Id == cost.Id), Is.SameAs(cost));
         }
 
         [Test]
         public void AddCost_InvalidInput_ThrowsError()
         {
-            Assert.Pass();
+            Assert.Throws<DbUpdateException>(() => _queries.AddCost(new Cost()));
         }
 
         [Test]
