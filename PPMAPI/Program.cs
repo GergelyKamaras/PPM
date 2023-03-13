@@ -27,6 +27,7 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
 builder.Services.AddTransient<ICostsQueries, CostsQueries>();
 builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
+builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
