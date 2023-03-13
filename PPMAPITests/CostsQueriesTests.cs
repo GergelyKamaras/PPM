@@ -205,7 +205,6 @@ namespace PPMAPITests
             _db.SaveChanges();
 
             _queries.DeleteCost(cost.Id);
-            _db.SaveChanges();
 
             Assert.That(_db.Costs.FirstOrDefault(c => c.Id == cost.Id), Is.Null);
         }

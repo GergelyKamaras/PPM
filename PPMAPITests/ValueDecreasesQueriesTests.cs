@@ -205,7 +205,6 @@ namespace PPMAPITests
             _db.SaveChanges();
 
             _queries.DeleteValueDecrease(valueDecrease.Id);
-            _db.SaveChanges();
 
             Assert.That(_db.ValueDecreases.FirstOrDefault(c => c.Id == valueDecrease.Id), Is.Null);
         }
