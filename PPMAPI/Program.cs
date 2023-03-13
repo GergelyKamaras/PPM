@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
+using PPMAPI.DataAccess.DbTableQueries.RevenuesQueries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddControllers();
 // Register own services
 builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
 builder.Services.AddTransient<ICostsQueries, CostsQueries>();
+builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
