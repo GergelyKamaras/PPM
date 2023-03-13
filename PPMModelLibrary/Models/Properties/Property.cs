@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PPMModelLibrary.Models.Transactions;
+using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;
 using PPMModelLibrary.Models.ValueModifiers;
 
@@ -15,6 +16,7 @@ namespace PPMModelLibrary.Models.Properties
         public float Size { get; set; }
         public decimal PurchasePrice { get; }
         public DateTime PurchaseDate { get; }
+        public Owner Owner { get; set; }
         public List<Cost> Costs { get; set; }
         public List<Revenue> Revenues { get; set; }
         public List<ValueIncrease> ValueIncreases { get; set; }
