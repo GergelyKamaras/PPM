@@ -32,10 +32,14 @@ namespace PPMAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("PurchasePrice")
                         .HasColumnType("decimal");
@@ -302,11 +306,13 @@ namespace PPMAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PPMModelLibrary.Models.Users.Owner", null)
+                    b.HasOne("PPMModelLibrary.Models.Users.Owner", "Owner")
                         .WithMany("Properties")
                         .HasForeignKey("OwnerUserId");
 
                     b.Navigation("Address");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.Properties.RentableProperty", b =>
@@ -317,7 +323,7 @@ namespace PPMAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PPMModelLibrary.Models.Users.Owner", null)
+                    b.HasOne("PPMModelLibrary.Models.Users.Owner", "Owner")
                         .WithMany("Rentableproperties")
                         .HasForeignKey("OwnerUserId");
 
@@ -326,6 +332,8 @@ namespace PPMAPI.Migrations
                         .HasForeignKey("TenantUserId");
 
                     b.Navigation("Address");
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Tenant");
                 });
