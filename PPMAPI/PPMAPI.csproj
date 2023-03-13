@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataAccess\DbTableQueries\ValueIncreasesQueries\" />
     <Folder Include="DataAccess\DbTableQueries\TenantsQueries\" />
     <Folder Include="DataAccess\DbTableQueries\RentablePropertiesQueries\" />
     <Folder Include="DataAccess\DbTableQueries\PropertiesQueries\" />

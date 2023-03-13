@@ -6,6 +6,8 @@ using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
 using PPMAPI.DataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries;
+using PPMAPI.DataAccess.DbTableQueries.ValueIncreasesQueries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +29,8 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
 builder.Services.AddTransient<ICostsQueries, CostsQueries>();
 builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
-builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
+builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
+builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
