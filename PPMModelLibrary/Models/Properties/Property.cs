@@ -12,6 +12,7 @@ namespace PPMModelLibrary.Models.Properties
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public Address Address { get; set; }
+        public float Size { get; set; }
         public decimal PurchasePrice { get; }
         public DateTime PurchaseDate { get; }
         public List<Cost> Costs { get; set; }

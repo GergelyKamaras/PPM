@@ -32,7 +32,6 @@ namespace PPMAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerUserId")
@@ -40,6 +39,9 @@ namespace PPMAPI.Migrations
 
                     b.Property<decimal>("PurchasePrice")
                         .HasColumnType("decimal");
+
+                    b.Property<float>("Size")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -60,7 +62,6 @@ namespace PPMAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerUserId")
@@ -69,11 +70,13 @@ namespace PPMAPI.Migrations
                     b.Property<decimal>("PurchasePrice")
                         .HasColumnType("decimal");
 
-                    b.Property<decimal>("RentalFee")
+                    b.Property<decimal?>("RentalFee")
                         .HasColumnType("decimal");
 
+                    b.Property<float>("Size")
+                        .HasColumnType("real");
+
                     b.Property<string>("TenantUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -320,9 +323,7 @@ namespace PPMAPI.Migrations
 
                     b.HasOne("PPMModelLibrary.Models.Users.Tenant", "Tenant")
                         .WithMany()
-                        .HasForeignKey("TenantUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TenantUserId");
 
                     b.Navigation("Address");
 
@@ -331,46 +332,62 @@ namespace PPMAPI.Migrations
 
             modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Cost", b =>
                 {
-                    b.HasOne("PPMModelLibrary.Models.Properties.Property", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.Property", "Property")
                         .WithMany("Costs")
                         .HasForeignKey("PropertyId");
 
-                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", "RentableProperty")
                         .WithMany("Costs")
                         .HasForeignKey("RentablePropertyId");
+
+                    b.Navigation("Property");
+
+                    b.Navigation("RentableProperty");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.Transactions.Revenue", b =>
                 {
-                    b.HasOne("PPMModelLibrary.Models.Properties.Property", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.Property", "Property")
                         .WithMany("Revenues")
                         .HasForeignKey("PropertyId");
 
-                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", "RentableProperty")
                         .WithMany("Revenues")
                         .HasForeignKey("RentablePropertyId");
+
+                    b.Navigation("Property");
+
+                    b.Navigation("RentableProperty");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.ValueModifiers.ValueDecrease", b =>
                 {
-                    b.HasOne("PPMModelLibrary.Models.Properties.Property", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.Property", "Property")
                         .WithMany("ValueDecreases")
                         .HasForeignKey("PropertyId");
 
-                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", "RentableProperty")
                         .WithMany("ValueDecreases")
                         .HasForeignKey("RentablePropertyId");
+
+                    b.Navigation("Property");
+
+                    b.Navigation("RentableProperty");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.ValueModifiers.ValueIncrease", b =>
                 {
-                    b.HasOne("PPMModelLibrary.Models.Properties.Property", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.Property", "Property")
                         .WithMany("ValueIncreases")
                         .HasForeignKey("PropertyId");
 
-                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", null)
+                    b.HasOne("PPMModelLibrary.Models.Properties.RentableProperty", "RentableProperty")
                         .WithMany("ValueIncreases")
                         .HasForeignKey("RentablePropertyId");
+
+                    b.Navigation("Property");
+
+                    b.Navigation("RentableProperty");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.Properties.Property", b =>

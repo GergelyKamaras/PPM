@@ -56,8 +56,9 @@ namespace PPMAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<float>(type: "real", nullable: false),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     OwnerUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -82,10 +83,11 @@ namespace PPMAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RentalFee = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenantUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    RentalFee = table.Column<decimal>(type: "decimal(18,0)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<float>(type: "real", nullable: false),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     OwnerUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -107,8 +109,7 @@ namespace PPMAPI.Migrations
                         name: "FK_RentableProperties_Tenants_TenantUserId",
                         column: x => x.TenantUserId,
                         principalTable: "Tenants",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
