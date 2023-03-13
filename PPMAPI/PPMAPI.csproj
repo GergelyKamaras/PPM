@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="DataAccess\DbTableQueries\TenantsQueries\" />
-    <Folder Include="DataAccess\DbTableQueries\OwnerQueries\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
