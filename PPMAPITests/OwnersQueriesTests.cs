@@ -97,9 +97,9 @@ namespace PPMAPITests
         }
 
         [Test]
-        public void GetOwnerByPropertyId_UseRentablePropertyIsInDb_GetsOwner()
+        public void GetOwnerByPropertyId_UseRentalPropertyIsInDb_GetsOwner()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -120,7 +120,7 @@ namespace PPMAPITests
                 UserId = "UserId"
             };
 
-            owner.Rentableproperties.Add(property);
+            owner.Rentalproperties.Add(property);
 
 
             _db.Owners.Add(owner);

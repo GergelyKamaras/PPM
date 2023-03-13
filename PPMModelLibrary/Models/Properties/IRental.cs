@@ -2,7 +2,7 @@
 
 namespace PPMModelLibrary.Models.Properties
 {
-    internal interface IRentable
+    internal interface IRental
     {
         public Tenant? Tenant { get; set; }
         public decimal? RentalFee { get; set; }

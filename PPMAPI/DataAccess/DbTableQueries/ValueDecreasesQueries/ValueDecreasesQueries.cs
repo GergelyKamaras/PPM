@@ -23,7 +23,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries
 
         public List<ValueDecrease> GetValueDecreaseByPropertyId(Guid id)
         {
-            return _db.ValueDecreases.Where(r => r.Property.Id == id || r.RentableProperty.Id == id).ToList();
+            return _db.ValueDecreases.Where(r => r.Property.Id == id || r.RentalProperty.Id == id).ToList();
         }
 
         public void UpdateValueDecrease(ValueDecrease valueDecrease)

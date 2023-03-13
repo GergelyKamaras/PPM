@@ -9,6 +9,6 @@ namespace PPMModelLibrary.Models.Users
         [Key]
         public string UserId { get; set; }
         public List<Property> Properties { get; set; } = new List<Property>();
-        public List<RentableProperty> Rentableproperties { get; set; } = new List<RentableProperty>();
+        public List<RentalProperty> Rentalproperties { get; set; } = new List<RentalProperty>();
     }
 }

@@ -23,7 +23,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.RevenuesQueries
 
         public List<Revenue> GetRevenueByPropertyId(Guid id)
         {
-            return _db.Revenues.Where(r => r.Property.Id == id || r.RentableProperty.Id == id).ToList();
+            return _db.Revenues.Where(r => r.Property.Id == id || r.RentalProperty.Id == id).ToList();
         }
 
         public void UpdateRevenue(Revenue revenue)

@@ -65,7 +65,7 @@ namespace PPMAPITests
         [Test]
         public void GetTenantByPropertyId_IsInDb_GetsTenant()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -109,7 +109,7 @@ namespace PPMAPITests
                 UserId = "UserId"
             };
 
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()

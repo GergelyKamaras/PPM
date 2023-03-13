@@ -1,13 +1,13 @@
 ﻿using PPMModelLibrary.Models.Properties;
 
-namespace PPMAPI.DataAccess.DbTableQueries.RentablePropertiesQueries
+namespace PPMAPI.DataAccess.DbTableQueries.RentalPropertiesQueries
 {
-    public interface IRentablePropertiesQueries
+    public interface IRentalPropertiesQueries
     {
-        public void AddRentableProperty(RentableProperty RentableProperty);
-        public void DeleteRentableProperty(Guid id);
-        public void UpdateRentableProperty(RentableProperty RentableProperty);
-        public RentableProperty GetRentablePropertyById(Guid id);
-        public List<RentableProperty> GetRentablePropertiesByOwnerId(string id);
+        public void AddRentalProperty(RentalProperty rentalProperty);
+        public void DeleteRentalProperty(Guid id);
+        public void UpdateRentalProperty(RentalProperty rentalProperty);
+        public RentalProperty GetRentalPropertyById(Guid id);
+        public List<RentalProperty> GetRentalPropertiesByOwnerId(string id);
     }
 }

@@ -108,9 +108,9 @@ namespace PPMAPITests
         }
 
         [Test]
-        public void GetValueIncreaseByPropertyId_UseRentablePropertyIsInDb_GetsValueIncrease()
+        public void GetValueIncreaseByPropertyId_UseRentalPropertyIsInDb_GetsValueIncrease()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -133,7 +133,7 @@ namespace PPMAPITests
                 Date = DateTime.Now,
                 Description = "Police station built next door",
                 Value = 50,
-                RentableProperty = property
+                RentalProperty = property
             };
 
 

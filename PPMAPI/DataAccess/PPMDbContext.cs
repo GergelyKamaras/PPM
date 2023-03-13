@@ -11,7 +11,7 @@ namespace PPMAPI.DataAccess
     {
         // Create Dbsets for models
         public DbSet<Property> Properties { get; set; }
-        public DbSet<RentableProperty> RentableProperties { get; set; }
+        public DbSet<RentalProperty> RentalProperties { get; set; }
         public DbSet<Cost> Costs { get; set; }
         public DbSet<Revenue> Revenues { get; set; }
         public DbSet<Owner> Owners { get; set; }
@@ -33,11 +33,11 @@ namespace PPMAPI.DataAccess
                 .Property(p => p.PurchasePrice)
                 .HasColumnType("decimal");
 
-            builder.Entity<RentableProperty>()
+            builder.Entity<RentalProperty>()
                 .Property(r => r.RentalFee)
                 .HasColumnType("decimal");
 
-            builder.Entity<RentableProperty>()
+            builder.Entity<RentalProperty>()
                 .Property(r => r.PurchasePrice)
                 .HasColumnType("decimal");
 

@@ -108,9 +108,9 @@ namespace PPMAPITests
         }
 
         [Test]
-        public void GetValueDecreaseByPropertyId_UseRentablePropertyIsInDb_GetsValueDecrease()
+        public void GetValueDecreaseByPropertyId_UseRentalPropertyIsInDb_GetsValueDecrease()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -133,7 +133,7 @@ namespace PPMAPITests
                 Date = DateTime.Now,
                 Description = "Nuclear power plant built next door",
                 Value = 50,
-                RentableProperty = property
+                RentalProperty = property
             };
 
 

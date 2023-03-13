@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PPMModelLibrary.Models.Properties
 {
-    public class RentableProperty : IRentableProperty
+    public class RentalProperty : IRentalProperty
     {
         [Key]
         public Guid Id { get; set; }

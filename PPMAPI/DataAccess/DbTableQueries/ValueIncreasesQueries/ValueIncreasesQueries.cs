@@ -23,7 +23,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.ValueIncreasesQueries
 
         public List<ValueIncrease> GetValueIncreaseByPropertyId(Guid id)
         {
-            return _db.ValueIncreases.Where(r => r.Property.Id == id || r.RentableProperty.Id == id).ToList();
+            return _db.ValueIncreases.Where(r => r.Property.Id == id || r.RentalProperty.Id == id).ToList();
         }
 
         public void UpdateValueIncrease(ValueIncrease valueIncrease)

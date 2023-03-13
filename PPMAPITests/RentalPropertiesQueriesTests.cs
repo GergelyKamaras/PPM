@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.RentablePropertiesQueries;
+using PPMAPI.DataAccess.DbTableQueries.RentalPropertiesQueries;
 using PPMAPI.DataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Users;
@@ -7,10 +7,10 @@ using PPMModelLibrary.Models.UtilityModels;
 
 namespace PPMAPITests
 {
-    internal class RentablePropertiesQueriesTests
+    internal class RentalPropertiesQueriesTests
     {
         private PPMDbContext _db;
-        private IRentablePropertiesQueries _queries;
+        private IRentalPropertiesQueries _queries;
 
         [SetUp]
         public void Setup()
@@ -21,13 +21,13 @@ namespace PPMAPITests
                 .Options;
             _db = new PPMDbContext(options);
 
-            _queries = new RentablePropertiesQueries(_db);
+            _queries = new RentalPropertiesQueries(_db);
         }
 
         [Test]
-        public void AddRentableProperty_ValidInput_IsInDb()
+        public void AddRentalProperty_ValidInput_IsInDb()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -40,26 +40,26 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _queries.AddRentableProperty(RentableProperty);
+            _queries.AddRentalProperty(rentalProperty);
 
-            Assert.That(_db.RentableProperties.Any(p => p.Id == RentableProperty.Id));
+            Assert.That(_db.RentalProperties.Any(p => p.Id == rentalProperty.Id));
         }
 
         [Test]
-        public void AddRentableProperty_InvalidInput_ThrowsError()
+        public void AddRentalProperty_InvalidInput_ThrowsError()
         {
-            RentableProperty RentableProperty = new RentableProperty();
-            RentableProperty.Address = null;
-            Assert.Throws<DbUpdateException>(() => _queries.AddRentableProperty(RentableProperty));
+            RentalProperty rentalProperty = new RentalProperty();
+            rentalProperty.Address = null;
+            Assert.Throws<DbUpdateException>(() => _queries.AddRentalProperty(rentalProperty));
         }
 
         [Test]
-        public void AddRentableProperty_AddSameTwice_ThrowsError()
+        public void AddRentalProperty_AddSameTwice_ThrowsError()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -72,18 +72,18 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _queries.AddRentableProperty(RentableProperty);
+            _queries.AddRentalProperty(rentalProperty);
 
-            Assert.Throws<ArgumentException>(() => _queries.AddRentableProperty(RentableProperty));
+            Assert.Throws<ArgumentException>(() => _queries.AddRentalProperty(rentalProperty));
         }
 
         [Test]
-        public void DeleteRentableProperty_IsInDb_Success()
+        public void DeleteRentalProperty_IsInDb_Success()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -96,27 +96,27 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _db.RentableProperties.Add(RentableProperty);
+            _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            _queries.DeleteRentableProperty(RentableProperty.Id);
+            _queries.DeleteRentalProperty(rentalProperty.Id);
 
-            Assert.That(_db.RentableProperties.FirstOrDefault(p => p.Id == RentableProperty.Id), Is.Null);
+            Assert.That(_db.RentalProperties.FirstOrDefault(p => p.Id == rentalProperty.Id), Is.Null);
         }
 
         [Test]
-        public void DeleteRentableProperty_NotInDb_ThrowsError()
+        public void DeleteRentalProperty_NotInDb_ThrowsError()
         {
-            Assert.Throws<ArgumentNullException>(() => _queries.DeleteRentableProperty(Guid.NewGuid()));
+            Assert.Throws<ArgumentNullException>(() => _queries.DeleteRentalProperty(Guid.NewGuid()));
         }
 
         [Test]
-        public void UpdateRentableProperty_IsInDb_Success()
+        public void UpdateRentalProperty_IsInDb_Success()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -129,25 +129,25 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _db.RentableProperties.Add(RentableProperty);
+            _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            string newName = "VeryRealRentableProperty";
-            RentableProperty.Name = newName;
+            string newName = "VeryRealRentalProperty";
+            rentalProperty.Name = newName;
 
-            _queries.UpdateRentableProperty(RentableProperty);
+            _queries.UpdateRentalProperty(rentalProperty);
 
-            Assert.That(_db.RentableProperties.FirstOrDefault(p => p.Id == RentableProperty.Id).Name, Is.SameAs(newName));
+            Assert.That(_db.RentalProperties.FirstOrDefault(p => p.Id == rentalProperty.Id).Name, Is.SameAs(newName));
 
         }
 
         [Test]
-        public void UpdateRentableProperty_NotInDb_ThrowsError()
+        public void UpdateRentalProperty_NotInDb_ThrowsError()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -160,16 +160,16 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateRentableProperty(RentableProperty));
+            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateRentalProperty(rentalProperty));
         }
 
         [Test]
-        public void GetRentablePropertyById_IsInDb_MatchesOriginal()
+        public void GetRentalPropertyById_IsInDb_MatchesOriginal()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -182,25 +182,25 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _db.RentableProperties.Add(RentableProperty);
+            _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRentablePropertyById(RentableProperty.Id), Is.SameAs(RentableProperty));
+            Assert.That(_queries.GetRentalPropertyById(rentalProperty.Id), Is.SameAs(rentalProperty));
         }
 
         [Test]
-        public void GetRentablePropertyById_NotInDb_ReturnsNull()
+        public void GetRentalPropertyById_NotInDb_ReturnsNull()
         {
-            Assert.That(_queries.GetRentablePropertyById(Guid.NewGuid()), Is.Null);
+            Assert.That(_queries.GetRentalPropertyById(Guid.NewGuid()), Is.Null);
         }
 
         [Test]
-        public void GetRentablePropertiesByOwnerId_IsInDb_ReturnsResult()
+        public void GetRentalPropertiesByOwnerId_IsInDb_ReturnsResult()
         {
-            RentableProperty RentableProperty = new RentableProperty()
+            RentalProperty rentalProperty = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Owner = new Owner()
@@ -217,17 +217,17 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            _db.RentableProperties.Add(RentableProperty);
+            _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRentablePropertiesByOwnerId(RentableProperty.Owner.UserId).Any(p => p.Id == RentableProperty.Id));
+            Assert.That(_queries.GetRentalPropertiesByOwnerId(rentalProperty.Owner.UserId).Any(p => p.Id == rentalProperty.Id));
         }
 
         [Test]
-        public void GetRentablePropertiesByOwnerId_MultipleInDb_ReturnsList()
+        public void GetRentalPropertiesByOwnerId_MultipleInDb_ReturnsList()
         {
             Owner owner = new Owner()
             {
@@ -235,7 +235,7 @@ namespace PPMAPITests
             };
 
 
-            RentableProperty RentableProperty1 = new RentableProperty()
+            RentalProperty rentalProperty1 = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Owner = owner,
@@ -249,10 +249,10 @@ namespace PPMAPITests
                     Number = 973,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty"
+                Name = "RealRentalProperty"
             };
 
-            RentableProperty RentableProperty2 = new RentableProperty()
+            RentalProperty rentalProperty2 = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Owner = owner,
@@ -266,23 +266,23 @@ namespace PPMAPITests
                     Number = 974,
                     AdditionalInfo = "Nothing Much"
                 },
-                Name = "RealRentableProperty2"
+                Name = "RealRentalProperty2"
             };
 
-            _db.RentableProperties.Add(RentableProperty1);
-            _db.RentableProperties.Add(RentableProperty2);
+            _db.RentalProperties.Add(rentalProperty1);
+            _db.RentalProperties.Add(rentalProperty2);
             _db.SaveChanges();
 
 
-            Assert.That(_queries.GetRentablePropertiesByOwnerId(owner.UserId).Any(p => p.Id == RentableProperty1.Id) &&
-                        _queries.GetRentablePropertiesByOwnerId(owner.UserId).Any(p => p.Id == RentableProperty2.Id));
+            Assert.That(_queries.GetRentalPropertiesByOwnerId(owner.UserId).Any(p => p.Id == rentalProperty1.Id) &&
+                        _queries.GetRentalPropertiesByOwnerId(owner.UserId).Any(p => p.Id == rentalProperty2.Id));
         }
 
         [Test]
-        public void GetRentablePropertiesByOwnerId_NotInDb_ReturnsEmptyList()
+        public void GetRentalPropertiesByOwnerId_NotInDb_ReturnsEmptyList()
         {
             string userId = "NotAUserId";
-            Assert.That(_queries.GetRentablePropertiesByOwnerId(userId), Is.Empty);
+            Assert.That(_queries.GetRentalPropertiesByOwnerId(userId), Is.Empty);
         }
     }
 }

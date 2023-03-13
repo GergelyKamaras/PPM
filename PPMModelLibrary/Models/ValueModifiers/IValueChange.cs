@@ -9,6 +9,6 @@ namespace PPMModelLibrary.Models.ValueModifiers
         public decimal Value { get; set; }
         public DateTime Date { get; set; }
         public Property? Property { get; set; }
-        public RentableProperty? RentableProperty { get; set; }
+        public RentalProperty? RentalProperty { get; set; }
     }
 }

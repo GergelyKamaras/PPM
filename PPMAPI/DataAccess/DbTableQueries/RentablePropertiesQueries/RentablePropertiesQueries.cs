@@ -1,41 +1,41 @@
 ﻿using PPMModelLibrary.Models.Properties;
 
-namespace PPMAPI.DataAccess.DbTableQueries.RentablePropertiesQueries
+namespace PPMAPI.DataAccess.DbTableQueries.RentalPropertiesQueries
 {
-    public class RentablePropertiesQueries : IRentablePropertiesQueries
+    public class RentalPropertiesQueries : IRentalPropertiesQueries
     {
         private readonly PPMDbContext _db;
 
-        public RentablePropertiesQueries(PPMDbContext db)
+        public RentalPropertiesQueries(PPMDbContext db)
         {
             _db = db;
         }
-        public void AddRentableProperty(RentableProperty RentableProperty)
+        public void AddRentalProperty(RentalProperty rentalProperty)
         {
-            _db.RentableProperties.Add(RentableProperty);
+            _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
         }
 
-        public void DeleteRentableProperty(Guid id)
+        public void DeleteRentalProperty(Guid id)
         {
-            _db.RentableProperties.Remove(_db.RentableProperties.FirstOrDefault(p => p.Id == id));
+            _db.RentalProperties.Remove(_db.RentalProperties.FirstOrDefault(p => p.Id == id));
             _db.SaveChanges();
         }
 
-        public void UpdateRentableProperty(RentableProperty RentableProperty)
+        public void UpdateRentalProperty(RentalProperty rentalProperty)
         {
-            _db.RentableProperties.Update(RentableProperty);
+            _db.RentalProperties.Update(rentalProperty);
             _db.SaveChanges();
         }
 
-        public RentableProperty GetRentablePropertyById(Guid id)
+        public RentalProperty GetRentalPropertyById(Guid id)
         {
-            return _db.RentableProperties.FirstOrDefault(p => p.Id == id);
+            return _db.RentalProperties.FirstOrDefault(p => p.Id == id);
         }
 
-        public List<RentableProperty> GetRentablePropertiesByOwnerId(string id)
+        public List<RentalProperty> GetRentalPropertiesByOwnerId(string id)
         {
-            return _db.RentableProperties.Where(p => p.Owner.UserId == id).ToList();
+            return _db.RentalProperties.Where(p => p.Owner.UserId == id).ToList();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.CostsQueries
 
         public List<Cost> GetCostByPropertyId(Guid id)
         {
-            return _db.Costs.Where(c => c.Property.Id == id || c.RentableProperty.Id == id).ToList();
+            return _db.Costs.Where(c => c.Property.Id == id || c.RentalProperty.Id == id).ToList();
         }
 
         public void UpdateCost(Cost cost)

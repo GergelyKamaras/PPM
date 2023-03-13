@@ -108,9 +108,9 @@ namespace PPMAPITests
         }
 
         [Test]
-        public void GetRevenueByPropertyId_UseRentablePropertyIsInDb_GetsRevenue()
+        public void GetRevenueByPropertyId_UseRentalPropertyIsInDb_GetsRevenue()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
@@ -133,7 +133,7 @@ namespace PPMAPITests
                 Date = DateTime.Now,
                 Description = "NotAFictitiousIncome",
                 Value = 50,
-                RentableProperty = property
+                RentalProperty = property
             };
 
 
