@@ -27,7 +27,7 @@ namespace PPMAPITests
         [Test]
         public void AddRevenue_ValidInput_IsInDb()
         {
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -36,9 +36,9 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            _queries.AddRevenue(Revenue);
+            _queries.AddRevenue(revenue);
 
-            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == Revenue.Id), Is.SameAs(Revenue));
+            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == revenue.Id), Is.SameAs(revenue));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace PPMAPITests
         [Test]
         public void GetRevenueById_IsInDb_GetsRevenue()
         {
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -59,10 +59,10 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            _db.Revenues.Add(Revenue);
+            _db.Revenues.Add(revenue);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRevenueById(Revenue.Id), Is.SameAs(Revenue));
+            Assert.That(_queries.GetRevenueById(revenue.Id), Is.SameAs(revenue));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace PPMAPITests
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
                     Number = 973,
@@ -90,7 +90,7 @@ namespace PPMAPITests
                 Name = "RealProperty"
             };
 
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -101,10 +101,10 @@ namespace PPMAPITests
             };
 
 
-            _db.Revenues.Add(Revenue);
+            _db.Revenues.Add(revenue);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRevenueByPropertyId(property.Id).Any(c => c.Id == Revenue.Id), Is.True);
+            Assert.That(_queries.GetRevenueByPropertyId(property.Id).Any(c => c.Id == revenue.Id), Is.True);
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace PPMAPITests
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
                     Number = 973,
@@ -126,7 +126,7 @@ namespace PPMAPITests
                 Name = "RealProperty"
             };
 
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -137,10 +137,10 @@ namespace PPMAPITests
             };
 
 
-            _db.Revenues.Add(Revenue);
+            _db.Revenues.Add(revenue);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRevenueByPropertyId(property.Id).Any(c => c.Id == Revenue.Id), Is.True);
+            Assert.That(_queries.GetRevenueByPropertyId(property.Id).Any(c => c.Id == revenue.Id), Is.True);
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace PPMAPITests
         [Test]
         public void UpdateRevenue_IsInDb_UpdatesSuccessfully()
         {
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -162,21 +162,21 @@ namespace PPMAPITests
             };
 
 
-            _db.Revenues.Add(Revenue);
+            _db.Revenues.Add(revenue);
             _db.SaveChanges();
 
             string newTitle = "ReallyNotAScam";
-            Revenue.Title = newTitle;
+            revenue.Title = newTitle;
 
-            _queries.UpdateRevenue(Revenue);
+            _queries.UpdateRevenue(revenue);
 
-            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == Revenue.Id).Title, Is.SameAs(newTitle));
+            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == revenue.Id).Title, Is.SameAs(newTitle));
         }
 
         [Test]
         public void UpdateRevenue_NotInDb_ThrowsError()
         {
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -185,13 +185,13 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateRevenue(Revenue));
+            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateRevenue(revenue));
         }
 
         [Test]
         public void DeleteRevenue_IsInDb_Successful()
         {
-            Revenue Revenue = new Revenue()
+            Revenue revenue = new Revenue()
             {
                 Id = 1,
                 Title = "TotallyValidRevenue",
@@ -201,13 +201,13 @@ namespace PPMAPITests
             };
 
 
-            _db.Revenues.Add(Revenue);
+            _db.Revenues.Add(revenue);
             _db.SaveChanges();
 
-            _queries.DeleteRevenue(Revenue.Id);
+            _queries.DeleteRevenue(revenue.Id);
             _db.SaveChanges();
 
-            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == Revenue.Id), Is.Null);
+            Assert.That(_db.Revenues.FirstOrDefault(c => c.Id == revenue.Id), Is.Null);
         }
 
         [Test]

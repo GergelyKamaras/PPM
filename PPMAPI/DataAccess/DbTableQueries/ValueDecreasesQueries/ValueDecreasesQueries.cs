@@ -10,9 +10,9 @@ namespace PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries
         {
             _db = db;
         }
-        public void AddValueDecrease(ValueDecrease ValueDecrease)
+        public void AddValueDecrease(ValueDecrease valueDecrease)
         {
-            _db.ValueDecreases.Add(ValueDecrease);
+            _db.ValueDecreases.Add(valueDecrease);
             _db.SaveChanges();
         }
 
@@ -26,9 +26,9 @@ namespace PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries
             return _db.ValueDecreases.Where(r => r.Property.Id == id || r.RentableProperty.Id == id).ToList();
         }
 
-        public void UpdateValueDecrease(ValueDecrease ValueDecrease)
+        public void UpdateValueDecrease(ValueDecrease valueDecrease)
         {
-            _db.ValueDecreases.Update(ValueDecrease);
+            _db.ValueDecreases.Update(valueDecrease);
             _db.SaveChanges();
         }
 

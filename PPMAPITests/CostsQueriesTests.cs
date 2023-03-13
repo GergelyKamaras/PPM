@@ -81,7 +81,7 @@ namespace PPMAPITests
                     {
                         Id = 1,
                         Country = "VeryCountry",
-                        City = "Verycity",
+                        City = "VeryCity",
                         ZipCode = "9783",
                         Street = "VeryStreet",
                         Number = 973,
@@ -117,7 +117,7 @@ namespace PPMAPITests
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
                     Number = 973,

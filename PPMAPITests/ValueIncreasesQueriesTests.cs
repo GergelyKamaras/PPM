@@ -27,7 +27,7 @@ namespace PPMAPITests
         [Test]
         public void AddValueIncrease_ValidInput_IsInDb()
         {
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -36,9 +36,9 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            _queries.AddValueIncrease(ValueIncrease);
+            _queries.AddValueIncrease(valueIncrease);
 
-            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == ValueIncrease.Id), Is.SameAs(ValueIncrease));
+            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == valueIncrease.Id), Is.SameAs(valueIncrease));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace PPMAPITests
         [Test]
         public void GetValueIncreaseById_IsInDb_GetsValueIncrease()
         {
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -59,10 +59,10 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            _db.ValueIncreases.Add(ValueIncrease);
+            _db.ValueIncreases.Add(valueIncrease);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetValueIncreaseById(ValueIncrease.Id), Is.SameAs(ValueIncrease));
+            Assert.That(_queries.GetValueIncreaseById(valueIncrease.Id), Is.SameAs(valueIncrease));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace PPMAPITests
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
                     Number = 973,
@@ -90,7 +90,7 @@ namespace PPMAPITests
                 Name = "RealProperty"
             };
 
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -101,10 +101,10 @@ namespace PPMAPITests
             };
 
 
-            _db.ValueIncreases.Add(ValueIncrease);
+            _db.ValueIncreases.Add(valueIncrease);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetValueIncreaseByPropertyId(property.Id).Any(c => c.Id == ValueIncrease.Id), Is.True);
+            Assert.That(_queries.GetValueIncreaseByPropertyId(property.Id).Any(c => c.Id == valueIncrease.Id), Is.True);
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace PPMAPITests
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
                     Number = 973,
@@ -126,7 +126,7 @@ namespace PPMAPITests
                 Name = "RealProperty"
             };
 
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -137,10 +137,10 @@ namespace PPMAPITests
             };
 
 
-            _db.ValueIncreases.Add(ValueIncrease);
+            _db.ValueIncreases.Add(valueIncrease);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetValueIncreaseByPropertyId(property.Id).Any(c => c.Id == ValueIncrease.Id), Is.True);
+            Assert.That(_queries.GetValueIncreaseByPropertyId(property.Id).Any(c => c.Id == valueIncrease.Id), Is.True);
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace PPMAPITests
         [Test]
         public void UpdateValueIncrease_IsInDb_UpdatesSuccessfully()
         {
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -162,21 +162,21 @@ namespace PPMAPITests
             };
 
 
-            _db.ValueIncreases.Add(ValueIncrease);
+            _db.ValueIncreases.Add(valueIncrease);
             _db.SaveChanges();
 
             string newTitle = "ReallyNotAScam";
-            ValueIncrease.Title = newTitle;
+            valueIncrease.Title = newTitle;
 
-            _queries.UpdateValueIncrease(ValueIncrease);
+            _queries.UpdateValueIncrease(valueIncrease);
 
-            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == ValueIncrease.Id).Title, Is.SameAs(newTitle));
+            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == valueIncrease.Id).Title, Is.SameAs(newTitle));
         }
 
         [Test]
         public void UpdateValueIncrease_NotInDb_ThrowsError()
         {
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -185,13 +185,13 @@ namespace PPMAPITests
                 Value = 50
             };
 
-            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateValueIncrease(ValueIncrease));
+            Assert.Throws<DbUpdateConcurrencyException>(() => _queries.UpdateValueIncrease(valueIncrease));
         }
 
         [Test]
         public void DeleteValueIncrease_IsInDb_Successful()
         {
-            ValueIncrease ValueIncrease = new ValueIncrease()
+            ValueIncrease valueIncrease = new ValueIncrease()
             {
                 Id = 1,
                 Title = "NewNeighbor",
@@ -201,13 +201,13 @@ namespace PPMAPITests
             };
 
 
-            _db.ValueIncreases.Add(ValueIncrease);
+            _db.ValueIncreases.Add(valueIncrease);
             _db.SaveChanges();
 
-            _queries.DeleteValueIncrease(ValueIncrease.Id);
+            _queries.DeleteValueIncrease(valueIncrease.Id);
             _db.SaveChanges();
 
-            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == ValueIncrease.Id), Is.Null);
+            Assert.That(_db.ValueIncreases.FirstOrDefault(c => c.Id == valueIncrease.Id), Is.Null);
         }
 
         [Test]
