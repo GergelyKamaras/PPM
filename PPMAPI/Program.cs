@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using PPMAPI.DataAccess;
 using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
 using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
+using PPMAPI.DataAccess.DbTableQueries.PropertiesQueries;
 using PPMAPI.DataAccess.DbTableQueries.RevenuesQueries;
 using PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPI.DataAccess.DbTableQueries.ValueIncreasesQueries;
@@ -31,6 +32,7 @@ builder.Services.AddTransient<ICostsQueries, CostsQueries>();
 builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
 builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
 builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
+builder.Services.AddTransient<IPropertiesQueries, PropertiesQueries>();
 
 // CORS
 builder.Services.AddCors(o =>
