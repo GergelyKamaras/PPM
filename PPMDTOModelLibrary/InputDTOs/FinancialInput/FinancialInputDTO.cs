@@ -1,6 +1,6 @@
 ﻿namespace PPMDTOModelLibrary.InputDTOs.Transactions
 {
-    internal class FinancialInputDTO
+    public class FinancialInputDTO
     {
         public string Title { get; set; }
         public string Description { get; set; }

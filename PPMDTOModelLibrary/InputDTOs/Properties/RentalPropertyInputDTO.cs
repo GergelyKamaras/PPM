@@ -1,6 +1,6 @@
 ﻿namespace PPMDTOModelLibrary.InputDTOs.Properties
 {
-    internal class RentalPropertyInputDTO
+    public class RentalPropertyInputDTO
     {
         public string OwnerId { get; set; }
         public string? TenantId { get; set; }

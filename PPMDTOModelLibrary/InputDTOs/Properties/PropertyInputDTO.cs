@@ -1,6 +1,6 @@
 ﻿namespace PPMDTOModelLibrary.InputDTOs.Properties
 {
-    internal class PropertyInputDTO
+    public class PropertyInputDTO
     {
         public string Name { get; set; }
         public float Size { get; set; }
