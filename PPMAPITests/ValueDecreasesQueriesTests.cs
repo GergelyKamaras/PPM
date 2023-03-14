@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries;
-using PPMAPI.DataAccess;
+using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
+using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.UtilityModels;
 using PPMModelLibrary.Models.ValueModifiers;

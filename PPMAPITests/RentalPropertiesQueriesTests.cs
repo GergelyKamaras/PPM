@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.RentalPropertiesQueries;
-using PPMAPI.DataAccess;
+using PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries;
+using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;

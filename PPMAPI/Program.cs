@@ -2,14 +2,14 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using PPMAPI.DataAccess;
-using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
-using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
-using PPMAPI.DataAccess.DbTableQueries.OwnersQueries;
-using PPMAPI.DataAccess.DbTableQueries.PropertiesQueries;
-using PPMAPI.DataAccess.DbTableQueries.RevenuesQueries;
-using PPMAPI.DataAccess.DbTableQueries.ValueDecreasesQueries;
-using PPMAPI.DataAccess.DbTableQueries.ValueIncreasesQueries;
+using PPMAPIDataAccess;
+using PPMAPIDataAccess.DbTableQueries.AddressQueries;
+using PPMAPIDataAccess.DbTableQueries.CostsQueries;
+using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
+using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
+using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
+using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.RevenuesQueries;
-using PPMAPI.DataAccess;
+using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.UtilityModels;

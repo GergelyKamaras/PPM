@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.ValueIncreasesQueries;
-using PPMAPI.DataAccess;
+using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
+using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.UtilityModels;
 using PPMModelLibrary.Models.ValueModifiers;

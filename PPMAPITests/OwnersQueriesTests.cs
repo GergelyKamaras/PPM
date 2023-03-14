@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess.DbTableQueries.OwnersQueries;
-using PPMAPI.DataAccess;
+using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
+using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;
