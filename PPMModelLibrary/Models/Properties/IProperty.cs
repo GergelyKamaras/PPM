@@ -1,7 +1,7 @@
-﻿using PPMModelLibrary.Models.Transactions;
+﻿using PPMModelLibrary.Models.FinancialObjects.Transactions;
+using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
 using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;
-using PPMModelLibrary.Models.ValueModifiers;
 
 namespace PPMModelLibrary.Models.Properties
 {

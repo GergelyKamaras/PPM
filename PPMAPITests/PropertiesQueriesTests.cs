@@ -3,7 +3,7 @@ using PPMAPIDataAccess;
 using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
 using PPMModelLibrary.Models.UtilityModels;
 using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.Transactions;
+using PPMModelLibrary.Models.FinancialObjects.Transactions;
 using PPMModelLibrary.Models.Users;
 
 namespace PPMAPITests

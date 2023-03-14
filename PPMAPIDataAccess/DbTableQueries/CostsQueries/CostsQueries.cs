@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.Transactions;
+﻿using PPMModelLibrary.Models.FinancialObjects.Transactions;
 
 namespace PPMAPIDataAccess.DbTableQueries.CostsQueries
 {

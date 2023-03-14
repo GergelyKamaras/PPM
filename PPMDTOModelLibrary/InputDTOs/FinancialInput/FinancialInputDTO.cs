@@ -8,5 +8,6 @@
         public DateTime Date { get; set; }
         public string PropertyId { get; set; }
         public bool IsRental { get; set; }
+        public string FinancialObjectType { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.UtilityModels;
-using PPMModelLibrary.Models.ValueModifiers;
+using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
 
 namespace PPMAPITests
 {

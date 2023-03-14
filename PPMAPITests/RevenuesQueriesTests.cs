@@ -2,8 +2,8 @@
 using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
 using PPMAPIDataAccess;
 using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.UtilityModels;
+using PPMModelLibrary.Models.FinancialObjects.Transactions;
 
 namespace PPMAPITests
 {

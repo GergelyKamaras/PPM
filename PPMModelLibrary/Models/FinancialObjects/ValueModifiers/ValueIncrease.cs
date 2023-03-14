@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using PPMModelLibrary.Models.Properties;
+﻿using PPMModelLibrary.Models.Properties;
+using System.ComponentModel.DataAnnotations;
 
-namespace PPMModelLibrary.Models.Transactions
+namespace PPMModelLibrary.Models.FinancialObjects.ValueModifiers
 {
-    public class Cost : ITransaction
+    public class ValueIncrease : IValueChange
     {
         [Key]
         public int Id { get; set; }

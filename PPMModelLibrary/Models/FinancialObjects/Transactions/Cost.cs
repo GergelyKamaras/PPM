@@ -1,9 +1,12 @@
-﻿using PPMModelLibrary.Models.Properties;
+﻿using System.ComponentModel.DataAnnotations;
+using PPMModelLibrary.Models.Properties;
 
-namespace PPMModelLibrary.Models.ValueModifiers
+namespace PPMModelLibrary.Models.FinancialObjects.Transactions
 {
-    internal interface IValueChange
+    public class Cost : ITransaction
     {
+        [Key]
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Value { get; set; }
