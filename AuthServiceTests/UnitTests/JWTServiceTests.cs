@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AuthService.Authentication.JWTService;
+using AuthServiceServiceLayer.Authentication.JWTService;
 using AuthServiceModelLibrary.ApplicationUser;
 using Microsoft.Extensions.Configuration;
 

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Web.Helpers.Crypto" Version="3.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuthServiceDataAccess\AuthServiceDataAccess.csproj" />
+    <ProjectReference Include="..\AuthServiceModelLibrary\AuthServiceModelLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

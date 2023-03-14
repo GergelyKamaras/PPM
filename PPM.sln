@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "AuthService\AuthService.csproj", "{6F244402-AC61-4349-B97D-8986CBEF562B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceAPI", "AuthService\AuthServiceAPI.csproj", "{6F244402-AC61-4349-B97D-8986CBEF562B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceTests", "AuthServiceTests\AuthServiceTests.csproj", "{1866639B-7352-47DA-83BB-02BF86DE6423}"
 EndProject
@@ -32,6 +32,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPITests", "PPMAPITests\PPMAPITests.csproj", "{3B0C618F-49F2-405F-9C4C-FC726381F0C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMDTOTests", "PPMDTOTests\PPMDTOTests.csproj", "{646480F5-1E4C-4C61-8645-4F789612375F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceDataAccess", "AuthServiceDataAccess\AuthServiceDataAccess.csproj", "{C56D202C-F0C5-45E6-B358-02DE952AC8B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceServiceLayer", "AuthServiceServiceLayer\AuthServiceServiceLayer.csproj", "{7090C00E-436C-41EB-80A1-97039DEA335A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,14 @@ Global
 		{646480F5-1E4C-4C61-8645-4F789612375F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{646480F5-1E4C-4C61-8645-4F789612375F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{646480F5-1E4C-4C61-8645-4F789612375F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C56D202C-F0C5-45E6-B358-02DE952AC8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56D202C-F0C5-45E6-B358-02DE952AC8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56D202C-F0C5-45E6-B358-02DE952AC8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56D202C-F0C5-45E6-B358-02DE952AC8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7090C00E-436C-41EB-80A1-97039DEA335A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7090C00E-436C-41EB-80A1-97039DEA335A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7090C00E-436C-41EB-80A1-97039DEA335A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7090C00E-436C-41EB-80A1-97039DEA335A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

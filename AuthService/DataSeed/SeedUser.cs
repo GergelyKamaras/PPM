@@ -1,8 +1,8 @@
-﻿using AuthService.Controller;
-using AuthService.DataAccess.UserTableQueries;
+﻿using AuthServiceAPI.Controller;
+using AuthServiceDataAccess.UserTableQueries;
 using AuthServiceModelLibrary.DTOs;
 
-namespace AuthService.DataSeed
+namespace AuthServiceAPI.DataSeed
 {
     public static class SeedUser
     {

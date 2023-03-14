@@ -1,14 +1,14 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using AuthService.Authentication.Roles.Validator;
-using AuthService.ModelConverter;
-using Microsoft.AspNetCore.Mvc;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
+using AuthServiceServiceLayer.Authentication.AuthOperations;
+using AuthServiceServiceLayer.Authentication.JWTService;
+using AuthServiceServiceLayer.Authentication.Roles.Validator;
+using AuthServiceServiceLayer.ModelConverter;
 using Microsoft.AspNetCore.Identity;
-using AuthService.Authentication.AuthOperations;
-using AuthService.Authentication.JWTService;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Controller
+namespace AuthServiceAPI.Controller
 {
     [Route("api/authentication")]
     [ApiController]
