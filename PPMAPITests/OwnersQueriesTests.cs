@@ -120,7 +120,7 @@ namespace PPMAPITests
                 UserId = "UserId"
             };
 
-            owner.Rentalproperties.Add(property);
+            owner.RentalProperties.Add(property);
 
 
             _db.Owners.Add(owner);

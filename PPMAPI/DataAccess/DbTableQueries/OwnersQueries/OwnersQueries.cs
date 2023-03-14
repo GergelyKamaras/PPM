@@ -35,7 +35,7 @@ namespace PPMAPI.DataAccess.DbTableQueries.OwnersQueries
 
         public Owner GetOwnerByPropertyId(Guid id)
         {
-            return _db.Owners.FirstOrDefault(o => o.Properties.Any(p => p.Id == id) || o.Rentalproperties.Any(p => p.Id == id));
+            return _db.Owners.FirstOrDefault(o => o.Properties.Any(p => p.Id == id) || o.RentalProperties.Any(p => p.Id == id));
         }
     }
 }

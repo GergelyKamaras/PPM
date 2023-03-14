@@ -328,7 +328,7 @@ namespace PPMAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("PPMModelLibrary.Models.Users.Owner", "Owner")
-                        .WithMany("Rentalproperties")
+                        .WithMany("RentalProperties")
                         .HasForeignKey("OwnerUserId");
 
                     b.HasOne("PPMModelLibrary.Models.Users.Tenant", "Tenant")
@@ -428,7 +428,7 @@ namespace PPMAPI.Migrations
                 {
                     b.Navigation("Properties");
 
-                    b.Navigation("Rentalproperties");
+                    b.Navigation("RentalProperties");
                 });
 
             modelBuilder.Entity("PPMModelLibrary.Models.Users.Tenant", b =>

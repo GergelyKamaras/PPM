@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 using PPMModelLibrary.Models.Transactions;
 using PPMModelLibrary.Models.Users;
 using PPMModelLibrary.Models.UtilityModels;
