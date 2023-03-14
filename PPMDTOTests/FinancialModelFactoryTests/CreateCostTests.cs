@@ -1,14 +1,13 @@
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMDTOModelLibrary.InputDTOs.FinancialInput;
-using PPMModelLibrary.Models.Properties;
 using PPMModelLibrary.Models.Transactions;
 
-namespace PPMDTOTests
+namespace PPMServiceLayerTests.FinancialModelFactoryTests
 {
-    public class Tests
+    public class CreateCostTests
     {
         private FinancialModelFactory _factory;
-        
+
         [SetUp]
         public void Setup()
         {
