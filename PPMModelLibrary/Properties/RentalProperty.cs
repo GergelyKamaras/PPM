@@ -11,7 +11,7 @@ namespace PPMAPIModelLibrary.Properties
         [Key]
         public Guid Id { get; set; }
         public Tenant? Tenant { get; set; }
-        public decimal? RentalFee { get; set; }
+        public decimal RentalFee { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; }
         public float Size { get; set; }

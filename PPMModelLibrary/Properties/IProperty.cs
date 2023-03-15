@@ -5,7 +5,7 @@ using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPIModelLibrary.Properties
 {
-    internal interface IProperty
+    public interface IProperty
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }

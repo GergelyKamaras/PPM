@@ -6,7 +6,7 @@ namespace PPMDTOModelLibrary.InputDTOs.Properties
     {
         public string OwnerId { get; set; }
         public string? TenantId { get; set; }
-        public decimal? RentalFee { get; set; }
+        public decimal RentalFee { get; set; }
         public string Name { get; set; }
         public float Size { get; set; }
         public decimal PurchasePrice { get; set; }
