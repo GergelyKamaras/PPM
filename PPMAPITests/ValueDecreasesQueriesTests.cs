@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPIDataAccess;
-using PPMAPIModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.UtilityModels;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 using PPMAPIModelLibrary.Properties;
 

@@ -2,7 +2,7 @@
 using PPMAPIDataAccess;
 using PPMAPIDataAccess.DbTableQueries.CostsQueries;
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
-using PPMAPIModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.UtilityModels;
 using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPITests
