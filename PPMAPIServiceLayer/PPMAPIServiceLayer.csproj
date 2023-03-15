@@ -11,8 +11,4 @@
     <ProjectReference Include="..\PPMModelLibrary\PPMAPIModelLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="OutputDTOConverter\" />
-  </ItemGroup>
-
 </Project>
