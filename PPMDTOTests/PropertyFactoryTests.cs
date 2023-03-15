@@ -1,4 +1,5 @@
-﻿using PPMAPIModelLibrary.Properties;
+﻿using PPMAPIDTOModelLibrary.SharedDTOs;
+using PPMAPIModelLibrary.Properties;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
@@ -24,12 +25,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Property property = _factory.CreateProperty(propertyDTO);
@@ -40,12 +44,12 @@ namespace PPMAPIServiceLayerTests
                 Assert.That(property.PurchasePrice, Is.EqualTo(propertyDTO.PurchasePrice));
                 Assert.That(property.PurchaseDate, Is.EqualTo(propertyDTO.PurchaseDate));
                 Assert.That(property.Size, Is.EqualTo(propertyDTO.Size));
-                Assert.That(property.Address.Country, Is.EqualTo(propertyDTO.Country));
-                Assert.That(property.Address.City, Is.EqualTo(propertyDTO.City));
-                Assert.That(property.Address.ZipCode, Is.EqualTo(propertyDTO.ZipCode));
-                Assert.That(property.Address.Street, Is.EqualTo(propertyDTO.Street));
-                Assert.That(property.Address.StreetNumber, Is.EqualTo(propertyDTO.StreetNumber));
-                Assert.That(property.Address.AdditionalInfo, Is.EqualTo(propertyDTO.AdditionalInfo));
+                Assert.That(property.Address.Country, Is.EqualTo(propertyDTO.Address.Country));
+                Assert.That(property.Address.City, Is.EqualTo(propertyDTO.Address.City));
+                Assert.That(property.Address.ZipCode, Is.EqualTo(propertyDTO.Address.ZipCode));
+                Assert.That(property.Address.Street, Is.EqualTo(propertyDTO.Address.Street));
+                Assert.That(property.Address.StreetNumber, Is.EqualTo(propertyDTO.Address.StreetNumber));
+                Assert.That(property.Address.AdditionalInfo, Is.EqualTo(propertyDTO.Address.AdditionalInfo));
                 Assert.That(property, Has.Property("Id"));
             });
         }
@@ -62,12 +66,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             RentalProperty property = _factory.CreateRentalProperty(propertyDTO);
@@ -79,12 +86,12 @@ namespace PPMAPIServiceLayerTests
                 Assert.That(property.PurchaseDate, Is.EqualTo(propertyDTO.PurchaseDate));
                 Assert.That(property.Size, Is.EqualTo(propertyDTO.Size));
                 Assert.That(property.RentalFee, Is.EqualTo(propertyDTO.RentalFee));
-                Assert.That(property.Address.Country, Is.EqualTo(propertyDTO.Country));
-                Assert.That(property.Address.City, Is.EqualTo(propertyDTO.City));
-                Assert.That(property.Address.ZipCode, Is.EqualTo(propertyDTO.ZipCode));
-                Assert.That(property.Address.Street, Is.EqualTo(propertyDTO.Street));
-                Assert.That(property.Address.StreetNumber, Is.EqualTo(propertyDTO.StreetNumber));
-                Assert.That(property.Address.AdditionalInfo, Is.EqualTo(propertyDTO.AdditionalInfo));
+                Assert.That(property.Address.Country, Is.EqualTo(propertyDTO.Address.Country));
+                Assert.That(property.Address.City, Is.EqualTo(propertyDTO.Address.City));
+                Assert.That(property.Address.ZipCode, Is.EqualTo(propertyDTO.Address.ZipCode));
+                Assert.That(property.Address.Street, Is.EqualTo(propertyDTO.Address.Street));
+                Assert.That(property.Address.StreetNumber, Is.EqualTo(propertyDTO.Address.StreetNumber));
+                Assert.That(property.Address.AdditionalInfo, Is.EqualTo(propertyDTO.Address.AdditionalInfo));
                 Assert.That(property, Has.Property("Id"));
             });
         }
@@ -101,12 +108,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateRentalProperty(propertyDTO));
@@ -121,12 +131,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -141,12 +154,15 @@ namespace PPMAPIServiceLayerTests
                 OwnerId = "Id1",
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -161,13 +177,16 @@ namespace PPMAPIServiceLayerTests
                 OwnerId = "Id1",
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
-                Size = 0,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Size = -1,
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -182,12 +201,15 @@ namespace PPMAPIServiceLayerTests
                 OwnerId = "Id1",
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -203,12 +225,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = -1,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
         }
@@ -222,12 +247,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
         }
@@ -242,11 +270,14 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -262,11 +293,14 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -282,11 +316,14 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                Street = "HighwayToHell",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    Street = "HighwayToHell",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -302,11 +339,14 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                StreetNumber = 1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    StreetNumber = 1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -322,11 +362,14 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));
@@ -342,12 +385,15 @@ namespace PPMAPIServiceLayerTests
                 PurchasePrice = 50,
                 PurchaseDate = DateTime.Now,
                 Size = 35,
-                Country = "Corruptistan",
-                City = "RudeAPest",
-                ZipCode = "666",
-                Street = "HighwayToHell",
-                StreetNumber = -1,
-                AdditionalInfo = "Nada"
+                Address = new AddressDTO()
+                {
+                    Country = "Corruptistan",
+                    City = "RudeAPest",
+                    ZipCode = "666",
+                    Street = "HighwayToHell",
+                    StreetNumber = -1,
+                    AdditionalInfo = "Nada"
+                }
             };
 
             Assert.Throws<ArgumentException>(() => _factory.CreateProperty(propertyDTO));

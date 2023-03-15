@@ -1,4 +1,6 @@
-﻿namespace PPMDTOModelLibrary.InputDTOs.Properties;
+﻿using PPMAPIDTOModelLibrary.SharedDTOs;
+
+namespace PPMDTOModelLibrary.InputDTOs.Properties;
 
 public interface IPropertyInputDTO
 {
@@ -7,10 +9,5 @@ public interface IPropertyInputDTO
     decimal PurchasePrice { get; set; }
     DateTime PurchaseDate { get; set; }
     string OwnerId { get; set; }
-    string Country { get; set; }
-    string City { get; set; }
-    string ZipCode { get; set; }
-    string Street { get; set; }
-    int StreetNumber { get; set; }
-    string? AdditionalInfo { get; set; }
+    public AddressDTO Address { get; set; }
 }

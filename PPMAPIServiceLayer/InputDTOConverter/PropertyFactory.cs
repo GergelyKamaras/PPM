@@ -1,4 +1,5 @@
-﻿using PPMAPIModelLibrary.Properties;
+﻿using PPMAPIDTOModelLibrary.SharedDTOs;
+using PPMAPIModelLibrary.Properties;
 using PPMAPIModelLibrary.UtilityModels;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
@@ -13,7 +14,7 @@ namespace PPMAPIServiceLayer.InputDTOConverter
                 return new Property()
                 {
                     Id = Guid.NewGuid(),
-                    Address = CreateAddress(property),
+                    Address = CreateAddress(property.Address),
                     Name = property.Name,
                     PurchaseDate = property.PurchaseDate,
                     PurchasePrice = property.PurchasePrice,
@@ -31,7 +32,7 @@ namespace PPMAPIServiceLayer.InputDTOConverter
                 return new RentalProperty()
                 {
                     Id = Guid.NewGuid(),
-                    Address = CreateAddress(property),
+                    Address = CreateAddress(property.Address),
                     Name = property.Name,
                     PurchaseDate = property.PurchaseDate,
                     PurchasePrice = property.PurchasePrice,
@@ -43,32 +44,31 @@ namespace PPMAPIServiceLayer.InputDTOConverter
             throw new ArgumentException("Error creating rental property!");
         }
 
-        private Address CreateAddress(IPropertyInputDTO property)
+        private Address CreateAddress(AddressDTO address)
         {
-            if (ValidateInputDTOAddress(property))
+            if (ValidateInputDTOAddress(address))
             {
                 return new Address()
                 {
-                    Country = property.Country,
-                    City = property.City,
-                    Street = property.Street,
-                    StreetNumber = property.StreetNumber,
-                    ZipCode = property.ZipCode,
-                    AdditionalInfo = property.AdditionalInfo
+                    Country = address.Country,
+                    City = address.City,
+                    Street = address.Street,
+                    StreetNumber = address.StreetNumber,
+                    ZipCode = address.ZipCode,
+                    AdditionalInfo = address.AdditionalInfo
                 };
             }
 
             throw new ArgumentException("Error generating address!");
         }
 
-        private bool ValidateInputDTOAddress(IPropertyInputDTO property)
+        private bool ValidateInputDTOAddress(AddressDTO address)
         {
-            if (property.City == null ||
-                property.Country == null ||
-                property.Street == null ||
-                property.StreetNumber == null ||
-                property.StreetNumber <= 0 ||
-                property.ZipCode == null)
+            if (address.City == null ||
+                address.Country == null ||
+                address.Street == null ||
+                address.StreetNumber <= 0 ||
+                address.ZipCode == null)
             {
                 throw new ArgumentException("Invalid address data!");
             }
@@ -80,11 +80,8 @@ namespace PPMAPIServiceLayer.InputDTOConverter
         {
             if (property.Name == null ||
                 property.OwnerId == null ||
-                property.PurchaseDate == null ||
                 property.PurchaseDate == DateTime.MinValue ||
-                property.Size == null ||
                 property.Size <= 0 ||
-                property.PurchasePrice == null ||
                 property.PurchasePrice <= 0)
             {
                 throw new ArgumentException("Invalid basic property data!");
@@ -96,7 +93,7 @@ namespace PPMAPIServiceLayer.InputDTOConverter
         {
             if (property.RentalFee <= 0)
             {
-                throw new ArgumentException("Invalid pental property data!");
+                throw new ArgumentException("Invalid rental property data!");
             }
 
             return true;
