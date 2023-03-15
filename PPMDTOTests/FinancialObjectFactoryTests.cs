@@ -4,7 +4,7 @@ using PPMModelLibrary.Models.FinancialObjects;
 using PPMModelLibrary.Models.FinancialObjects.Transactions;
 using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
 
-namespace PPMServiceLayerTests.FinancialModelFactoryTests
+namespace PPMAPIServiceLayerTests
 {
     public class CreateFinancialObjectTests
     {
