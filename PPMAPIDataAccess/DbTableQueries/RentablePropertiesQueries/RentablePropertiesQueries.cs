@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.Properties;
+﻿using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries
 {

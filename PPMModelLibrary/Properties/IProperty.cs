@@ -1,9 +1,9 @@
-﻿using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
-using PPMModelLibrary.Models.Users;
-using PPMModelLibrary.Models.UtilityModels;
+﻿using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Users;
+using PPMAPIModelLibrary.UtilityModels;
 
-namespace PPMModelLibrary.Models.Properties
+namespace PPMAPIModelLibrary.Properties
 {
     internal interface IProperty
     {

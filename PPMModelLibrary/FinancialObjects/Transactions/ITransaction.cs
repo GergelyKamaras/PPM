@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Models.FinancialObjects.Transactions
+﻿namespace PPMAPIModelLibrary.FinancialObjects.Transactions
 {
     internal interface ITransaction : IFinancialObject
     {

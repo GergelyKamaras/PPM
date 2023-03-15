@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PPMModelLibrary.Models.Properties;
+using PPMAPIModelLibrary.Properties;
 
-namespace PPMModelLibrary.Models.FinancialObjects.Transactions
+namespace PPMAPIModelLibrary.FinancialObjects.Transactions
 {
-    public class Cost : ITransaction
+    public class Revenue : ITransaction
     {
         [Key]
         public int Id { get; set; }

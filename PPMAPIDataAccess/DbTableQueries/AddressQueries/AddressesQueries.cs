@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.UtilityModels;
+﻿using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPIDataAccess.DbTableQueries.AddressQueries
 {

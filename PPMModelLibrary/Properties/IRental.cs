@@ -1,6 +1,6 @@
-﻿using PPMModelLibrary.Models.Users;
+﻿using PPMAPIModelLibrary.Users;
 
-namespace PPMModelLibrary.Models.Properties
+namespace PPMAPIModelLibrary.Properties
 {
     internal interface IRental
     {

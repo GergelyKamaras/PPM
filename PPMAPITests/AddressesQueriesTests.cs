@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PPMAPIDataAccess;
 using PPMAPIDataAccess.DbTableQueries.AddressQueries;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPITests
 {

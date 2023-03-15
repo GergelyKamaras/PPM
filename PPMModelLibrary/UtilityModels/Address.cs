@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PPMModelLibrary.Models.UtilityModels
+namespace PPMAPIModelLibrary.UtilityModels
 {
     public class Address : IAddress
     {

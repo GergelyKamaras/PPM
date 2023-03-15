@@ -1,10 +1,10 @@
-﻿using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
-using PPMModelLibrary.Models.Users;
-using PPMModelLibrary.Models.UtilityModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Users;
+using PPMAPIModelLibrary.UtilityModels;
 
-namespace PPMModelLibrary.Models.Properties
+namespace PPMAPIModelLibrary.Properties
 {
     public class RentalProperty : IRentalProperty
     {

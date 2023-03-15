@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.Users;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Properties;
+using PPMAPIModelLibrary.Users;
+using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPIDataAccess
 {

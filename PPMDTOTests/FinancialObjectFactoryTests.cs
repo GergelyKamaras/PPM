@@ -1,8 +1,8 @@
+using PPMAPIModelLibrary.FinancialObjects;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMDTOModelLibrary.InputDTOs.FinancialInput;
-using PPMModelLibrary.Models.FinancialObjects;
-using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
 
 namespace PPMAPIServiceLayerTests
 {

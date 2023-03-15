@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries;
 using PPMAPIDataAccess;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.Users;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.Properties;
+using PPMAPIModelLibrary.Users;
 
 namespace PPMAPITests
 {

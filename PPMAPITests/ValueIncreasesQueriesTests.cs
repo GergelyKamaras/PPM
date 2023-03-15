@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 using PPMAPIDataAccess;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.UtilityModels;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPITests
 {

@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Models.Properties
+﻿namespace PPMAPIModelLibrary.Properties
 {
     internal interface IRentalProperty : IRental, IProperty
     {

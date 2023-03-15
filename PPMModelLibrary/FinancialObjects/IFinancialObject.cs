@@ -1,6 +1,6 @@
-﻿using PPMModelLibrary.Models.Properties;
+﻿using PPMAPIModelLibrary.Properties;
 
-namespace PPMModelLibrary.Models.FinancialObjects
+namespace PPMAPIModelLibrary.FinancialObjects
 {
     public interface IFinancialObject
     {

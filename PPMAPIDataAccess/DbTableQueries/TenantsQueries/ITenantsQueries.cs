@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.Users;
+﻿using PPMAPIModelLibrary.Users;
 
 namespace PPMAPIDataAccess.DbTableQueries.TenantsQueries
 {

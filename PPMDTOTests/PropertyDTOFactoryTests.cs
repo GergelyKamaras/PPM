@@ -1,6 +1,6 @@
-﻿using PPMAPIServiceLayer.InputDTOConverter;
+﻿using PPMAPIModelLibrary.Properties;
+using PPMAPIServiceLayer.InputDTOConverter;
 using PPMDTOModelLibrary.InputDTOs.Properties;
-using PPMModelLibrary.Models.Properties;
 
 namespace PPMAPIServiceLayerTests
 {

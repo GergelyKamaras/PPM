@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
+﻿using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 
 namespace PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries
 {

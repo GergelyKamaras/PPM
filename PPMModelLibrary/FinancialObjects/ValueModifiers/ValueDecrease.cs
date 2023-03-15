@@ -1,9 +1,9 @@
-﻿using PPMModelLibrary.Models.Properties;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using PPMAPIModelLibrary.Properties;
 
-namespace PPMModelLibrary.Models.FinancialObjects.Transactions
+namespace PPMAPIModelLibrary.FinancialObjects.ValueModifiers
 {
-    public class Revenue : ITransaction
+    public class ValueDecrease : IValueChange
     {
         [Key]
         public int Id { get; set; }

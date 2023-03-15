@@ -1,4 +1,4 @@
-﻿using PPMModelLibrary.Models.FinancialObjects.Transactions;
+﻿using PPMAPIModelLibrary.FinancialObjects.Transactions;
 
 namespace PPMAPIDataAccess.DbTableQueries.RevenuesQueries
 {

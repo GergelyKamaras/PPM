@@ -1,7 +1,5 @@
-﻿using PPMDTOModelLibrary.InputDTOs.FinancialInput;
-using PPMModelLibrary.Models.FinancialObjects;
-using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.FinancialObjects.ValueModifiers;
+﻿using PPMAPIModelLibrary.FinancialObjects;
+using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 
 namespace PPMAPIServiceLayer.InputDTOConverter;
 

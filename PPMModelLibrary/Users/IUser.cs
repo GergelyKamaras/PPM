@@ -1,4 +1,4 @@
-﻿namespace PPMModelLibrary.Users
+﻿namespace PPMAPIModelLibrary.Users
 {
     public interface IUser
     {

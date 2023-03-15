@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PPMAPIDataAccess;
 using PPMAPIDataAccess.DbTableQueries.CostsQueries;
-using PPMModelLibrary.Models.FinancialObjects.Transactions;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.Models.UtilityModels;
+using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPITests
 {

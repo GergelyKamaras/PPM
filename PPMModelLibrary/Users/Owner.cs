@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Users;
+using PPMAPIModelLibrary.Properties;
 
-namespace PPMModelLibrary.Models.Users
+namespace PPMAPIModelLibrary.Users
 {
     public class Owner : IUser
     {

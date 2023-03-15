@@ -1,6 +1,6 @@
-﻿using PPMDTOModelLibrary.InputDTOs.Properties;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.UtilityModels;
+﻿using PPMAPIModelLibrary.Properties;
+using PPMAPIModelLibrary.UtilityModels;
+using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace PPMAPIServiceLayer.InputDTOConverter
 {
