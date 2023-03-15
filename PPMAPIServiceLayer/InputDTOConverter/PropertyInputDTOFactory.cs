@@ -4,7 +4,7 @@ using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace PPMAPIServiceLayer.InputDTOConverter
 {
-    public class PropertyDTOFactory : IPropertyDTOFactory
+    public class PropertyInputDTOFactory : IPropertyInputDTOFactory
     {
         public Property CreateProperty(PropertyInputDTO property)
         {

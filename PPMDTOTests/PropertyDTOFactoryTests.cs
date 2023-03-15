@@ -6,12 +6,12 @@ namespace PPMAPIServiceLayerTests
 {
     internal class PropertyDTOFactoryTests
     {
-        private PropertyDTOFactory _factory;
+        private PropertyInputDTOFactory _factory;
         
         [SetUp]
         public void Setup()
         {
-            _factory = new PropertyDTOFactory();
+            _factory = new PropertyInputDTOFactory();
         }
 
         [Test]

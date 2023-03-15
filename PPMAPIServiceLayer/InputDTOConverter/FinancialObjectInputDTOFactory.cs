@@ -5,7 +5,7 @@ using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 
 namespace PPMAPIServiceLayer.InputDTOConverter
 {
-    public class FinancialObjectFactory : IFinancialObjectFactory
+    public class FinancialObjectInputDTOFactory : IFinancialObjectInputDTOFactory
     {
         private readonly string[] _financialObjectTypes = 
         {

@@ -3,7 +3,7 @@ using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 
 namespace PPMAPIServiceLayer.InputDTOConverter;
 
-public interface IFinancialObjectFactory
+public interface IFinancialObjectInputDTOFactory
 {
     IFinancialObject CreateFinancialObject(FinancialInputDTO inputDTO);
     
