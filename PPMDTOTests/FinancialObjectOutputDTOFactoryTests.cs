@@ -2,7 +2,7 @@
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 using PPMAPIModelLibrary.Properties;
-using PPMAPIServiceLayer.OutputDTOConverter;
+using PPMAPIServiceLayer.OutputDTOFactory;
 
 namespace PPMAPIServiceLayerTests
 {
@@ -17,7 +17,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_ValidCostInput_ValidOutput()
+        public void Create_ValidCostInput_ValidOutput()
         {
             Property property = new Property()
             {
@@ -35,7 +35,7 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            IFinancialObjectOutputDTO output = _factory.Convert(cost);
+            IFinancialObjectOutputDTO output = _factory.Create(cost);
 
             Assert.Multiple(() =>
             {
@@ -50,7 +50,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_ValidRevenueInput_ValidOutput()
+        public void Create_ValidRevenueInput_ValidOutput()
         {
             Property property = new Property()
             {
@@ -68,7 +68,7 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            IFinancialObjectOutputDTO output = _factory.Convert(revenue);
+            IFinancialObjectOutputDTO output = _factory.Create(revenue);
 
             Assert.Multiple(() =>
             {
@@ -83,7 +83,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_ValidValueIncreaseInput_ValidOutput()
+        public void Create_ValidValueIncreaseInput_ValidOutput()
         {
             Property property = new Property()
             {
@@ -101,7 +101,7 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            IFinancialObjectOutputDTO output = _factory.Convert(valueIncrease);
+            IFinancialObjectOutputDTO output = _factory.Create(valueIncrease);
 
             Assert.Multiple(() =>
             {
@@ -116,7 +116,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_ValidValueDecreaseInput_ValidOutput()
+        public void Create_ValidValueDecreaseInput_ValidOutput()
         {
             Property property = new Property()
             {
@@ -134,7 +134,7 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            IFinancialObjectOutputDTO output = _factory.Convert(valueDecrease);
+            IFinancialObjectOutputDTO output = _factory.Create(valueDecrease);
 
             Assert.Multiple(() =>
             {
@@ -149,7 +149,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_ValidInput_MapsPropertyTypesCorrectly()
+        public void Create_ValidInput_MapsPropertyTypesCorrectly()
         {
             Property property = new Property()
             {
@@ -183,8 +183,8 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = rentalProperty
             };
 
-            IFinancialObjectOutputDTO propertyOutput = _factory.Convert(costProperty);
-            IFinancialObjectOutputDTO rentalPropertyOutput = _factory.Convert(costRentalProperty);
+            IFinancialObjectOutputDTO propertyOutput = _factory.Create(costProperty);
+            IFinancialObjectOutputDTO rentalPropertyOutput = _factory.Create(costRentalProperty);
             Assert.Multiple(() =>
             {
                 Assert.That(propertyOutput.IsRental, Is.False);
@@ -195,7 +195,7 @@ namespace PPMAPIServiceLayerTests
         }
 
         [Test]
-        public void Convert_MissingId_ThrowsError()
+        public void Create_MissingId_ThrowsError()
         {
             Property property = new Property()
             {
@@ -212,11 +212,11 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
 
         [Test]
-        public void Convert_MissingTitle_ThrowsError()
+        public void Create_MissingTitle_ThrowsError()
         {
             Property property = new Property()
             {
@@ -233,11 +233,11 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
 
         [Test]
-        public void Convert_MissingValue_ThrowsError()
+        public void Create_MissingValue_ThrowsError()
         {
             Property property = new Property()
             {
@@ -254,11 +254,11 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
 
         [Test]
-        public void Convert_InvalidValue_ThrowsError()
+        public void Create_InvalidValue_ThrowsError()
         {
             Property property = new Property()
             {
@@ -276,11 +276,11 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
 
         [Test]
-        public void Convert_MissingDate_ThrowsError()
+        public void Create_MissingDate_ThrowsError()
         {
             Property property = new Property()
             {
@@ -297,11 +297,11 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
 
         [Test]
-        public void Convert_InvalidDate_ThrowsError()
+        public void Create_InvalidDate_ThrowsError()
         {
             Property property = new Property()
             {
@@ -319,7 +319,7 @@ namespace PPMAPIServiceLayerTests
                 RentalProperty = null
             };
 
-            Assert.Throws<ArgumentException>(() => _factory.Convert(cost));
+            Assert.Throws<ArgumentException>(() => _factory.Create(cost));
         }
     }
 }

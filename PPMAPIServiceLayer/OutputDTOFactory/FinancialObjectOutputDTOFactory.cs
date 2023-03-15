@@ -3,11 +3,11 @@ using PPMAPIModelLibrary.FinancialObjects;
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 
-namespace PPMAPIServiceLayer.OutputDTOConverter
+namespace PPMAPIServiceLayer.OutputDTOFactory
 {
     public class FinancialObjectOutputDTOFactory : IFinancialObjectOutputDTOFactory
     {
-        public IFinancialObjectOutputDTO Convert(IFinancialObject finObject)
+        public IFinancialObjectOutputDTO Create(IFinancialObject finObject)
         {
             ValidateInput(finObject);
             

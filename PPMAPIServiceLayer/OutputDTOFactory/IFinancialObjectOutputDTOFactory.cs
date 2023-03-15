@@ -1,10 +1,10 @@
 ﻿using PPMAPIDTOModelLibrary.OutputDTOs.FinancialObjects;
 using PPMAPIModelLibrary.FinancialObjects;
 
-namespace PPMAPIServiceLayer.OutputDTOConverter
+namespace PPMAPIServiceLayer.OutputDTOFactory
 {
     internal interface IFinancialObjectOutputDTOFactory
     {
-        public IFinancialObjectOutputDTO Convert(IFinancialObject finObject);
+        public IFinancialObjectOutputDTO Create(IFinancialObject finObject);
     }
 }
