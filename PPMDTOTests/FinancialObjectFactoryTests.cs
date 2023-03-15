@@ -8,12 +8,12 @@ namespace PPMAPIServiceLayerTests
 {
     public class CreateFinancialObjectTests
     {
-        private FinancialObjectInputDTOFactory _factory;
+        private FinancialObjectFactory _factory;
 
         [SetUp]
         public void Setup()
         {
-            _factory = new FinancialObjectInputDTOFactory();
+            _factory = new FinancialObjectFactory();
         }
 
         [Test]

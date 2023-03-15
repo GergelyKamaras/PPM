@@ -4,14 +4,14 @@ using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace PPMAPIServiceLayerTests
 {
-    internal class PropertyDTOFactoryTests
+    internal class PropertyFactoryTests
     {
-        private PropertyInputDTOFactory _factory;
+        private PropertyFactory _factory;
         
         [SetUp]
         public void Setup()
         {
-            _factory = new PropertyInputDTOFactory();
+            _factory = new PropertyFactory();
         }
 
         [Test]
