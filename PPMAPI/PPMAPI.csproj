@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PPMAPIDataAccess\PPMAPIDataAccess.csproj" />
-    <ProjectReference Include="..\PPMDTOModelLibrary\PPMDTOModelLibrary.csproj" />
-    <ProjectReference Include="..\PPMModelLibrary\PPMModelLibrary.csproj" />
+    <ProjectReference Include="..\PPMDTOModelLibrary\PPMAPIDTOModelLibrary.csproj" />
+    <ProjectReference Include="..\PPMModelLibrary\PPMAPIModelLibrary.csproj" />
   </ItemGroup>
 
 </Project>

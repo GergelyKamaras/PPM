@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceAPI", "AuthServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceTests", "AuthServiceTests\AuthServiceTests.csproj", "{1866639B-7352-47DA-83BB-02BF86DE6423}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMModelLibrary", "PPMModelLibrary\PPMModelLibrary.csproj", "{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIModelLibrary", "PPMModelLibrary\PPMAPIModelLibrary.csproj", "{BEA5AC49-756D-444F-BEB8-DC10F6D4391A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceModelLibrary", "AuthServiceModelLibrary\AuthServiceModelLibrary.csproj", "{D995693B-A77A-4364-A175-AFC4C54529E5}"
 EndProject
@@ -27,19 +27,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPI", "PPMAPI\PPMAPI.csproj", "{2DE5B299-0D62-41D0-85EA-327A861CFBB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMDTOModelLibrary", "PPMDTOModelLibrary\PPMDTOModelLibrary.csproj", "{EC2F9676-716E-49D7-8357-25CE550EAFB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIDTOModelLibrary", "PPMDTOModelLibrary\PPMAPIDTOModelLibrary.csproj", "{EC2F9676-716E-49D7-8357-25CE550EAFB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPITests", "PPMAPITests\PPMAPITests.csproj", "{3B0C618F-49F2-405F-9C4C-FC726381F0C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIDataAccessTests", "PPMAPITests\PPMAPIDataAccessTests.csproj", "{3B0C618F-49F2-405F-9C4C-FC726381F0C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMServiceLayerTests", "PPMDTOTests\PPMServiceLayerTests.csproj", "{646480F5-1E4C-4C61-8645-4F789612375F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIServiceLayerTests", "PPMDTOTests\PPMAPIServiceLayerTests.csproj", "{646480F5-1E4C-4C61-8645-4F789612375F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceDataAccess", "AuthServiceDataAccess\AuthServiceDataAccess.csproj", "{C56D202C-F0C5-45E6-B358-02DE952AC8B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceDataAccess", "AuthServiceDataAccess\AuthServiceDataAccess.csproj", "{C56D202C-F0C5-45E6-B358-02DE952AC8B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceServiceLayer", "AuthServiceServiceLayer\AuthServiceServiceLayer.csproj", "{7090C00E-436C-41EB-80A1-97039DEA335A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceServiceLayer", "AuthServiceServiceLayer\AuthServiceServiceLayer.csproj", "{7090C00E-436C-41EB-80A1-97039DEA335A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMAPIDataAccess", "PPMAPIDataAccess\PPMAPIDataAccess.csproj", "{9C3D80BB-BA4B-4426-8CFC-BB3C29ADB267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIDataAccess", "PPMAPIDataAccess\PPMAPIDataAccess.csproj", "{9C3D80BB-BA4B-4426-8CFC-BB3C29ADB267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMAPIServiceLayer", "PPMAPIServiceLayer\PPMAPIServiceLayer.csproj", "{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIServiceLayer", "PPMAPIServiceLayer\PPMAPIServiceLayer.csproj", "{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
