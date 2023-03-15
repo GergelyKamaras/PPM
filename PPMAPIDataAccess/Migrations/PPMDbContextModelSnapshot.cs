@@ -209,7 +209,7 @@ namespace PPMAPIDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Number")
+                    b.Property<int>("StreetNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Street")

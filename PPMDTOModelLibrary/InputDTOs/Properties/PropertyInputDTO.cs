@@ -1,6 +1,6 @@
 ﻿namespace PPMDTOModelLibrary.InputDTOs.Properties
 {
-    public class PropertyInputDTO
+    public class PropertyInputDTO : IPropertyInputDTO
     {
         public string Name { get; set; }
         public float Size { get; set; }
@@ -11,7 +11,7 @@
         public string City { get; set; }
         public string ZipCode { get; set; }
         public string Street { get; set; }
-        public int Number { get; set; }
-        public string AdditionalInfo { get; set; }
+        public int StreetNumber { get; set; }
+        public string? AdditionalInfo { get; set; }
     }
 }

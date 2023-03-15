@@ -15,8 +15,8 @@ namespace PPMModelLibrary.Models.Properties
         public string Name { get; set; }
         public Address Address { get; set; }
         public float Size { get; set; }
-        public decimal PurchasePrice { get; }
-        public DateTime PurchaseDate { get; }
+        public decimal PurchasePrice { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public Owner Owner { get; set; }
         public List<Cost> Costs { get; set; }
         public List<Revenue> Revenues { get; set; }

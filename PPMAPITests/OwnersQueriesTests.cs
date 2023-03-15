@@ -75,7 +75,7 @@ namespace PPMAPITests
                     City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
-                    Number = 973,
+                    StreetNumber = 973,
                     AdditionalInfo = "Nothing Much"
                 },
                 Name = "RealProperty"
@@ -109,7 +109,7 @@ namespace PPMAPITests
                     City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
-                    Number = 973,
+                    StreetNumber = 973,
                     AdditionalInfo = "Nothing Much"
                 },
                 Name = "RealProperty"
@@ -153,7 +153,7 @@ namespace PPMAPITests
                     City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
-                    Number = 973,
+                    StreetNumber = 973,
                     AdditionalInfo = "Nothing Much"
                 },
                 Name = "RealProperty"
