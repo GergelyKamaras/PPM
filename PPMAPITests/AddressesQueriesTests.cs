@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess;
-using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIDataAccess;
+using PPMAPIDataAccess.DbTableQueries.AddressQueries;
+using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPITests
 {
@@ -30,10 +30,10 @@ namespace PPMAPITests
             {
                 Id = 1,
                 Country = "VeryCountry",
-                City = "Verycity",
+                City = "VeryCity",
                 ZipCode = "9783",
                 Street = "VeryStreet",
-                Number = 973,
+                StreetNumber = 973,
                 AdditionalInfo = "Nothing Much"
             };
 
@@ -62,10 +62,10 @@ namespace PPMAPITests
             {
                 Id = 1,
                 Country = "VeryCountry",
-                City = "Verycity",
+                City = "VeryCity",
                 ZipCode = "9783",
                 Street = "VeryStreet",
-                Number = 973,
+                StreetNumber = 973,
                 AdditionalInfo = "Nothing Much"
             };
             
@@ -90,10 +90,10 @@ namespace PPMAPITests
             {
                 Id = 1,
                 Country = "VeryCountry",
-                City = "Verycity",
+                City = "VeryCity",
                 ZipCode = "9783",
                 Street = "VeryStreet",
-                Number = 973,
+                StreetNumber = 973,
                 AdditionalInfo = "Nothing Much"
             };
 
@@ -116,10 +116,10 @@ namespace PPMAPITests
             {
                 Id = 1,
                 Country = "VeryCountry",
-                City = "Verycity",
+                City = "VeryCity",
                 ZipCode = "9783",
                 Street = "VeryStreet",
-                Number = 973,
+                StreetNumber = 973,
                 AdditionalInfo = "Nothing Much"
             };
 
@@ -135,10 +135,10 @@ namespace PPMAPITests
             {
                 Id = 1,
                 Country = "VeryCountry",
-                City = "Verycity",
+                City = "VeryCity",
                 ZipCode = "9783",
                 Street = "VeryStreet",
-                Number = 973,
+                StreetNumber = 973,
                 AdditionalInfo = "Nothing Much"
             };
 

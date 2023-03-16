@@ -1,5 +1,5 @@
-using AuthService.DataAccess;
-using AuthService.DataAccess.UserTableQueries;
+using AuthServiceDataAccess;
+using AuthServiceDataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
 using AuthServiceModelLibrary.ApplicationUser;
 

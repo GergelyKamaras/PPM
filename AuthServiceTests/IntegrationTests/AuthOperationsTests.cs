@@ -1,11 +1,11 @@
-using AuthService.Authentication;
-using AuthService.DataAccess;
-using AuthService.DataAccess.UserTableQueries;
+using AuthServiceServiceLayer.Authentication;
+using AuthServiceDataAccess;
+using AuthServiceDataAccess.UserTableQueries;
 using Microsoft.EntityFrameworkCore;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
-using AuthService.Authentication.AuthOperations;
-using AuthService.Authentication.SecurityUtil;
+using AuthServiceServiceLayer.Authentication.AuthOperations;
+using AuthServiceServiceLayer.Authentication.SecurityUtil;
 
 namespace AuthServiceTests.IntegrationTests
 {

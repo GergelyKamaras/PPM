@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PPMAPI.DataAccess;
-using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
-using PPMModelLibrary.Models.Properties;
-using PPMModelLibrary.Models.Transactions;
-using PPMModelLibrary.Models.UtilityModels;
+using PPMAPIDataAccess;
+using PPMAPIDataAccess.DbTableQueries.CostsQueries;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMAPIModelLibrary.UtilityModels;
+using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPITests
 {
@@ -81,10 +81,10 @@ namespace PPMAPITests
                     {
                         Id = 1,
                         Country = "VeryCountry",
-                        City = "Verycity",
+                        City = "VeryCity",
                         ZipCode = "9783",
                         Street = "VeryStreet",
-                        Number = 973,
+                        StreetNumber = 973,
                         AdditionalInfo = "Nothing Much"
                 },
                 Name = "RealProperty"
@@ -108,19 +108,19 @@ namespace PPMAPITests
         }
 
         [Test]
-        public void GetCostByPropertyId_UseRentablePropertyIsInDb_GetsCost()
+        public void GetCostByPropertyId_UseRentalPropertyIsInDb_GetsCost()
         {
-            RentableProperty property = new RentableProperty()
+            RentalProperty property = new RentalProperty()
             {
                 Id = Guid.NewGuid(),
                 Address = new Address()
                 {
                     Id = 1,
                     Country = "VeryCountry",
-                    City = "Verycity",
+                    City = "VeryCity",
                     ZipCode = "9783",
                     Street = "VeryStreet",
-                    Number = 973,
+                    StreetNumber = 973,
                     AdditionalInfo = "Nothing Much"
                 },
                 Name = "RealProperty"
@@ -133,7 +133,7 @@ namespace PPMAPITests
                 Date = DateTime.Now,
                 Description = "NotAFictitiousExpense",
                 Value = 50,
-                RentableProperty = property
+                RentalProperty = property
             };
 
 
@@ -205,7 +205,6 @@ namespace PPMAPITests
             _db.SaveChanges();
 
             _queries.DeleteCost(cost.Id);
-            _db.SaveChanges();
 
             Assert.That(_db.Costs.FirstOrDefault(c => c.Id == cost.Id), Is.Null);
         }

@@ -1,5 +1,5 @@
-﻿using AuthService.Authentication.SecurityUtil;
-using AuthService.ModelConverter;
+﻿using AuthServiceServiceLayer.Authentication.SecurityUtil;
+using AuthServiceServiceLayer.ModelConverter;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceModelLibrary.ApplicationUser;
 

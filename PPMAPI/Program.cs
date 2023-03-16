@@ -2,9 +2,16 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using PPMAPI.DataAccess;
-using PPMAPI.DataAccess.DbTableQueries.AddressQueries;
-using PPMAPI.DataAccess.DbTableQueries.CostsQueries;
+using PPMAPIDataAccess;
+using PPMAPIDataAccess.DbTableQueries.AddressQueries;
+using PPMAPIDataAccess.DbTableQueries.CostsQueries;
+using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
+using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
+using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
+using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
+using PPMAPIServiceLayer.InputDTOConverter;
+using PPMAPIServiceLayer.OutputDTOFactory;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +29,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-// Register own services
+// Register own data access services
 builder.Services.AddTransient<IAddressesQueries, AddressesQueries>();
 builder.Services.AddTransient<ICostsQueries, CostsQueries>();
+builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
+builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
+builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
+builder.Services.AddTransient<IPropertiesQueries, PropertiesQueries>();
+builder.Services.AddTransient<IOwnersQueries, OwnersQueries>();
+
+// Register service layer services
+builder.Services.AddTransient<IFinancialObjectFactory, FinancialObjectFactory>();
+builder.Services.AddTransient<IPropertyFactory, PropertyFactory>();
+builder.Services.AddTransient<IFinancialObjectOutputDTOFactory, FinancialObjectOutputDTOFactory>();
+builder.Services.AddTransient<IPropertyOutputDTOFactory, PropertyOutputDTOFactory>();
 
 // CORS
 builder.Services.AddCors(o =>

@@ -1,8 +1,8 @@
-﻿using AuthService.Authentication.Roles;
+﻿using AuthServiceServiceLayer.Authentication.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Controller
+namespace AuthServiceAPI.Controller
 {
     [Route("")]
     [ApiController]
