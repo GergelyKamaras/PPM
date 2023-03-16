@@ -102,7 +102,7 @@ namespace PPMAPITests
             _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            _queries.DeleteRentalProperty(rentalProperty.Id);
+            _queries.DeleteRentalProperty(rentalProperty.Id.ToString());
 
             Assert.That(_db.RentalProperties.FirstOrDefault(p => p.Id == rentalProperty.Id), Is.Null);
         }
@@ -110,7 +110,7 @@ namespace PPMAPITests
         [Test]
         public void DeleteRentalProperty_NotInDb_ThrowsError()
         {
-            Assert.Throws<ArgumentNullException>(() => _queries.DeleteRentalProperty(Guid.NewGuid()));
+            Assert.Throws<ArgumentNullException>(() => _queries.DeleteRentalProperty(Guid.NewGuid().ToString()));
         }
 
         [Test]
@@ -188,13 +188,13 @@ namespace PPMAPITests
             _db.RentalProperties.Add(rentalProperty);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetRentalPropertyById(rentalProperty.Id), Is.SameAs(rentalProperty));
+            Assert.That(_queries.GetRentalPropertyById(rentalProperty.Id.ToString()), Is.SameAs(rentalProperty));
         }
 
         [Test]
         public void GetRentalPropertyById_NotInDb_ReturnsNull()
         {
-            Assert.That(_queries.GetRentalPropertyById(Guid.NewGuid()), Is.Null);
+            Assert.That(_queries.GetRentalPropertyById(Guid.NewGuid().ToString()), Is.Null);
         }
 
         [Test]

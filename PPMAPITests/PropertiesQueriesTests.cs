@@ -102,7 +102,7 @@ namespace PPMAPITests
             _db.Properties.Add(property);
             _db.SaveChanges();
 
-            _queries.DeleteProperty(property.Id);
+            _queries.DeleteProperty(property.Id.ToString());
 
             Assert.That(_db.Properties.FirstOrDefault(p => p.Id == property.Id), Is.Null);
         }
@@ -110,7 +110,7 @@ namespace PPMAPITests
         [Test]
         public void DeleteProperty_NotInDb_ThrowsError()
         {
-            Assert.Throws<ArgumentNullException>(() => _queries.DeleteProperty(Guid.NewGuid()));
+            Assert.Throws<ArgumentNullException>(() => _queries.DeleteProperty(Guid.NewGuid().ToString()));
         }
 
         [Test]
@@ -188,13 +188,13 @@ namespace PPMAPITests
             _db.Properties.Add(property);
             _db.SaveChanges();
 
-            Assert.That(_queries.GetPropertyById(property.Id), Is.SameAs(property));
+            Assert.That(_queries.GetPropertyById(property.Id.ToString()), Is.SameAs(property));
         }
 
         [Test]
         public void GetPropertyById_NotInDb_ReturnsNull()
         {
-            Assert.That(_queries.GetPropertyById(Guid.NewGuid()), Is.Null);
+            Assert.That(_queries.GetPropertyById(Guid.NewGuid().ToString()), Is.Null);
         }
 
         [Test]

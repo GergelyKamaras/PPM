@@ -5,9 +5,9 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
     public interface IPropertiesQueries
     {
         public void AddProperty(Property property);
-        public void DeleteProperty(Guid id);
+        public void DeleteProperty(string id);
         public void UpdateProperty(Property property);
-        public Property GetPropertyById(Guid id);
+        public Property GetPropertyById(string id);
         public List<Property> GetPropertiesByOwnerId(string id);
     }
 }

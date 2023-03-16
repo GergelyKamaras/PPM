@@ -12,5 +12,6 @@ namespace PPMDTOModelLibrary.InputDTOs.Properties
         public decimal PurchasePrice { get; set; }
         public DateTime PurchaseDate { get; set; }
         public AddressDTO Address { get; set; }
+        public bool IsRental { get; set; }
     }
 }

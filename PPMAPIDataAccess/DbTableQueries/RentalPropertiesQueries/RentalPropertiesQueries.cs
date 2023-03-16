@@ -16,9 +16,9 @@ namespace PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries
             _db.SaveChanges();
         }
 
-        public void DeleteRentalProperty(Guid id)
+        public void DeleteRentalProperty(string id)
         {
-            _db.RentalProperties.Remove(_db.RentalProperties.FirstOrDefault(p => p.Id == id));
+            _db.RentalProperties.Remove(_db.RentalProperties.FirstOrDefault(p => p.Id.ToString() == id));
             _db.SaveChanges();
         }
 
@@ -28,9 +28,9 @@ namespace PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries
             _db.SaveChanges();
         }
 
-        public RentalProperty GetRentalPropertyById(Guid id)
+        public RentalProperty GetRentalPropertyById(string id)
         {
-            return _db.RentalProperties.FirstOrDefault(p => p.Id == id);
+            return _db.RentalProperties.FirstOrDefault(p => p.Id.ToString() == id);
         }
 
         public List<RentalProperty> GetRentalPropertiesByOwnerId(string id)

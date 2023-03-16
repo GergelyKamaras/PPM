@@ -16,9 +16,9 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
             _db.SaveChanges();
         }
 
-        public void DeleteProperty(Guid id)
+        public void DeleteProperty(string id)
         {
-            _db.Properties.Remove(_db.Properties.FirstOrDefault(p => p.Id == id));
+            _db.Properties.Remove(_db.Properties.FirstOrDefault(p => p.Id.ToString() == id));
             _db.SaveChanges();
         }
 
@@ -28,9 +28,9 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
             _db.SaveChanges();
         }
 
-        public Property GetPropertyById(Guid id)
+        public Property GetPropertyById(string id)
         {
-            return _db.Properties.FirstOrDefault(p => p.Id == id);
+            return _db.Properties.FirstOrDefault(p => p.Id.ToString() == id);
         }
 
         public List<Property> GetPropertiesByOwnerId(string id)
