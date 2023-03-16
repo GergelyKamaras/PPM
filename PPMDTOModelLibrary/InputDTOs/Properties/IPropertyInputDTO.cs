@@ -10,4 +10,6 @@ public interface IPropertyInputDTO
     DateTime PurchaseDate { get; set; }
     string OwnerId { get; set; }
     public AddressDTO Address { get; set; }
+    public bool IsRental { get; set; }
+
 }
