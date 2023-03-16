@@ -3,7 +3,7 @@ using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 
 namespace PPMAPIServiceLayer.OutputDTOFactory
 {
-    internal interface IPropertyOutputDTOFactory
+    public interface IPropertyOutputDTOFactory
     {
         public IPropertyOutputDTO CreatePropertyOutputDTO(IProperty property);
     }

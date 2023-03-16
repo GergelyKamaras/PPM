@@ -16,9 +16,9 @@ namespace PPMAPIModelLibrary.Properties
         public decimal PurchasePrice { get; set; }
         public DateTime PurchaseDate { get; set; }
         public Owner Owner { get; set; }
-        public List<Cost> Costs { get; set; }
-        public List<Revenue> Revenues { get; set; }
-        public List<ValueIncrease> ValueIncreases { get; set; }
-        public List<ValueDecrease> ValueDecreases { get; set; }
+        public List<Cost> Costs { get; set; } = new List<Cost>();
+        public List<Revenue> Revenues { get; set; } = new List<Revenue>();
+        public List<ValueIncrease> ValueIncreases { get; set; } = new List<ValueIncrease>();
+        public List<ValueDecrease> ValueDecreases { get; set; } = new List<ValueDecrease>();
     }
 }

@@ -47,10 +47,11 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                 PurchasePrice = property.PurchasePrice,
                 PurchaseDate = property.PurchaseDate,
                 OwnerId = property.Owner.UserId,
-                TotalCost = 0,
-                TotalRevenue = 0,
-                CurrentValue = 0,
-                Balance = 0
+                TotalCost = property.Costs.Sum(c => c.Value),
+                TotalRevenue = property.Revenues.Sum(r => r.Value),
+                CurrentValue = property.ValueIncreases.Sum(v => v.Value) - 
+                               property.ValueDecreases.Sum(v => v.Value),
+                Balance = property.Revenues.Sum(r => r.Value) - property.Costs.Sum(c => c.Value)
             };
         }
 
@@ -75,10 +76,11 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                 PurchaseDate = property.PurchaseDate,
                 TenantId = (property.Tenant == null) ? "" : property.Tenant.UserId,
                 RentalFee = property.RentalFee,
-                TotalCost = 0,
-                TotalRevenue = 0,
-                CurrentValue = 0,
-                Balance = 0
+                TotalCost = property.Costs.Sum(c => c.Value),
+                TotalRevenue = property.Revenues.Sum(r => r.Value),
+                CurrentValue = property.ValueIncreases.Sum(v => v.Value) -
+                               property.ValueDecreases.Sum(v => v.Value),
+                Balance = property.Revenues.Sum(r => r.Value) - property.Costs.Sum(c => c.Value)
             };
         }
 
