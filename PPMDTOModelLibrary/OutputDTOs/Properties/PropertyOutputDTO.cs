@@ -8,8 +8,8 @@ namespace PPMAPIDTOModelLibrary.OutputDTOs.Properties
         public string? Name { get; set; }
         public AddressDTO Address { get; set; }
         public float Size { get; set; }
-        public decimal PurchasePrice { get; }
-        public DateTime PurchaseDate { get; }
+        public decimal PurchasePrice { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public string OwnerId { get; set; }
         public decimal TotalCost { get; set; }
         public decimal TotalRevenue { get; set; }

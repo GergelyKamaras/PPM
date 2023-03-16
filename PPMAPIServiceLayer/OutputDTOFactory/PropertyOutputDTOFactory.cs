@@ -5,9 +5,9 @@ using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPIServiceLayer.OutputDTOFactory
 {
-    internal class PropertyOutputDTOFactory : IPropertyOutputDTOFactory
+    public class PropertyOutputDTOFactory : IPropertyOutputDTOFactory
     {
-        public IPropertyOutputDTO CreatePropertyOutput(IProperty property)
+        public IPropertyOutputDTO CreatePropertyOutputDTO(IProperty property)
         {
             bool propertyIsValid = ValidateProperty(property);
             bool addressIsValid = ValidateAddress(property.Address);
@@ -44,6 +44,8 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                     AdditionalInfo = property.Address.AdditionalInfo
                 },
                 Size = property.Size,
+                PurchasePrice = property.PurchasePrice,
+                PurchaseDate = property.PurchaseDate,
                 OwnerId = property.Owner.UserId,
                 TotalCost = 0,
                 TotalRevenue = 0,
@@ -69,6 +71,8 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                 },
                 Size = property.Size,
                 OwnerId = property.Owner.UserId,
+                PurchasePrice = property.PurchasePrice,
+                PurchaseDate = property.PurchaseDate,
                 TenantId = (property.Tenant == null) ? "" : property.Tenant.UserId,
                 RentalFee = property.RentalFee,
                 TotalCost = 0,
@@ -80,11 +84,11 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
 
         private bool ValidateAddress(Address address)
         {
-            if (address.City == null ||
-                address.Country == null ||
+            if (address.Country == null ||
+                address.City == null ||
+                address.ZipCode == null||
                 address.Street == null ||
-                address.StreetNumber <= 0 ||
-                address.ZipCode == null)
+                address.StreetNumber <= 0)
             {
                 throw new ArgumentException("Invalid address data!");
             }
@@ -95,6 +99,7 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
         private bool ValidateProperty(IProperty property)
         {
             if (property.Id == null ||
+                property.Id == Guid.Empty ||
                 property.Name == null ||
                 property.Size <= 0 ||
                 property.PurchasePrice <= 0 ||

@@ -5,6 +5,6 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
 {
     internal interface IPropertyOutputDTOFactory
     {
-        public IPropertyOutputDTO CreatePropertyOutput(IProperty property);
+        public IPropertyOutputDTO CreatePropertyOutputDTO(IProperty property);
     }
 }
