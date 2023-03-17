@@ -7,34 +7,26 @@ namespace PPMAPIServiceLayer.InputDTOConverter
 {
     public class FinancialObjectFactory : IFinancialObjectFactory
     {
-        private readonly string[] _financialObjectTypes = 
-        {
-            "Cost",
-            "Revenue",
-            "ValueIncrease",
-            "ValueDecrease"
-        };
-
         public IFinancialObject CreateFinancialObject(FinancialInputDTO inputDTO)
         {
             if (inputDTO.Value <= 0 ||
                 inputDTO.PropertyId == null ||
                 inputDTO.Title == null ||
                 inputDTO.Date == DateTime.MinValue ||
-                _financialObjectTypes.All(t => t != inputDTO.FinancialObjectType))
+                FinancialObject.Types.All(t => t != inputDTO.FinancialObjectType))
             {
                 throw new ArgumentException();
             }
 
             switch (inputDTO.FinancialObjectType)
             {
-                case "Cost":
+                case FinancialObject.Cost:
                     return CreateCost(inputDTO);
-                case "Revenue":
+                case FinancialObject.Revenue:
                     return CreateRevenue(inputDTO);
-                case "ValueIncrease":
+                case FinancialObject.ValueIncrease:
                     return CreateValueIncrease(inputDTO);
-                case "ValueDecrease":
+                case FinancialObject.ValueDecrease:
                     return CreateValueDecrease(inputDTO);
                 default:
                     throw new ArgumentException("Invalid financial object type!");

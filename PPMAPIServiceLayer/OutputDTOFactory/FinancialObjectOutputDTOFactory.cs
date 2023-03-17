@@ -15,22 +15,22 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
 
             if (finObject is Cost)
             {
-                output.FinancialObjectType = "Cost";
+                output.FinancialObjectType = FinancialObject.Cost;
             }
 
             if (finObject is Revenue)
             {
-                output.FinancialObjectType = "Revenue";
+                output.FinancialObjectType = FinancialObject.Revenue;
             }
 
             if (finObject is ValueIncrease)
             {
-                output.FinancialObjectType = "ValueIncrease";
+                output.FinancialObjectType = FinancialObject.ValueIncrease;
             }
 
             if (finObject is ValueDecrease)
             {
-                output.FinancialObjectType = "ValueDecrease";
+                output.FinancialObjectType = FinancialObject.ValueDecrease;
             }
 
             return output;
@@ -48,7 +48,7 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                 finObject.Date == DateTime.MinValue ||
                 finObject.Value <= 0)
             {
-                throw new ArgumentException("Error, finan cial object has missing or invalid properties!");
+                throw new ArgumentException("Error, financial object has missing or invalid properties!");
             }
         }
 
