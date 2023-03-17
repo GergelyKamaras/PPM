@@ -46,16 +46,16 @@ namespace PPMAPI.Controllers
             IFinancialObjectOutputDTO dto = null;
             switch (type)
             {
-                case ("Cost"):
+                case (FinancialObject.Cost):
                     dto = _financialObjectOutputDTOFactory.Create(_costsQueries.GetCostById(id));
                     break;
-                case ("Revenue"):
+                case (FinancialObject.Revenue):
                     dto = _financialObjectOutputDTOFactory.Create(_revenuesQueries.GetRevenueById(id));
                     break;
-                case ("ValueIncrease"):
+                case (FinancialObject.ValueIncrease):
                     dto = _financialObjectOutputDTOFactory.Create(_valueIncreasesQueries.GetValueIncreaseById(id));
                     break;
-                case ("ValueDecrease"):
+                case (FinancialObject.ValueDecrease):
                     dto = _financialObjectOutputDTOFactory.Create(_valueDecreasesQueries.GetValueDecreaseById(id));
                     break;
             }
@@ -74,16 +74,16 @@ namespace PPMAPI.Controllers
             IFinancialObject financialObject = _financialObjectFactory.CreateFinancialObject(input);
             switch (input.FinancialObjectType)
             {
-                case ("Cost"):
+                case (FinancialObject.Cost):
                     _costsQueries.UpdateCost((Cost)financialObject);
                     break;
-                case ("Revenue"):
+                case (FinancialObject.Revenue):
                     _revenuesQueries.UpdateRevenue((Revenue)financialObject);
                     break;
-                case ("ValueIncrease"):
+                case (FinancialObject.ValueIncrease):
                     _valueIncreasesQueries.UpdateValueIncrease((ValueIncrease)financialObject);
                     break;
-                case ("ValueDecrease"):
+                case (FinancialObject.ValueDecrease):
                     _valueDecreasesQueries.UpdateValueDecrease((ValueDecrease)financialObject);
                     break;
             }
@@ -97,16 +97,16 @@ namespace PPMAPI.Controllers
         {
             switch (type)
             {
-                case ("Cost"):
+                case (FinancialObject.Cost):
                     _costsQueries.DeleteCost(id);
                     break;
-                case ("Revenue"):
+                case (FinancialObject.Revenue):
                     _revenuesQueries.DeleteRevenue(id);
                     break;
-                case ("ValueIncrease"):
+                case (FinancialObject.ValueIncrease):
                     _valueIncreasesQueries.DeleteValueIncrease(id);
                     break;
-                case ("ValueDecrease"):
+                case (FinancialObject.ValueDecrease):
                     _valueDecreasesQueries.DeleteValueDecrease(id);
                     break;
             }
@@ -121,16 +121,16 @@ namespace PPMAPI.Controllers
 
             switch (input.FinancialObjectType)
             {
-                case ("Cost"):
+                case (FinancialObject.Cost):
                     _costsQueries.AddCost((Cost)financialObject);
                     break;
-                case ("Revenue"):
+                case (FinancialObject.Revenue):
                     _revenuesQueries.AddRevenue((Revenue)financialObject);
                     break;
-                case ("ValueIncrease"):
+                case (FinancialObject.ValueIncrease):
                     _valueIncreasesQueries.AddValueIncrease((ValueIncrease)financialObject);
                     break;
-                case ("ValueDecrease"):
+                case (FinancialObject.ValueDecrease):
                     _valueDecreasesQueries.AddValueDecrease((ValueDecrease)financialObject);
                     break;
             }
