@@ -8,6 +8,7 @@ using PPMAPIDataAccess.DbTableQueries.CostsQueries;
 using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
 using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
 using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPIDataAccess.DbTableQueries.TenantsQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 using PPMAPIServiceLayer.InputDTOConverter;
@@ -37,6 +38,7 @@ builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
 builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
 builder.Services.AddTransient<IPropertiesQueries, PropertiesQueries>();
 builder.Services.AddTransient<IOwnersQueries, OwnersQueries>();
+builder.Services.AddTransient<ITenantsQueries, TenantsQueries>();
 
 // Register service layer services
 builder.Services.AddTransient<IFinancialObjectFactory, FinancialObjectFactory>();
