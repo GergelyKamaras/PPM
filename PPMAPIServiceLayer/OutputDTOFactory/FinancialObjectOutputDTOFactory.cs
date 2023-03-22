@@ -9,8 +9,6 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
     {
         public IFinancialObjectOutputDTO Create(IFinancialObject finObject)
         {
-            ValidateInput(finObject);
-            
             IFinancialObjectOutputDTO output = CreateFinancialObjectOutputDTO(finObject);
 
             if (finObject is Cost)
@@ -34,22 +32,6 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
             }
 
             return output;
-        }
-
-        private void ValidateInput(IFinancialObject finObject)
-        {
-            if (finObject.Property == null && finObject.RentalProperty == null)
-            {
-                throw new ArgumentException("Error, no connected properties!");
-            }
-
-            if (finObject.Id == 0 ||
-                finObject.Title == null ||
-                finObject.Date == DateTime.MinValue ||
-                finObject.Value <= 0)
-            {
-                throw new ArgumentException("Error, financial object has missing or invalid properties!");
-            }
         }
 
         private FinancialObjectOutputDTO CreateFinancialObjectOutputDTO(IFinancialObject finObject)

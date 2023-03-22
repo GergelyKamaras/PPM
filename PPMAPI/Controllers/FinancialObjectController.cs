@@ -27,12 +27,13 @@ namespace PPMAPI.Controllers
         private readonly IFinancialObjectFactory _financialObjectFactory;
         private readonly IFinancialObjectOutputDTOFactory _financialObjectOutputDTOFactory;
         private readonly IFinancialInputDTOValidator _financialInputDTOValidator;
+        private readonly IFinancialObjectValidator _financialObjectValidator;
 
         public FinancialObjectController(ICostsQueries costsQueries,
             IRevenuesQueries revenuesQueries, IValueIncreasesQueries valueIncreasesQueries,
             IValueDecreasesQueries valueDecreasesQueries, IFinancialObjectFactory financialObjectFactory,
             IFinancialObjectOutputDTOFactory financialObjectOutputDTOFactory, 
-            IFinancialInputDTOValidator financialInputDTOValidator)
+            IFinancialInputDTOValidator financialInputDTOValidator, IFinancialObjectValidator financialObjectValidator)
         {
             _costsQueries = costsQueries;
             _revenuesQueries = revenuesQueries;
@@ -41,39 +42,47 @@ namespace PPMAPI.Controllers
             _financialObjectFactory = financialObjectFactory;
             _financialObjectOutputDTOFactory = financialObjectOutputDTOFactory;
             _financialInputDTOValidator = financialInputDTOValidator;
+            _financialObjectValidator = financialObjectValidator;
         }
 
         [HttpGet]
         [Route("{type}/{id}")]
         public IResult GetFinancialObjectById(string type, int id)
         {
-            IFinancialObjectOutputDTO dto = null;
+            IFinancialObject finObject = null;
             switch (type)
             {
                 case (FinancialObject.Cost):
-                    dto = _financialObjectOutputDTOFactory.Create(_costsQueries.GetCostById(id));
+                    finObject = _costsQueries.GetCostById(id);
                     break;
                 case (FinancialObject.Revenue):
-                    dto = _financialObjectOutputDTOFactory.Create(_revenuesQueries.GetRevenueById(id));
+                    finObject = _revenuesQueries.GetRevenueById(id);
                     break;
                 case (FinancialObject.ValueIncrease):
-                    dto = _financialObjectOutputDTOFactory.Create(_valueIncreasesQueries.GetValueIncreaseById(id));
+                    finObject = _valueIncreasesQueries.GetValueIncreaseById(id);
                     break;
                 case (FinancialObject.ValueDecrease):
-                    dto = _financialObjectOutputDTOFactory.Create(_valueDecreasesQueries.GetValueDecreaseById(id));
+                    finObject = _valueDecreasesQueries.GetValueDecreaseById(id);
                     break;
             }
 
-            if (dto == null)
+            if (finObject == null)
             {
                 return Results.Problem("Could not find financial object of given type and id!");
             }
+
+            if (!_financialObjectValidator.Validate(finObject))
+            {
+                return Results.Problem("Invalid financial object model!");
+            }
+
+            IFinancialObjectOutputDTO dto = _financialObjectOutputDTOFactory.Create(finObject);
 
             return Results.Ok(dto);
         }
 
         [HttpPut]
-        public IResult UpdateFinancialObjectById([FromForm] FinancialInputDTO input)
+        public IResult UpdateFinancialObject([FromForm] FinancialInputDTO input)
         {
             if (!_financialInputDTOValidator.Validate(input))
             {
