@@ -14,8 +14,10 @@ export default function AuthFetch(url, data, login = false)
                         .then(r =>
                             {
                                 localStorage.setItem("AccessToken", `Bearer ${r.token}`);
+                                alert("Succesfull login!");
                             });
                 }
+                alert("Succesfull registration!");
             }
             else
             {
