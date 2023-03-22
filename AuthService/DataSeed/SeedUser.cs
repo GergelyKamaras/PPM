@@ -6,11 +6,11 @@ namespace AuthServiceAPI.DataSeed
 {
     public static class SeedUser
     {
-        public static async void Init(AuthController controller, IUserTableQueries queries, string password)
+        public static async void Init(AuthController controller, IUserTableQueries queries, string email, string password)
         {
             UserRegistrationDTO user = new UserRegistrationDTO()
             {
-                Email = "admin@admin.com",
+                Email = email,
                 FirstName = "Admin",
                 LastName = "Von Admin",
                 Password = password,

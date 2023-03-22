@@ -19,7 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json");
 string connString = builder.Configuration.GetConnectionString("ConnString");
-string seedUserPassword = builder.Configuration["SeedAdminPassword"];
+string seedUserPassword = builder.Configuration["AdminOnePassword"];
+string seedUserEmail = builder.Configuration["AdminOneEmail"];
 
 builder.Services.AddCors(o =>
 {
@@ -92,9 +93,10 @@ var seedService = app.Services.CreateScope().ServiceProvider;
 await RoleSeed.InitRoles(seedService.GetRequiredService<RoleManager<IdentityRole>>());
 
 AuthController controller = new AuthController(seedService.GetRequiredService<IApplicationUserFactory>(), seedService.GetRequiredService<IAuthOperations>(),
-    seedService.GetRequiredService<IRoleValidator>(), seedService.GetRequiredService<UserManager<ApplicationUser>>(), seedService.GetRequiredService<IJWTService>());
+    seedService.GetRequiredService<IRoleValidator>(), seedService.GetRequiredService<UserManager<ApplicationUser>>(), 
+    seedService.GetRequiredService<IJWTService>(), seedService.GetRequiredService<IConfiguration>());
 
-SeedUser.Init(controller, seedService.GetRequiredService<IUserTableQueries>(), seedUserPassword);
+SeedUser.Init(controller, seedService.GetRequiredService<IUserTableQueries>(), seedUserEmail, seedUserPassword);
 
 app.MapControllers();
 
