@@ -2,7 +2,7 @@
 using PPMAPIModelLibrary.Properties;
 using PPMAPIServiceLayer.Validation;
 
-namespace PPMAPIServiceLayerTests
+namespace PPMAPIServiceLayerTests.Validation
 {
     internal class FinancialObjectValidatorTests
     {
@@ -12,7 +12,7 @@ namespace PPMAPIServiceLayerTests
         {
             _validator = new FinancialObjectValidator();
         }
-        
+
         [Test]
         public void Validate_MissingId_ReturnsFalse()
         {

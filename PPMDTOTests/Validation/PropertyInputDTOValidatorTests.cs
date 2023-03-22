@@ -2,7 +2,7 @@
 using PPMAPIServiceLayer.Validation;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
-namespace PPMAPIServiceLayerTests
+namespace PPMAPIServiceLayerTests.Validation
 {
     internal class PropertyInputDTOValidatorTests
     {
@@ -12,7 +12,7 @@ namespace PPMAPIServiceLayerTests
         {
             _validator = new PropertyInputDTOValidator();
         }
-        
+
         [Test]
         public void ValidateRentalProperty_InValidRentalFee_ReturnsFalse()
         {

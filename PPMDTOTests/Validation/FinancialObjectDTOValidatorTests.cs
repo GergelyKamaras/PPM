@@ -1,12 +1,12 @@
 ﻿using PPMAPIServiceLayer.Validation;
 using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 
-namespace PPMAPIServiceLayerTests
+namespace PPMAPIServiceLayerTests.Validation
 {
     internal class FinancialObjectDTOValidatorTests
     {
         private IFinancialInputDTOValidator _validator;
-        
+
         [SetUp]
         public void Setup()
         {
