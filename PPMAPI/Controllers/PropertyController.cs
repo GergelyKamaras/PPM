@@ -25,6 +25,9 @@ namespace PPMAPI.Controllers
         private readonly IRentalPropertiesQueries _rentalPropertiesQueries;
         private readonly IValueIncreasesQueries _valueIncreasesQueries;
 
+        private const string RentalPropertyType = "rental";
+        private const string BasePropertyType = "property";
+
         public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory,
             ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries,
             IValueIncreasesQueries valueIncreasesQueries)
@@ -43,13 +46,13 @@ namespace PPMAPI.Controllers
         {
             switch (type)
             {
-                case ("rental"):
+                case (RentalPropertyType):
                     RentalProperty rentalProperty = _rentalPropertiesQueries.GetRentalPropertyById(id);
                     IPropertyOutputDTO outRentalProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty);
 
                     return Results.Ok(outRentalProperty);
 
-                case ("property"):
+                case (BasePropertyType):
                     Property property = _propertiesQueries.GetPropertyById(id);
                     IPropertyOutputDTO outProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(property);
 
@@ -69,14 +72,14 @@ namespace PPMAPI.Controllers
             List<IPropertyOutputDTO> outList = new List<IPropertyOutputDTO>();
             switch (type)
             {
-                case ("rental"):
+                case (RentalPropertyType):
                     List<RentalProperty> rentalProperties = _rentalPropertiesQueries.GetRentalPropertiesByOwnerId(id);
 
                     rentalProperties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
 
                     return Results.Ok(outList);
 
-                case ("property"):
+                case (BasePropertyType):
                     List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
 
 
@@ -152,10 +155,10 @@ namespace PPMAPI.Controllers
         {
             switch (type)
             {
-                case ("rental"):
+                case (RentalPropertyType):
                     _rentalPropertiesQueries.DeleteRentalProperty(id);
                     break;
-                case ("property"):
+                case (BasePropertyType):
                     _propertiesQueries.DeleteProperty(id);
                     break;
                 default:
