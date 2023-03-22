@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceServiceLayer.Authentication.AuthOperations;
@@ -19,16 +20,18 @@ namespace AuthServiceAPI.Controller
         private readonly IRoleValidator _roleValidator;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IJWTService _jwtService;
+        private readonly IConfiguration _config;
 
         public AuthController(IApplicationUserFactory factory, IAuthOperations ops, 
             IRoleValidator roleValidator, UserManager<ApplicationUser> userManager,
-            IJWTService jwtService)
+            IJWTService jwtService, IConfiguration config)
         {
             _factory = factory;
             _ops = ops;
             _roleValidator = roleValidator;
             _userManager = userManager;
             _jwtService = jwtService;
+            _config = config;
         }
 
         [Route("register")]
@@ -46,8 +49,12 @@ namespace AuthServiceAPI.Controller
             bool userRegResult = _ops.Register(user);
 
             IdentityResult roleRegResult = await _userManager.AddToRoleAsync(user, user.Role);
+            
+            // Administrators don't need to be registered on the api
+            var apiRegResult = user.Role == "Administrator" ? Results.Ok() : await RegisterUserOnAPI(user);
 
-            if (userRegResult && roleRegResult == IdentityResult.Success)
+            if (userRegResult && roleRegResult == IdentityResult.Success &&
+                apiRegResult == Results.Ok())
             {
                 return Results.Ok("Successfully registered user!");
             }
@@ -76,6 +83,33 @@ namespace AuthServiceAPI.Controller
                 message = "Success",
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+        }
+
+        private async Task<IResult> RegisterUserOnAPI(ApplicationUser user)
+        {
+            Dictionary<string, string> userData = new Dictionary<string, string>()
+            {
+                { "userId", user.Id },
+                {"role", user.Role}
+            };
+            var content = new FormUrlEncodedContent(userData);
+            
+            HttpClient client = new HttpClient();
+
+            ApplicationUser adminOne = _ops.VerifyLoginDTO(new UserLoginDTO(){Email = _config["AdminOneEmail"], Password = _config["AdminOnePassword"] });
+            
+            JwtSecurityToken token = _jwtService.GenerateLoginJWT(adminOne);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", new JwtSecurityTokenHandler().WriteToken(token));
+
+            var response = await client.PostAsync("https://localhost:7001/api/users", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Results.Ok();
+            }
+
+            return Results.Problem("Something went wrong while registering the user on the API");
         }
     }
 }
