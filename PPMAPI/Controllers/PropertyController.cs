@@ -61,13 +61,11 @@ namespace PPMAPI.Controllers
                 default:
                     return Results.Problem("Not a valid property type!");
             }
-
-
         }
 
         [HttpGet]
         [Route("{type}/owners/{id}")]
-        public IResult GetPropertiesByOwner(string type, string id)
+        public IResult GetPropertiesByTypeByOwner(string type, string id)
         {
             List<IPropertyOutputDTO> outList = new List<IPropertyOutputDTO>();
             switch (type)
@@ -82,7 +80,6 @@ namespace PPMAPI.Controllers
                 case (BasePropertyType):
                     List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
 
-
                     properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
 
                     return Results.Ok(outList);
@@ -90,6 +87,21 @@ namespace PPMAPI.Controllers
                 default:
                     return Results.Problem("Not a valid property type!");
             }
+        }
+
+        [HttpGet]
+        [Route("owners/{id}")]
+        public IResult GetAllPropertiesByOwner(string id)
+        {
+            List<IPropertyOutputDTO> outList = new List<IPropertyOutputDTO>();
+            
+            List<RentalProperty> rentalProperties = _rentalPropertiesQueries.GetRentalPropertiesByOwnerId(id);
+            rentalProperties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+            
+            List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
+            properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+            
+            return Results.Ok(outList);
         }
 
         [HttpPost]
