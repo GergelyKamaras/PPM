@@ -102,7 +102,10 @@ namespace AuthServiceAPI.Controller
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", new JwtSecurityTokenHandler().WriteToken(token));
 
-            var response = await client.PostAsync("https://localhost:7001/api/users", content);
+            string domain = HttpContext.Request.Host.Host;
+            string port = _config.GetSection("APIPort").Value;
+
+            var response = await client.PostAsync($"https://{domain}:{port}/api/users", content);
 
             if (response.IsSuccessStatusCode)
             {
