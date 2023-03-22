@@ -51,6 +51,7 @@ builder.Services.AddTransient<IPropertyOutputDTOFactory, PropertyOutputDTOFactor
 builder.Services.AddTransient<IFinancialInputDTOValidator, FinancialInputDTOValidator>();
 builder.Services.AddTransient<IPropertyInputDTOValidator, PropertyInputDTOValidator>();
 builder.Services.AddTransient<IFinancialObjectValidator, FinancialObjectValidator>();
+builder.Services.AddTransient<IPropertyValidator, PropertyValidator>();
 
 // CORS
 builder.Services.AddCors(o =>

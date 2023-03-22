@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using PPMAPIDataAccess.DbTableQueries.CostsQueries;
 using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
 using PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries;
@@ -26,13 +27,15 @@ namespace PPMAPI.Controllers
         private readonly IRentalPropertiesQueries _rentalPropertiesQueries;
         private readonly IValueIncreasesQueries _valueIncreasesQueries;
         private readonly IPropertyInputDTOValidator _propertyInputDTOValidator;
+        private readonly IPropertyValidator _propertyValidator;
 
         private const string RentalPropertyType = "rental";
         private const string BasePropertyType = "property";
 
         public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory,
             ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries,
-            IValueIncreasesQueries valueIncreasesQueries, IPropertyInputDTOValidator propertyInputDTOValidator)
+            IValueIncreasesQueries valueIncreasesQueries, IPropertyInputDTOValidator propertyInputDTOValidator,
+            IPropertyValidator propertyValidator)
         {
             _propertyFactory = propertyFactory;
             _propertyOutputDtoFactory = propertyOutputDtoFactory;
@@ -41,6 +44,7 @@ namespace PPMAPI.Controllers
             _rentalPropertiesQueries = rentalPropertiesQueries;
             _valueIncreasesQueries = valueIncreasesQueries;
             _propertyInputDTOValidator = propertyInputDTOValidator;
+            _propertyValidator = propertyValidator;
         }
 
         [HttpGet]
@@ -51,16 +55,26 @@ namespace PPMAPI.Controllers
             {
                 case (RentalPropertyType):
                     RentalProperty rentalProperty = _rentalPropertiesQueries.GetRentalPropertyById(id);
-                    IPropertyOutputDTO outRentalProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty);
+                    if (_propertyValidator.Validate(rentalProperty))
+                    {
+                        IPropertyOutputDTO outRentalProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty);
 
-                    return Results.Ok(outRentalProperty);
+                        return Results.Ok(outRentalProperty);
+                    }
+
+                    return Results.Problem("Error in property model!");
 
                 case (BasePropertyType):
                     Property property = _propertiesQueries.GetPropertyById(id);
-                    IPropertyOutputDTO outProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(property);
+                    if (_propertyValidator.Validate(property))
+                    {
+                        IPropertyOutputDTO outProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(property);
 
-                    return Results.Ok(outProperty);
+                        return Results.Ok(outProperty);
+                    }
 
+                    return Results.Problem("Error in property model!");
+                
                 default:
                     return Results.Problem("Not a valid property type!");
             }
@@ -76,14 +90,30 @@ namespace PPMAPI.Controllers
                 case (RentalPropertyType):
                     List<RentalProperty> rentalProperties = _rentalPropertiesQueries.GetRentalPropertiesByOwnerId(id);
 
-                    rentalProperties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+                    foreach (RentalProperty rentalProperty in rentalProperties)
+                    {
+                        if (!_propertyValidator.Validate(rentalProperty))
+                        {
+                            return Results.Problem("Error in property model!");
+                        }
+
+                        outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty));
+                    }
 
                     return Results.Ok(outList);
 
                 case (BasePropertyType):
                     List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
 
-                    properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+                    foreach (Property property in properties)
+                    {
+                        if (!_propertyValidator.Validate(property))
+                        {
+                            return Results.Problem("Error in property model!");
+                        }
+
+                        outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(property));
+                    }
 
                     return Results.Ok(outList);
 
@@ -99,11 +129,28 @@ namespace PPMAPI.Controllers
             List<IPropertyOutputDTO> outList = new List<IPropertyOutputDTO>();
             
             List<RentalProperty> rentalProperties = _rentalPropertiesQueries.GetRentalPropertiesByOwnerId(id);
-            rentalProperties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
-            
+            foreach (RentalProperty rentalProperty in rentalProperties)
+            {
+                if (!_propertyValidator.Validate(rentalProperty))
+                {
+                    return Results.Problem("Error in property model!");
+                }
+
+                outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty));
+            }
+
             List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
-            properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
-            
+            foreach (Property property in properties)
+            {
+                if (!_propertyValidator.Validate(property))
+                {
+                    return Results.Problem("Error in property model!");
+                }
+
+                outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(property));
+            }
+
+
             return Results.Ok(outList);
         }
 

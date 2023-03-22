@@ -1,7 +1,6 @@
 ﻿using PPMAPIModelLibrary.Properties;
 using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 using PPMAPIDTOModelLibrary.SharedDTOs;
-using PPMAPIModelLibrary.UtilityModels;
 
 namespace PPMAPIServiceLayer.OutputDTOFactory
 {
@@ -9,23 +8,14 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
     {
         public IPropertyOutputDTO CreatePropertyOutputDTO(IProperty property)
         {
-            bool propertyIsValid = ValidateProperty(property);
-            bool addressIsValid = ValidateAddress(property.Address);
-
-            if (propertyIsValid && addressIsValid && property is Property)
+            if (property is Property)
             {
                 return MakePropertyOutputDTO(property);
             }
-            else if (propertyIsValid && addressIsValid && property is RentalProperty && 
-                     ValidateRentalProperty((RentalProperty)property))
+            else 
             {
                 return MakeRentalPropertyOutputDTO((RentalProperty)property);
             }
-            else
-            {
-                throw new ArgumentException("Error! Invalid property object type!");
-            }
-
         }
 
         public PropertyOutputDTO MakePropertyOutputDTO(IProperty property)
@@ -82,46 +72,6 @@ namespace PPMAPIServiceLayer.OutputDTOFactory
                                property.ValueDecreases.Sum(v => v.Value),
                 Balance = property.Revenues.Sum(r => r.Value) - property.Costs.Sum(c => c.Value)
             };
-        }
-
-        private bool ValidateAddress(Address address)
-        {
-            if (address.Country == null ||
-                address.City == null ||
-                address.ZipCode == null||
-                address.Street == null ||
-                address.StreetNumber <= 0)
-            {
-                throw new ArgumentException("Invalid address data!");
-            }
-
-            return true;
-        }
-        
-        private bool ValidateProperty(IProperty property)
-        {
-            if (property.Id == null ||
-                property.Id == Guid.Empty ||
-                property.Name == null ||
-                property.Size <= 0 ||
-                property.PurchasePrice <= 0 ||
-                property.PurchaseDate == DateTime.MinValue ||
-                property.Owner == null)
-            {
-                throw new ArgumentException("Error! Invalid property object properties!");
-            }
-
-            return true;
-        }
-
-        private bool ValidateRentalProperty(RentalProperty property)
-        {
-            if (property.RentalFee <= 0)
-            {
-                throw new ArgumentException("Error! Invalid rental property object properties!");
-            }
-
-            return true;
         }
     }
 }
