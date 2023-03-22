@@ -49,6 +49,7 @@ builder.Services.AddTransient<IPropertyOutputDTOFactory, PropertyOutputDTOFactor
 
 // Register Validators
 builder.Services.AddTransient<IFinancialInputDTOValidator, FinancialInputDTOValidator>();
+builder.Services.AddTransient<IPropertyInputDTOValidator, PropertyInputDTOValidator>();
 
 // CORS
 builder.Services.AddCors(o =>

@@ -10,6 +10,7 @@ using PPMAPIModelLibrary.Properties;
 using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIServiceLayer.Validation;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace PPMAPI.Controllers
@@ -24,13 +25,14 @@ namespace PPMAPI.Controllers
         private readonly IPropertiesQueries _propertiesQueries;
         private readonly IRentalPropertiesQueries _rentalPropertiesQueries;
         private readonly IValueIncreasesQueries _valueIncreasesQueries;
+        private readonly IPropertyInputDTOValidator _propertyInputDTOValidator;
 
         private const string RentalPropertyType = "rental";
         private const string BasePropertyType = "property";
 
         public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory,
             ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries,
-            IValueIncreasesQueries valueIncreasesQueries)
+            IValueIncreasesQueries valueIncreasesQueries, IPropertyInputDTOValidator propertyInputDTOValidator)
         {
             _propertyFactory = propertyFactory;
             _propertyOutputDtoFactory = propertyOutputDtoFactory;
@@ -38,6 +40,7 @@ namespace PPMAPI.Controllers
             _propertiesQueries = propertiesQueries;
             _rentalPropertiesQueries = rentalPropertiesQueries;
             _valueIncreasesQueries = valueIncreasesQueries;
+            _propertyInputDTOValidator = propertyInputDTOValidator;
         }
 
         [HttpGet]
@@ -107,6 +110,11 @@ namespace PPMAPI.Controllers
         [HttpPost]
         public IResult AddProperty([FromForm] IPropertyInputDTO protoProperty)
         {
+            if (!_propertyInputDTOValidator.Validate(protoProperty))
+            {
+                return Results.Problem("Error in property input DTO!");
+            }
+
             RentalProperty rentalProperty = null;
             Property property = null;
 
@@ -148,6 +156,11 @@ namespace PPMAPI.Controllers
         [HttpPut]
         public IResult UpdateProperty(IPropertyInputDTO propertyDTO)
         {
+            if (!_propertyInputDTOValidator.Validate(propertyDTO))
+            {
+                return Results.Problem("Error in property input DTO!");
+            }
+
             if (propertyDTO.IsRental)
             {
                 RentalProperty property = _propertyFactory.CreateRentalProperty((RentalPropertyInputDTO)propertyDTO);
