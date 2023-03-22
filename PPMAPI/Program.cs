@@ -13,6 +13,7 @@ using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMAPIServiceLayer.OutputDTOFactory;
+using PPMAPIServiceLayer.Validation;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +46,9 @@ builder.Services.AddTransient<IFinancialObjectFactory, FinancialObjectFactory>()
 builder.Services.AddTransient<IPropertyFactory, PropertyFactory>();
 builder.Services.AddTransient<IFinancialObjectOutputDTOFactory, FinancialObjectOutputDTOFactory>();
 builder.Services.AddTransient<IPropertyOutputDTOFactory, PropertyOutputDTOFactory>();
+
+// Register Validators
+builder.Services.AddTransient<IFinancialInputDTOValidator, FinancialInputDTOValidator>();
 
 // CORS
 builder.Services.AddCors(o =>

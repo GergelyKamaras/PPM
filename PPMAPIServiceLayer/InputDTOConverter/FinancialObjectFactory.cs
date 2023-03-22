@@ -9,11 +9,6 @@ namespace PPMAPIServiceLayer.InputDTOConverter
     {
         public IFinancialObject CreateFinancialObject(FinancialInputDTO inputDTO)
         {
-            if (!ValidateFinancialInputDTO(inputDTO))
-            {
-                throw new ArgumentException();
-            }
-
             switch (inputDTO.FinancialObjectType)
             {
                 case FinancialObject.Cost:
@@ -28,20 +23,6 @@ namespace PPMAPIServiceLayer.InputDTOConverter
                     throw new ArgumentException("Invalid financial object type!");
 
             }
-        }
-
-        private bool ValidateFinancialInputDTO(FinancialInputDTO inputDTO)
-        {
-            if (inputDTO.Value <= 0 ||
-                inputDTO.PropertyId == null ||
-                inputDTO.Title == null ||
-                inputDTO.Date == DateTime.MinValue ||
-                FinancialObject.Types.All(t => t != inputDTO.FinancialObjectType))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private Cost CreateCost(FinancialInputDTO inputDTO)

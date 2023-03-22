@@ -10,6 +10,7 @@ using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMAPIServiceLayer.OutputDTOFactory;
+using PPMAPIServiceLayer.Validation;
 using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 
 namespace PPMAPI.Controllers
@@ -25,11 +26,13 @@ namespace PPMAPI.Controllers
         private readonly IValueDecreasesQueries _valueDecreasesQueries;
         private readonly IFinancialObjectFactory _financialObjectFactory;
         private readonly IFinancialObjectOutputDTOFactory _financialObjectOutputDTOFactory;
+        private readonly IFinancialInputDTOValidator _financialInputDTOValidator;
 
         public FinancialObjectController(ICostsQueries costsQueries,
             IRevenuesQueries revenuesQueries, IValueIncreasesQueries valueIncreasesQueries,
             IValueDecreasesQueries valueDecreasesQueries, IFinancialObjectFactory financialObjectFactory,
-            IFinancialObjectOutputDTOFactory financialObjectOutputDTOFactory)
+            IFinancialObjectOutputDTOFactory financialObjectOutputDTOFactory, 
+            IFinancialInputDTOValidator financialInputDTOValidator)
         {
             _costsQueries = costsQueries;
             _revenuesQueries = revenuesQueries;
@@ -37,6 +40,7 @@ namespace PPMAPI.Controllers
             _valueDecreasesQueries = valueDecreasesQueries;
             _financialObjectFactory = financialObjectFactory;
             _financialObjectOutputDTOFactory = financialObjectOutputDTOFactory;
+            _financialInputDTOValidator = financialInputDTOValidator;
         }
 
         [HttpGet]
@@ -71,6 +75,11 @@ namespace PPMAPI.Controllers
         [HttpPut]
         public IResult UpdateFinancialObjectById([FromForm] FinancialInputDTO input)
         {
+            if (!_financialInputDTOValidator.Validate(input))
+            {
+                return Results.Problem("Error in input DTO!");
+            }
+
             IFinancialObject financialObject = _financialObjectFactory.CreateFinancialObject(input);
             switch (input.FinancialObjectType)
             {
@@ -117,6 +126,11 @@ namespace PPMAPI.Controllers
         [HttpPost]
         public IResult AddFinancialObject([FromForm] FinancialInputDTO input)
         {
+            if (!_financialInputDTOValidator.Validate(input))
+            {
+                return Results.Problem("Error in input DTO!");
+            }
+
             IFinancialObject financialObject = _financialObjectFactory.CreateFinancialObject(input);
 
             switch (input.FinancialObjectType)
