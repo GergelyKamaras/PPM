@@ -18,15 +18,15 @@ namespace PPMAPI.Controllers
     [Route("api/properties")]
     public class PropertyController : ControllerBase
     {
-        private readonly IPropertyFactory _propertyFactory ;
+        private readonly IPropertyFactory _propertyFactory;
         private readonly IPropertyOutputDTOFactory _propertyOutputDtoFactory;
         private readonly ICostsQueries _costsQueries;
         private readonly IPropertiesQueries _propertiesQueries;
         private readonly IRentalPropertiesQueries _rentalPropertiesQueries;
         private readonly IValueIncreasesQueries _valueIncreasesQueries;
 
-        public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory, 
-            ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries, 
+        public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory,
+            ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries,
             IValueIncreasesQueries valueIncreasesQueries)
         {
             _propertyFactory = propertyFactory;
@@ -38,25 +38,55 @@ namespace PPMAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IResult GetPropertyById(string id)
+        [Route("{type}/{id}")]
+        public IResult GetPropertyById(string type, string id)
         {
-            Property property = _propertiesQueries.GetPropertyById(id);
-            IPropertyOutputDTO outProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(property);
+            switch (type)
+            {
+                case ("rental"):
+                    RentalProperty rentalProperty = _rentalPropertiesQueries.GetRentalPropertyById(id);
+                    IPropertyOutputDTO outRentalProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(rentalProperty);
 
-            return Results.Ok(outProperty);
+                    return Results.Ok(outRentalProperty);
+
+                case ("property"):
+                    Property property = _propertiesQueries.GetPropertyById(id);
+                    IPropertyOutputDTO outProperty = _propertyOutputDtoFactory.CreatePropertyOutputDTO(property);
+
+                    return Results.Ok(outProperty);
+
+                default:
+                    return Results.Problem("Not a valid property type!");
+            }
+
+
         }
-        
+
         [HttpGet]
-        [Route("owners/{id}")]
-        public IResult GetPropertiesByOwner(string id)
+        [Route("{type}/owners/{id}")]
+        public IResult GetPropertiesByOwner(string type, string id)
         {
-            List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
-
             List<IPropertyOutputDTO> outList = new List<IPropertyOutputDTO>();
-            properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+            switch (type)
+            {
+                case ("rental"):
+                    List<RentalProperty> rentalProperties = _rentalPropertiesQueries.GetRentalPropertiesByOwnerId(id);
 
-            return Results.Ok(outList);
+                    rentalProperties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+
+                    return Results.Ok(outList);
+
+                case ("property"):
+                    List<Property> properties = _propertiesQueries.GetPropertiesByOwnerId(id);
+
+
+                    properties.ForEach(p => outList.Add(_propertyOutputDtoFactory.CreatePropertyOutputDTO(p)));
+
+                    return Results.Ok(outList);
+
+                default:
+                    return Results.Problem("Not a valid property type!");
+            }
         }
 
         [HttpPost]
@@ -101,18 +131,36 @@ namespace PPMAPI.Controllers
         }
 
         [HttpPut]
-        public IResult UpdateProperty(PropertyInputDTO propertyDTO)
+        public IResult UpdateProperty(IPropertyInputDTO propertyDTO)
         {
-            Property property = _propertyFactory.CreateProperty(propertyDTO);
-            _propertiesQueries.UpdateProperty(property);
-            
+            if (propertyDTO.IsRental)
+            {
+                RentalProperty property = _propertyFactory.CreateRentalProperty((RentalPropertyInputDTO)propertyDTO);
+                _rentalPropertiesQueries.UpdateRentalProperty(property);
+            }
+            else
+            {
+                Property property = _propertyFactory.CreateProperty((PropertyInputDTO)propertyDTO);
+                _propertiesQueries.UpdateProperty(property);
+            }
             return Results.Ok();
         }
 
         [HttpDelete]
-        public IResult DeleteProperty(string id)
+        [Route("{type}/{id}")]
+        public IResult DeleteProperty(string type, string id)
         {
-            _propertiesQueries.DeleteProperty(id);
+            switch (type)
+            {
+                case ("rental"):
+                    _rentalPropertiesQueries.DeleteRentalProperty(id);
+                    break;
+                case ("property"):
+                    _propertiesQueries.DeleteProperty(id);
+                    break;
+                default:
+                    return Results.Problem("Not a valid property type!");
+            }
             return Results.Ok();
         }
     }
