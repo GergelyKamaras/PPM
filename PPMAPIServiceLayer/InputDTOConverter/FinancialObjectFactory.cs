@@ -9,15 +9,6 @@ namespace PPMAPIServiceLayer.InputDTOConverter
     {
         public IFinancialObject CreateFinancialObject(FinancialInputDTO inputDTO)
         {
-            if (inputDTO.Value <= 0 ||
-                inputDTO.PropertyId == null ||
-                inputDTO.Title == null ||
-                inputDTO.Date == DateTime.MinValue ||
-                FinancialObject.Types.All(t => t != inputDTO.FinancialObjectType))
-            {
-                throw new ArgumentException();
-            }
-
             switch (inputDTO.FinancialObjectType)
             {
                 case FinancialObject.Cost:

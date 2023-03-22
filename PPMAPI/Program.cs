@@ -8,10 +8,12 @@ using PPMAPIDataAccess.DbTableQueries.CostsQueries;
 using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
 using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
 using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
+using PPMAPIDataAccess.DbTableQueries.TenantsQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMAPIServiceLayer.OutputDTOFactory;
+using PPMAPIServiceLayer.Validation;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,12 +39,19 @@ builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
 builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
 builder.Services.AddTransient<IPropertiesQueries, PropertiesQueries>();
 builder.Services.AddTransient<IOwnersQueries, OwnersQueries>();
+builder.Services.AddTransient<ITenantsQueries, TenantsQueries>();
 
 // Register service layer services
 builder.Services.AddTransient<IFinancialObjectFactory, FinancialObjectFactory>();
 builder.Services.AddTransient<IPropertyFactory, PropertyFactory>();
 builder.Services.AddTransient<IFinancialObjectOutputDTOFactory, FinancialObjectOutputDTOFactory>();
 builder.Services.AddTransient<IPropertyOutputDTOFactory, PropertyOutputDTOFactory>();
+
+// Register Validators
+builder.Services.AddTransient<IFinancialInputDTOValidator, FinancialInputDTOValidator>();
+builder.Services.AddTransient<IPropertyInputDTOValidator, PropertyInputDTOValidator>();
+builder.Services.AddTransient<IFinancialObjectValidator, FinancialObjectValidator>();
+builder.Services.AddTransient<IPropertyValidator, PropertyValidator>();
 
 // CORS
 builder.Services.AddCors(o =>
