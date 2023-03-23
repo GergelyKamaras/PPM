@@ -1,12 +1,18 @@
 import AuthFetch from "../DataCommunication/AuthFetch";
 import { loginEndpoint } from "../Config";
+import { useAuth } from "../Contexts/AuthContext";
 
 export default function Login()
 {
+    const {authUser,
+        setAuthUser,
+        isLoggedIn,
+        setIsLoggedIn} = useAuth();
+
     function handleSubmit(e){
         e.preventDefault();
         let form = new FormData(document.querySelector('#loginForm'));
-        AuthFetch(loginEndpoint, form, true);
+        AuthFetch(loginEndpoint, form, true, setIsLoggedIn, setAuthUser);
     }
 
     return (
