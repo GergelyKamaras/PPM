@@ -1,5 +1,7 @@
 import FetchData from "../DataCommunication/FetchData";
 import { useAuth } from "../Contexts/AuthContext";
+import { propertiesEndpoint } from "../Config";
+import { DataEntryModal } from "./DataEntryModal";
 
 export default function NavBar() {
     const {authUser,
@@ -7,10 +9,11 @@ export default function NavBar() {
         isLoggedIn,
         setIsLoggedIn} = useAuth();
 
-        function handleClick(e) {
+        function handlePropertyRegistartion(e) {
             e.preventDefault();
             let url = e.target.dataset.url;
-            FetchData(url).then(r => console.log(r));
+            console.log(url);
+            // FetchData(url).then(r => console.log(r));
         }
 
         function handleLogout(e)
@@ -50,6 +53,12 @@ export default function NavBar() {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="" onClick={handleLogout}>Logout</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="">My Properties</a>
+                            </li>
+                            <li>
+                                <DataEntryModal type="Property" url={propertiesEndpoint}/>
                             </li>
                         </ul>
                     </nav>
