@@ -7,6 +7,7 @@ using PPMAPIDataAccess.DbTableQueries.AddressQueries;
 using PPMAPIDataAccess.DbTableQueries.CostsQueries;
 using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
 using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
+using PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries;
 using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
 using PPMAPIDataAccess.DbTableQueries.TenantsQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
@@ -38,6 +39,7 @@ builder.Services.AddTransient<IRevenuesQueries, RevenuesQueries>();
 builder.Services.AddTransient<IValueIncreasesQueries, ValueIncreasesQueries>();
 builder.Services.AddTransient<IValueDecreasesQueries, ValueDecreasesQueries>();
 builder.Services.AddTransient<IPropertiesQueries, PropertiesQueries>();
+builder.Services.AddTransient<IRentalPropertiesQueries, RentalPropertiesQueries>();
 builder.Services.AddTransient<IOwnersQueries, OwnersQueries>();
 builder.Services.AddTransient<ITenantsQueries, TenantsQueries>();
 
