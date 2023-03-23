@@ -20,7 +20,7 @@ namespace PPMAPIServiceLayer.InputDTOConverter
                 };
             }
 
-        public RentalProperty CreateRentalProperty(RentalPropertyInputDTO property)
+        public RentalProperty CreateRentalProperty(PropertyInputDTO property)
         {
             return new RentalProperty()
                 {

@@ -6,6 +6,7 @@ export default async function SendData(method, url, payload)
         method: method,
         headers: {
             "Authorization": localStorage.getItem("AccessToken"),
+            'Content-type':'application/json'
         },
         body: payload
     })

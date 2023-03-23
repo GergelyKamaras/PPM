@@ -15,8 +15,8 @@ export function PropertyForm({type, url}) {
         let payload = JSON.stringify({
             name : form[1].value,
             size : form[2].value,
-            prchasePrice: form[3].value,
-            date: form[4].value,
+            purchasePrice: form[3].value,
+            purchaseDate: form[4].value,
             address: {
                 country: form[5].value,
                 city: form[6].value,
@@ -25,7 +25,8 @@ export function PropertyForm({type, url}) {
                 streetNumber: form[9].value,
                 additionalInfo: form[10].value
             },
-            isRental: form[0].value == "on" ? true : false
+            isRental: form[0].checked,
+            ownerId: form[11].value
         });
         console.log(payload);
         SendData("POST", url, payload);
