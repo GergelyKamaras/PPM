@@ -1,7 +1,7 @@
 import { useAuth } from "../../Contexts/AuthContext";
 import SendData from "../../DataCommunication/SendData";
 
-export function PropertyForm({type, url}) {
+export function PropertyForm({type, url, handleClose}) {
     const {authUser,
         setAuthUser,
         isLoggedIn,
@@ -30,6 +30,8 @@ export function PropertyForm({type, url}) {
         });
         console.log(payload);
         SendData("POST", url, payload);
+        handleClose();
+        alert("Form submitted!");
     }
 
         return (
