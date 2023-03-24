@@ -4,6 +4,9 @@ A web application for keeping track of users's property portfolio, tracking expe
 
 Built using Microservice architecture and implementing a multi-layered design
 
+Usage instructions:
+    Run RunServers.bat in the root directory
+
 Tech Stack:
     ASP.Net Web API, Identity Framework, Entity Framework, JWT, React frontend with Vite, Docker, Github Actions
     
