@@ -1,13 +1,20 @@
 import { useAuth } from "../../Contexts/AuthContext";
 import SendData from "../../DataCommunication/SendData";
+import { useState } from "react";
 
 export function PropertyForm({type, url, handleClose}) {
+    const [isRental, setRental] = useState(false);
+
     const {authUser,
         setAuthUser,
         isLoggedIn,
         setIsLoggedIn} = useAuth();
 
-    const handleSubmit = (e) =>
+    const handleRentalChange = () => {
+        isRental ? setRental(false) : setRental(true);
+    };
+
+        const handleSubmit = (e) =>
     {
         e.preventDefault();
         let form = e.target.form;
@@ -26,20 +33,22 @@ export function PropertyForm({type, url, handleClose}) {
                 additionalInfo: form.querySelector("#additionalInfo").value
             },
             isRental: form.querySelector("#isRental").checked,
-            ownerId: form.querySelector("#ownerId").value
+            ownerId: form.querySelector("#ownerId").value,
+            rentalFee: isRental ? form.querySelector("#rentalPrice").value : 0
         });
         console.log(payload);
         console.log(form.querySelector("#isRental").checked);
         SendData("POST", url, payload);
-        //handleClose();
+        handleClose();
         alert("Form submitted!");
-    }
+    };
 
         return (
         <form>
+            <h3>Basic information</h3>
             <div className="form-check">
-                <input type="checkbox" className="form-check-input" id="isRental"></input>
                 <label className="form-check-label" htmlFor="isRental">Is the property for rent?</label>
+                <input type="checkbox" className="form-check-input" id="isRental" onChange={() => isRental ? setRental(false) : setRental(true)}></input>
             </div>
             <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -58,7 +67,7 @@ export function PropertyForm({type, url, handleClose}) {
                 <input type="date" className="form-control" id="purchaseDate" required></input>
             </div>
             <div className="form-group">
-                <p>Address</p>
+                <h3>Address</h3>
                 <label htmlFor="country">Country</label>
                 <input type="text" className="form-control" id="country" placeholder="Enter Country Name" required></input>
                 <label htmlFor="city">City</label>
@@ -73,6 +82,14 @@ export function PropertyForm({type, url, handleClose}) {
                 <input type="text" className="form-control" id="additionalInfo" placeholder="Additional information regardin the address"></input>
             </div>
             <input type="hidden" id="ownerId" value={authUser["Id"]}></input>
+            {isRental &&
+            <div className="form-group">
+                <h3>Rental information</h3>
+                <label htmlFor="rentalPrice">Rental price</label>
+                <input type="number" className="form-control" id="rentalPrice" placeholder="Rental Price in HUF" required></input>
+                <p>Placeholder for tenant selector</p>
+            </div>
+            }
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
         </form>
     )
