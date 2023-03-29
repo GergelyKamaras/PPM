@@ -2,17 +2,13 @@ import { useAuth } from "../../Contexts/AuthContext";
 import SendData from "../../DataCommunication/SendData";
 import { useState } from "react";
 
-export function PropertyForm({type, url, handleClose}) {
+export function PropertyForm({url, handleClose}) {
     const [isRental, setRental] = useState(false);
 
     const {authUser,
         setAuthUser,
         isLoggedIn,
         setIsLoggedIn} = useAuth();
-
-    const handleRentalChange = () => {
-        isRental ? setRental(false) : setRental(true);
-    };
 
         const handleSubmit = (e) =>
     {

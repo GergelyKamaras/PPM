@@ -4,7 +4,7 @@ let apiServicePort = "7001";
 // Endpoint list
 export let registrationEndpoint = `:${authServicePort}/api/authentication/register`;
 export let loginEndpoint = `:${authServicePort}/api/authentication/login`;
-export let propertiesEndpoint = `:${apiServicePort}/api/properties`
+export let propertiesEndpoint = `:${apiServicePort}/api/properties`;
 
 // Access keys for token headers
 export const EMAIL_KEY = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";

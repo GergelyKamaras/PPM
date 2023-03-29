@@ -20,7 +20,7 @@ export function DataEntryModal({type, url}) {
           <Modal.Title>Property form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <PropertyForm type={type} url={url} handleClose={handleClose}/>
+            <PropertyForm url={url} handleClose={handleClose}/>
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
