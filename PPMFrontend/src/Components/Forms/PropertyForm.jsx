@@ -11,26 +11,27 @@ export function PropertyForm({type, url, handleClose}) {
     {
         e.preventDefault();
         let form = e.target.form;
-        console.log(form);
+        console.log({form});
         let payload = JSON.stringify({
-            name : form[1].value,
-            size : form[2].value,
-            purchasePrice: form[3].value,
-            purchaseDate: form[4].value,
+            name : form.querySelector("#name").value,
+            size : form.querySelector("#size").value,
+            purchasePrice: form.querySelector("#purchasePrice").value,
+            purchaseDate: form.querySelector("#purchaseDate").value,
             address: {
-                country: form[5].value,
-                city: form[6].value,
-                zipCode: form[7].value,
-                street: form[8].value,
-                streetNumber: form[9].value,
-                additionalInfo: form[10].value
+                country: form.querySelector("#country").value,
+                city: form.querySelector("#city").value,
+                zipCode: form.querySelector("#zipCode").value,
+                street: form.querySelector("#street").value,
+                streetNumber: form.querySelector("#streetNumber").value,
+                additionalInfo: form.querySelector("#additionalInfo").value
             },
-            isRental: form[0].checked,
-            ownerId: form[11].value
+            isRental: form.querySelector("#isRental").checked,
+            ownerId: form.querySelector("#ownerId").value
         });
         console.log(payload);
+        console.log(form.querySelector("#isRental").checked);
         SendData("POST", url, payload);
-        handleClose();
+        //handleClose();
         alert("Form submitted!");
     }
 
@@ -41,35 +42,35 @@ export function PropertyForm({type, url, handleClose}) {
                 <label className="form-check-label" htmlFor="isRental">Is the property for rent?</label>
             </div>
             <div className="form-group">
-                <label htmlFor="Name">Name</label>
-                <input type="text" className="form-control" id="Name" placeholder="Enter Property Name" required></input>
+                <label htmlFor="name">Name</label>
+                <input type="text" className="form-control" id="name" placeholder="Enter Property Name" required></input>
             </div>
             <div className="form-group">
-                <label htmlFor="Size">Property Size</label>
-                <input type="number" className="form-control" id="Size" placeholder="Property size in m2" required></input>
+                <label htmlFor="size">Property Size</label>
+                <input type="number" className="form-control" id="size" placeholder="Property size in m2" required></input>
             </div>
             <div className="form-group">
-                <label htmlFor="Price">Purchase price</label>
-                <input type="number" className="form-control" id="Price" placeholder="Property Price in HUF" required></input>
+                <label htmlFor="purchasePrice">Purchase price</label>
+                <input type="number" className="form-control" id="purchasePrice" placeholder="Property Price in HUF" required></input>
             </div>
             <div className="form-group">
-                <label htmlFor="Date">Purchase Date</label>
-                <input type="date" className="form-control" id="Date" required></input>
+                <label htmlFor="purchaseDate">Purchase Date</label>
+                <input type="date" className="form-control" id="purchaseDate" required></input>
             </div>
             <div className="form-group">
                 <p>Address</p>
-                <label htmlFor="Country">Country</label>
-                <input type="text" className="form-control" id="Country" placeholder="Enter Country Name" required></input>
-                <label htmlFor="City">City</label>
-                <input type="text" className="form-control" id="City" placeholder="Enter City Name" required></input>
-                <label htmlFor="ZipCode">ZipCode</label>
-                <input type="text" className="form-control" id="ZipCode" placeholder="Enter ZipCode" required></input>
-                <label htmlFor="Street">Street</label>
-                <input type="text" className="form-control" id="Street" placeholder="Enter Street Name" required></input>
-                <label htmlFor="StreetNumber">Street Number</label>
-                <input type="number" className="form-control" id="StreetNumber" placeholder="Enter Street Number" required></input>
-                <label htmlFor="AdditionalInfo">Additional Information</label>
-                <input type="text" className="form-control" id="AdditionalInfo" placeholder="Additional information regardin the address"></input>
+                <label htmlFor="country">Country</label>
+                <input type="text" className="form-control" id="country" placeholder="Enter Country Name" required></input>
+                <label htmlFor="city">City</label>
+                <input type="text" className="form-control" id="city" placeholder="Enter City Name" required></input>
+                <label htmlFor="zipCode">ZipCode</label>
+                <input type="text" className="form-control" id="zipCode" placeholder="Enter ZipCode" required></input>
+                <label htmlFor="street">Street</label>
+                <input type="text" className="form-control" id="street" placeholder="Enter Street Name" required></input>
+                <label htmlFor="streetNumber">Street Number</label>
+                <input type="number" className="form-control" id="streetNumber" placeholder="Enter Street Number" required></input>
+                <label htmlFor="additionalInfo">Additional Information</label>
+                <input type="text" className="form-control" id="additionalInfo" placeholder="Additional information regardin the address"></input>
             </div>
             <input type="hidden" id="ownerId" value={authUser["Id"]}></input>
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
