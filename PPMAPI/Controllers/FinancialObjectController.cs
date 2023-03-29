@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PPMAPIDataAccess.DbTableQueries.CostsQueries;
+using PPMAPIDataAccess.DbTableQueries.PropertiesQueries;
+using PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries;
 using PPMAPIDataAccess.DbTableQueries.RevenuesQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueDecreasesQueries;
 using PPMAPIDataAccess.DbTableQueries.ValueIncreasesQueries;
@@ -8,6 +10,7 @@ using PPMAPIDTOModelLibrary.OutputDTOs.FinancialObjects;
 using PPMAPIModelLibrary.FinancialObjects;
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Properties;
 using PPMAPIServiceLayer.InputDTOConverter;
 using PPMAPIServiceLayer.OutputDTOFactory;
 using PPMAPIServiceLayer.Validation;
@@ -28,12 +31,15 @@ namespace PPMAPI.Controllers
         private readonly IFinancialObjectOutputDTOFactory _financialObjectOutputDTOFactory;
         private readonly IFinancialInputDTOValidator _financialInputDTOValidator;
         private readonly IFinancialObjectValidator _financialObjectValidator;
+        private readonly IPropertiesQueries _propertyQueries;
+        private readonly IRentalPropertiesQueries _rentalPropertiesQueries;
 
         public FinancialObjectController(ICostsQueries costsQueries,
             IRevenuesQueries revenuesQueries, IValueIncreasesQueries valueIncreasesQueries,
             IValueDecreasesQueries valueDecreasesQueries, IFinancialObjectFactory financialObjectFactory,
             IFinancialObjectOutputDTOFactory financialObjectOutputDTOFactory, 
-            IFinancialInputDTOValidator financialInputDTOValidator, IFinancialObjectValidator financialObjectValidator)
+            IFinancialInputDTOValidator financialInputDTOValidator, IFinancialObjectValidator financialObjectValidator,
+            IPropertiesQueries propertyQueries, IRentalPropertiesQueries rentalPropertiesQueries)
         {
             _costsQueries = costsQueries;
             _revenuesQueries = revenuesQueries;
@@ -43,6 +49,8 @@ namespace PPMAPI.Controllers
             _financialObjectOutputDTOFactory = financialObjectOutputDTOFactory;
             _financialInputDTOValidator = financialInputDTOValidator;
             _financialObjectValidator = financialObjectValidator;
+            _propertyQueries = propertyQueries;
+            _rentalPropertiesQueries = rentalPropertiesQueries;
         }
 
         [HttpGet]
@@ -140,7 +148,12 @@ namespace PPMAPI.Controllers
                 return Results.Problem("Error in input DTO!");
             }
 
+            RentalProperty rentalProperty = _rentalPropertiesQueries.GetRentalPropertyById(input.PropertyId);
+            Property property = _propertyQueries.GetPropertyById(input.PropertyId);
+
             IFinancialObject financialObject = _financialObjectFactory.CreateFinancialObject(input);
+            financialObject.Property = property;
+            financialObject.RentalProperty = rentalProperty;
 
             switch (input.FinancialObjectType)
             {
