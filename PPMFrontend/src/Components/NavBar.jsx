@@ -1,6 +1,6 @@
 import FetchData from "../DataCommunication/FetchData";
 import { useAuth } from "../Contexts/AuthContext";
-import { propertiesEndpoint } from "../Config";
+import { financialObjectsEndpoint, propertiesEndpoint } from "../Config";
 import { DataEntryModal } from "./DataEntryModal";
 
 export default function NavBar() {
@@ -59,6 +59,9 @@ export default function NavBar() {
                             </li>
                             <li>
                                 <DataEntryModal type="Property" url={propertiesEndpoint}/>
+                            </li>
+                            <li>
+                                <DataEntryModal type="FinancialObject" url={financialObjectsEndpoint}/>
                             </li>
                         </ul>
                     </nav>

@@ -14,7 +14,6 @@ export function PropertyForm({url, handleClose}) {
     {
         e.preventDefault();
         let form = e.target.form;
-        console.log({form});
         let payload = JSON.stringify({
             name : form.querySelector("#name").value,
             size : form.querySelector("#size").value,
@@ -32,14 +31,11 @@ export function PropertyForm({url, handleClose}) {
             ownerId: form.querySelector("#ownerId").value,
             rentalFee: isRental ? form.querySelector("#rentalPrice").value : 0
         });
-        console.log(payload);
-        console.log(form.querySelector("#isRental").checked);
         SendData("POST", url, payload);
         handleClose();
-        alert("Form submitted!");
     };
 
-        return (
+    return (
         <form>
             <h3>Basic information</h3>
             <div className="form-check">
