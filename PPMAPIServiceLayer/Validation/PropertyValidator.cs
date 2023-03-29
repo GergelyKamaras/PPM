@@ -61,7 +61,7 @@ namespace PPMAPIServiceLayer.Validation
 
         private bool ValidateRentalProperty(RentalProperty property)
         {
-            if (property.RentalFee <= 0)
+            if (property.RentalFee < 0)
             {
                 return false;
             }
