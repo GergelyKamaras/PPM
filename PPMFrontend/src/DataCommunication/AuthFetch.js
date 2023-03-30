@@ -23,7 +23,7 @@ export default function AuthFetch(url, data, login = false, setIsLoggedIn, setAu
                                     Name: decoded[NAME_KEY],
                                     Role : decoded[ROLE_KEY],
                                     Email: decoded[EMAIL_KEY]
-                                })
+                                });
                                 setIsLoggedIn(true);
                             });
                 }
