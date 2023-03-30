@@ -2,28 +2,40 @@ import { useAuth } from "../../Contexts/AuthContext";
 import SendData from "../../DataCommunication/SendData";
 import { useState, useEffect } from "react";
 import FetchData from "../../DataCommunication/FetchData";
-import { getAllPropertiesByOwner } from "../../Config";
+import { getAllPropertiesByOwnerEndpoint } from "../../Config";
 
 export function FinancialObjectForm({url, handleClose}) {
-    const [isRental, setRental] = useState(false);
+    const [properties, setProperties] = useState([]);
 
     const {authUser,
         setAuthUser,
         isLoggedIn,
         setIsLoggedIn} = useAuth();
-    /*
-    useEffect(async () => {
-        console.log("And I run");
-        let userId = authUser["Id"];
-        async function populateProperties() {
-            let properties = await FetchData(getAllPropertiesByOwner + authUser["Id"]);
-            console.log({properties});
-            https://stackoverflow.com/questions/72301355/how-to-populate-select-options-from-an-api-call-in-react-js-on-page-load
 
+    useEffect(() => {
+        console.log("And I run");
+        //via https://stackoverflow.com/questions/72301355/how-to-populate-select-options-from-an-api-call-in-react-js-on-page-load
+        async function getProperties() {
+            const data = await FetchData(getAllPropertiesByOwnerEndpoint + authUser["Id"]);
+            const results = [];
+
+            data.forEach(element => {
+                results.push({
+                    name : element["name"],
+                    key : element["id"]
+                });
+            });
+
+            setProperties([
+                {name: 'Select a property', key: ''},
+                ...results
+            ]);
         }
-        populateProperties();
+
+        getProperties();
+
     }, []);
-    */
+
 
     const handleSubmit = (e) =>
     {
@@ -76,7 +88,11 @@ export function FinancialObjectForm({url, handleClose}) {
             <div className="form-group">
                 <label htmlFor="propertyId">Property</label>
                 <select id="propertyId" required>
-                    <option value="">--Please choose related property--</option>
+                    {properties.map((property) => {
+                        return (
+                            <option value={property.key}>{property.name}</option>
+                        )
+                    })}
                 </select>
             </div>
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>

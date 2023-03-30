@@ -18,7 +18,7 @@ export function DataEntryModal({type, url}) {
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Property form</Modal.Title>
+            <Modal.Title>{type} form</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {type == "Property" &&
