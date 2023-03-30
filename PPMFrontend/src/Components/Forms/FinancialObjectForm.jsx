@@ -51,7 +51,7 @@ export function FinancialObjectForm({url, handleClose}) {
         });
         console.log(payload);
         SendData("POST", url, payload);
-        //handleClose();
+        handleClose();
         alert("Form submitted!");
     };
 

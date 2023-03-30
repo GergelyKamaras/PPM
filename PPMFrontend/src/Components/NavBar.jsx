@@ -1,4 +1,3 @@
-import FetchData from "../DataCommunication/FetchData";
 import { useAuth } from "../Contexts/AuthContext";
 import { financialObjectsEndpoint, propertiesEndpoint } from "../Config";
 import { DataEntryModal } from "./DataEntryModal";
@@ -8,13 +7,6 @@ export default function NavBar() {
         setAuthUser,
         isLoggedIn,
         setIsLoggedIn} = useAuth();
-
-        function handlePropertyRegistartion(e) {
-            e.preventDefault();
-            let url = e.target.dataset.url;
-            console.log(url);
-            // FetchData(url).then(r => console.log(r));
-        }
 
         function handleLogout(e)
         {
