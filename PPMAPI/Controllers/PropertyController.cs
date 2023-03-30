@@ -204,11 +204,11 @@ namespace PPMAPI.Controllers
             _valueIncreasesQueries.AddValueIncrease(initialValue);
             _costsQueries.AddCost(initialCost);
 
-            return Results.Ok();
+            return Results.Ok("Property created!");
         }
 
         [HttpPut]
-        public IResult UpdateProperty(PropertyInputDTO propertyDTO)
+        public IResult UpdateProperty([FromBody] PropertyInputDTO propertyDTO)
         {
             if (!_propertyInputDTOValidator.Validate(propertyDTO))
             {
@@ -225,7 +225,7 @@ namespace PPMAPI.Controllers
                 Property property = _propertyFactory.CreateProperty(propertyDTO);
                 _propertiesQueries.UpdateProperty(property);
             }
-            return Results.Ok();
+            return Results.Ok("Property updated!");
         }
 
         [HttpDelete]
@@ -243,7 +243,7 @@ namespace PPMAPI.Controllers
                 default:
                     return Results.Problem("Not a valid property type!");
             }
-            return Results.Ok();
+            return Results.Ok("Property deleted!");
         }
     }
 }

@@ -90,7 +90,7 @@ namespace PPMAPI.Controllers
         }
 
         [HttpPut]
-        public IResult UpdateFinancialObject([FromForm] FinancialInputDTO input)
+        public IResult UpdateFinancialObject([FromBody] FinancialInputDTO input)
         {
             if (!_financialInputDTOValidator.Validate(input))
             {
@@ -114,7 +114,7 @@ namespace PPMAPI.Controllers
                     break;
             }
 
-            return Results.Ok();
+            return Results.Ok("Financial object updated!");
         }
 
         [HttpDelete]
@@ -137,7 +137,7 @@ namespace PPMAPI.Controllers
                     break;
             }
 
-            return Results.Ok();
+            return Results.Ok("Financial object deleted!");
         }
 
         [HttpPost]
@@ -171,7 +171,7 @@ namespace PPMAPI.Controllers
                     break;
             }
 
-            return Results.Ok();
+            return Results.Ok("Financial object added!");
         }
     }
 }
