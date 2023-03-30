@@ -47,7 +47,7 @@ export default function NavBar() {
                                 <a className="nav-link" href="" onClick={handleLogout}>Logout</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="">My Properties</a>
+                                <a className="nav-link" href="/properties">My Properties</a>
                             </li>
                             <li>
                                 <DataEntryModal type="Property" url={propertiesEndpoint}/>
