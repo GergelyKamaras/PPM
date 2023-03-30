@@ -141,7 +141,7 @@ namespace PPMAPI.Controllers
         }
 
         [HttpPost]
-        public IResult AddFinancialObject([FromForm] FinancialInputDTO input)
+        public IResult AddFinancialObject([FromBody] FinancialInputDTO input)
         {
             if (!_financialInputDTOValidator.Validate(input))
             {

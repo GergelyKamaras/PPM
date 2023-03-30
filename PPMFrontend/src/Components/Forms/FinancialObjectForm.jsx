@@ -13,8 +13,7 @@ export function FinancialObjectForm({url, handleClose}) {
         setIsLoggedIn} = useAuth();
 
     useEffect(() => {
-        console.log("And I run");
-        //via https://stackoverflow.com/questions/72301355/how-to-populate-select-options-from-an-api-call-in-react-js-on-page-load
+        // Via https://stackoverflow.com/questions/72301355/how-to-populate-select-options-from-an-api-call-in-react-js-on-page-load
         async function getProperties() {
             const data = await FetchData(getAllPropertiesByOwnerEndpoint + authUser["Id"]);
             const results = [];
@@ -78,7 +77,7 @@ export function FinancialObjectForm({url, handleClose}) {
             <div className="form-group">
                 <label htmlFor="financialObjectType">Type</label>
                 <select id="financialObjectType" required>
-                    <option value="">--Type of financiaL object--</option>
+                    <option value="">--Type of financial object--</option>
                     <option value="Cost">Cost</option>
                     <option value="Revenue">Revenue</option>
                     <option value="ValueIncrease">Value Increase</option>
