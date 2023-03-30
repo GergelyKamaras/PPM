@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import NavBar from './NavBar'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <NavBar />
-    <App />
-  </React.StrictMode>,
-)
+function main()
+{
+    ReactDOM.createRoot(document.getElementById('root')).render(
+            <App />
+    )
+}
+main();

@@ -21,8 +21,8 @@ namespace PPMAPIDataAccess.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Number = table.Column<int>(type: "int", nullable: false),
-                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    StreetNumber = table.Column<int>(type: "int", nullable: false),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,11 +85,12 @@ namespace PPMAPIDataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenantUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    RentalFee = table.Column<decimal>(type: "decimal(18,0)", nullable: true),
+                    RentalFee = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<float>(type: "real", nullable: false),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OwnerUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -120,7 +121,7 @@ namespace PPMAPIDataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -148,7 +149,7 @@ namespace PPMAPIDataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -176,7 +177,7 @@ namespace PPMAPIDataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -204,7 +205,7 @@ namespace PPMAPIDataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),

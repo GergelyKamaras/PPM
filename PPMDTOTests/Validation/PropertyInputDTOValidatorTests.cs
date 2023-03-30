@@ -16,7 +16,7 @@ namespace PPMAPIServiceLayerTests.Validation
         [Test]
         public void ValidateRentalProperty_InValidRentalFee_ReturnsFalse()
         {
-            RentalPropertyInputDTO propertyDTO = new RentalPropertyInputDTO()
+            PropertyInputDTO propertyDTO = new PropertyInputDTO()
             {
                 Name = "RealProperty",
                 OwnerId = "Id1",

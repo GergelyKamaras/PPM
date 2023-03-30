@@ -5,17 +5,17 @@ namespace PPMAPIServiceLayer.Validation
 {
     public interface IPropertyInputDTOValidator
     {
-        bool Validate(IPropertyInputDTO protoProperty);
+        bool Validate(PropertyInputDTO protoProperty);
     }
 
     public class PropertyInputDTOValidator : IPropertyInputDTOValidator
     {
 
-        public bool Validate(IPropertyInputDTO protoProperty)
+        public bool Validate(PropertyInputDTO protoProperty)
         {
             if (!ValidatePropertyData(protoProperty) ||
                 !ValidateInputDTOAddress(protoProperty.Address) ||
-                (protoProperty.IsRental && !ValidateRentalPropertySpecificData((RentalPropertyInputDTO)protoProperty)))
+                (protoProperty.IsRental && !ValidateRentalPropertySpecificData(protoProperty)))
             {
                 return false;
             }
@@ -36,7 +36,7 @@ namespace PPMAPIServiceLayer.Validation
             return true;
         }
 
-        private bool ValidatePropertyData(IPropertyInputDTO property)
+        private bool ValidatePropertyData(PropertyInputDTO property)
         {
             if (property.Name == null ||
                 property.OwnerId == null ||
@@ -49,9 +49,9 @@ namespace PPMAPIServiceLayer.Validation
             return true;
         }
 
-        private bool ValidateRentalPropertySpecificData(RentalPropertyInputDTO property)
+        private bool ValidateRentalPropertySpecificData(PropertyInputDTO property)
         {
-            if (property.RentalFee <= 0)
+            if (property.RentalFee < 0)
             {
                 return false;
             }

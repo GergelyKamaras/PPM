@@ -21,7 +21,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Description = "A very valid cost",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = true,
                 PropertyId = "Id"
             };
             Assert.That(_validator.Validate(input), Is.False);
@@ -35,7 +34,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Title = "ValidCost",
                 Description = "A very valid cost",
                 Date = DateTime.Now,
-                IsRental = true,
                 PropertyId = "Id"
             };
 
@@ -51,7 +49,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Description = "A very valid cost",
                 Value = 0,
                 Date = DateTime.Now,
-                IsRental = true,
                 PropertyId = "Id"
             };
 
@@ -67,7 +64,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Description = "A very valid cost",
                 Value = -1,
                 Date = DateTime.Now,
-                IsRental = true,
                 PropertyId = "Id"
             };
 
@@ -82,7 +78,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Title = "ValidCost",
                 Description = "A very valid cost",
                 Value = 50,
-                IsRental = true,
                 PropertyId = "Id"
             };
 
@@ -98,7 +93,6 @@ namespace PPMAPIServiceLayerTests.Validation
                 Description = "A very valid cost",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = true,
             };
 
             Assert.That(_validator.Validate(input), Is.False);

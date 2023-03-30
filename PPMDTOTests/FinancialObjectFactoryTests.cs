@@ -25,7 +25,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid transaction",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = false,
                 PropertyId = "Id",
                 FinancialObjectType = "Revenue"
             };
@@ -53,7 +52,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid transaction",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = false,
                 PropertyId = "Id",
                 FinancialObjectType = "Cost"
             };
@@ -81,7 +79,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid transaction",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = false,
                 PropertyId = "Id",
                 FinancialObjectType = "ValueIncrease"
             };
@@ -109,7 +106,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid transaction",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = false,
                 PropertyId = "Id",
                 FinancialObjectType = "ValueDecrease"
             };
@@ -137,7 +133,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid transaction",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = false,
                 PropertyId = "Id",
                 FinancialObjectType = "Cost"
             };
@@ -164,7 +159,6 @@ namespace PPMAPIServiceLayerTests
                 Description = "A very valid cost",
                 Value = 50,
                 Date = DateTime.Now,
-                IsRental = true,
                 PropertyId = "Id",
                 FinancialObjectType = "Cost"
             };

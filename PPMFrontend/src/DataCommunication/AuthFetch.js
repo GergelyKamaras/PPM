@@ -1,4 +1,7 @@
-export default function AuthFetch(url, data, login = false)
+import jwt_decode from "jwt-decode";
+import { EMAIL_KEY, NAME_KEY, ROLE_KEY } from "../Config";
+
+export default function AuthFetch(url, data, login = false, setIsLoggedIn, setAuthUser)
 {
     let domain = "https://" + window.location.hostname;
 
@@ -14,10 +17,20 @@ export default function AuthFetch(url, data, login = false)
                         .then(r =>
                             {
                                 localStorage.setItem("AccessToken", `Bearer ${r.token}`);
-                                alert("Succesfull login!");
+                                var decoded = jwt_decode(r.token);
+                                setAuthUser({
+                                    Id: decoded["Id"],
+                                    Name: decoded[NAME_KEY],
+                                    Role : decoded[ROLE_KEY],
+                                    Email: decoded[EMAIL_KEY]
+                                });
+                                setIsLoggedIn(true);
                             });
                 }
-                alert("Succesfull registration!");
+                else
+                {
+                    alert("Succesfull registration!");
+                }
             }
             else
             {

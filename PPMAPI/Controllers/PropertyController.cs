@@ -11,8 +11,10 @@ using PPMAPIModelLibrary.Properties;
 using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMAPIModelLibrary.FinancialObjects.ValueModifiers;
+using PPMAPIModelLibrary.Users;
 using PPMAPIServiceLayer.Validation;
 using PPMDTOModelLibrary.InputDTOs.Properties;
+using PPMAPIDataAccess.DbTableQueries.OwnersQueries;
 
 namespace PPMAPI.Controllers
 {
@@ -28,6 +30,7 @@ namespace PPMAPI.Controllers
         private readonly IValueIncreasesQueries _valueIncreasesQueries;
         private readonly IPropertyInputDTOValidator _propertyInputDTOValidator;
         private readonly IPropertyValidator _propertyValidator;
+        private readonly IOwnersQueries _ownersQueries;
 
         private const string RentalPropertyType = "rental";
         private const string BasePropertyType = "property";
@@ -35,7 +38,7 @@ namespace PPMAPI.Controllers
         public PropertyController(IPropertyFactory propertyFactory, IPropertyOutputDTOFactory propertyOutputDtoFactory,
             ICostsQueries costsQueries, IPropertiesQueries propertiesQueries, IRentalPropertiesQueries rentalPropertiesQueries,
             IValueIncreasesQueries valueIncreasesQueries, IPropertyInputDTOValidator propertyInputDTOValidator,
-            IPropertyValidator propertyValidator)
+            IPropertyValidator propertyValidator, IOwnersQueries ownersQueries)
         {
             _propertyFactory = propertyFactory;
             _propertyOutputDtoFactory = propertyOutputDtoFactory;
@@ -45,6 +48,7 @@ namespace PPMAPI.Controllers
             _valueIncreasesQueries = valueIncreasesQueries;
             _propertyInputDTOValidator = propertyInputDTOValidator;
             _propertyValidator = propertyValidator;
+            _ownersQueries = ownersQueries;
         }
 
         [HttpGet]
@@ -155,7 +159,7 @@ namespace PPMAPI.Controllers
         }
 
         [HttpPost]
-        public IResult AddProperty([FromForm] IPropertyInputDTO protoProperty)
+        public IResult AddProperty([FromBody] PropertyInputDTO protoProperty)
         {
             if (!_propertyInputDTOValidator.Validate(protoProperty))
             {
@@ -164,15 +168,18 @@ namespace PPMAPI.Controllers
 
             RentalProperty rentalProperty = null;
             Property property = null;
+            Owner owner = _ownersQueries.GetOwnerById(protoProperty.OwnerId);
 
             if (protoProperty.IsRental)
             {
-                rentalProperty = _propertyFactory.CreateRentalProperty((RentalPropertyInputDTO)protoProperty);
+                rentalProperty = _propertyFactory.CreateRentalProperty(protoProperty);
+                rentalProperty.Owner = owner;
                 _rentalPropertiesQueries.AddRentalProperty(rentalProperty);
             }
             else
             {
-                property = _propertyFactory.CreateProperty((PropertyInputDTO)protoProperty);
+                property = _propertyFactory.CreateProperty(protoProperty);
+                property.Owner = owner;
                 _propertiesQueries.AddProperty(property);
             }
 
@@ -197,11 +204,11 @@ namespace PPMAPI.Controllers
             _valueIncreasesQueries.AddValueIncrease(initialValue);
             _costsQueries.AddCost(initialCost);
 
-            return Results.Ok();
+            return Results.Ok("Property created!");
         }
 
         [HttpPut]
-        public IResult UpdateProperty(IPropertyInputDTO propertyDTO)
+        public IResult UpdateProperty([FromBody] PropertyInputDTO propertyDTO)
         {
             if (!_propertyInputDTOValidator.Validate(propertyDTO))
             {
@@ -210,15 +217,15 @@ namespace PPMAPI.Controllers
 
             if (propertyDTO.IsRental)
             {
-                RentalProperty property = _propertyFactory.CreateRentalProperty((RentalPropertyInputDTO)propertyDTO);
+                RentalProperty property = _propertyFactory.CreateRentalProperty(propertyDTO);
                 _rentalPropertiesQueries.UpdateRentalProperty(property);
             }
             else
             {
-                Property property = _propertyFactory.CreateProperty((PropertyInputDTO)propertyDTO);
+                Property property = _propertyFactory.CreateProperty(propertyDTO);
                 _propertiesQueries.UpdateProperty(property);
             }
-            return Results.Ok();
+            return Results.Ok("Property updated!");
         }
 
         [HttpDelete]
@@ -236,7 +243,7 @@ namespace PPMAPI.Controllers
                 default:
                     return Results.Problem("Not a valid property type!");
             }
-            return Results.Ok();
+            return Results.Ok("Property deleted!");
         }
     }
 }

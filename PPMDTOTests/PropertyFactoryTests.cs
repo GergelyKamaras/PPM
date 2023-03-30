@@ -57,7 +57,7 @@ namespace PPMAPIServiceLayerTests
         [Test]
         public void CreateRentalProperty_ValidInput_PropertiesMatch()
         {
-            RentalPropertyInputDTO propertyDTO = new RentalPropertyInputDTO()
+            PropertyInputDTO propertyDTO = new PropertyInputDTO()
             {
                 Name = "RealProperty",
                 OwnerId = "Id1",

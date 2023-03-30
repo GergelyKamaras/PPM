@@ -1,4 +1,5 @@
-﻿using PPMAPIModelLibrary.Properties;
+﻿using Microsoft.EntityFrameworkCore;
+using PPMAPIModelLibrary.Properties;
 
 namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
 {
@@ -35,7 +36,14 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
 
         public List<Property> GetPropertiesByOwnerId(string id)
         {
-            return _db.Properties.Where(p => p.Owner.UserId == id).ToList();
+            return _db.Properties.Where(p => p.Owner.UserId == id)
+                .Include(p => p.Address)
+                .Include(p => p.Owner)
+                .Include(p => p.Costs)
+                .Include(p => p.Revenues)
+                .Include(p => p.ValueDecreases)
+                .Include(p => p.ValueIncreases)
+                .ToList();
         }
     }
 }
