@@ -1,6 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
-using System.Security.Claims;
 using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using AuthServiceServiceLayer.Authentication.AuthOperations;
