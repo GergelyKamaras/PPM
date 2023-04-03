@@ -1,7 +1,7 @@
-using System.Web.Helpers;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using AuthServiceDataAccess;
 using AuthServiceModelLibrary.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -117,21 +117,27 @@ namespace IntegrationTests
             // Registration 
             await client.PostAsync("/api/authentication/register", form);
 
-            // Login, get token 
+            // Login, get token, get userId
             HttpResponseMessage responseLogin = await client.PostAsync("/api/authentication/login", loginForm);
             string s = await responseLogin.Content.ReadAsStringAsync();
             LoginResultDTO r = JsonConvert.DeserializeObject<LoginResultDTO>(s);
-            string token = r.Token;
-            
+            var token = new JwtSecurityTokenHandler().ReadJwtToken(r.Token);
+            string userId = token.Claims.FirstOrDefault(c => c.Type == "Id").Value;
+
+            // Add authorization to following requests
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", r.Token);
+
+            // Perform deletion of user from AuthService
+            HttpResponseMessage responseDelete = await client.DeleteAsync($"/api/authentication/{userId}");
             // register a property
             // register a rental property
             // add financial objects each of them, check the response codes
-            // delete user check status code
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(responseLogin.IsSuccessStatusCode);
+                Assert.That(responseDelete.IsSuccessStatusCode);
             });
         }
 
