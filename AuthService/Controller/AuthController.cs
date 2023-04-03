@@ -87,6 +87,7 @@ namespace AuthServiceAPI.Controller
         }
 
         [Authorize]
+        [Route("{id}")]
         public async Task<IResult> DeleteUser(string id)
         {
 
