@@ -1,7 +1,11 @@
+using System.Web.Helpers;
 using AuthServiceDataAccess;
+using AuthServiceModelLibrary.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace IntegrationTests
 {
@@ -65,7 +69,7 @@ namespace IntegrationTests
                 {"LastName", "Hegyi"},
                 {"Password", "VeryPassword_123"},
                 {"Username", "Hegyine"}
-        };
+            };
 
             FormUrlEncodedContent form = new FormUrlEncodedContent(user);
             
@@ -85,7 +89,7 @@ namespace IntegrationTests
         }
 
         [Test]
-        public async Task RegisterAndLogin_Owner_ReturnsSuccessCode()
+        public async Task HappyPath_Owner_ReturnsSuccessCodes()
         {
             // Arrange
             var client = _authServiceFactory.CreateClient();
@@ -110,11 +114,25 @@ namespace IntegrationTests
             var loginForm = new FormUrlEncodedContent(loginData);
 
             // Act
+            // Registration 
             await client.PostAsync("/api/authentication/register", form);
-            var response = await client.PostAsync("/api/authentication/login", loginForm);
+
+            // Login, get token 
+            HttpResponseMessage responseLogin = await client.PostAsync("/api/authentication/login", loginForm);
+            string s = await responseLogin.Content.ReadAsStringAsync();
+            LoginResultDTO r = JsonConvert.DeserializeObject<LoginResultDTO>(s);
+            string token = r.Token;
+            
+            // register a property
+            // register a rental property
+            // add financial objects each of them, check the response codes
+            // delete user check status code
 
             // Assert
-            Assert.That(response.IsSuccessStatusCode);
+            Assert.Multiple(() =>
+            {
+                Assert.That(responseLogin.IsSuccessStatusCode);
+            });
         }
 
         [OneTimeTearDown]

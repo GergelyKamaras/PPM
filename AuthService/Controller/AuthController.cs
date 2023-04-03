@@ -79,10 +79,10 @@ namespace AuthServiceAPI.Controller
 
             JwtSecurityToken token = _jwtService.GenerateLoginJWT(user);
 
-            return Results.Ok(new
+            return Results.Ok(new LoginResultDTO()
             {
-                message = "Success",
-                token = new JwtSecurityTokenHandler().WriteToken(token)
+                Message = "Success",
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
             });
         }
 
