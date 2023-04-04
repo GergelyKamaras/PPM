@@ -165,7 +165,7 @@ namespace IntegrationTests
 
             HttpResponseMessage responsePropertyRegistration = await apiClient.PostAsJsonAsync<PropertyInputDTO>("api/properties", property);
 
-            List<PropertyOutputDTO> propertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/owners/{userId}");
+            List<PropertyOutputDTO> propertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/property/owners/{userId}");
             //s = await propertyResponse.Content.ReadAsStringAsync();
             //= JsonConvert.DeserializeObject<List<PropertyOutputDTO>>(s); ;
             // Delete the property
