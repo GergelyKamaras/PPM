@@ -1,4 +1,5 @@
-﻿using PPMAPIModelLibrary.Users;
+﻿using Microsoft.EntityFrameworkCore;
+using PPMAPIModelLibrary.Users;
 
 namespace PPMAPIDataAccess.DbTableQueries.OwnersQueries
 {
@@ -18,7 +19,12 @@ namespace PPMAPIDataAccess.DbTableQueries.OwnersQueries
 
         public void DeleteOwner(string id)
         {
-            _db.Owners.Remove(_db.Owners.FirstOrDefault(o => o.UserId == id));
+            var owner = _db.Owners
+                .Include(o => o.Properties)
+                .Include(o => o.RentalProperties)
+                .FirstOrDefault(o => o.UserId == id);
+
+            _db.Owners.Remove(owner);
             _db.SaveChanges();
         }
 
@@ -30,12 +36,20 @@ namespace PPMAPIDataAccess.DbTableQueries.OwnersQueries
 
         public Owner GetOwnerById(string id)
         {
-            return _db.Owners.FirstOrDefault(o => o.UserId == id);
+            return _db.Owners
+                .Include(o => o.Properties)
+                .Include(o => o.RentalProperties)
+                .FirstOrDefault(o => o.UserId == id);
         }
 
         public Owner GetOwnerByPropertyId(Guid id)
         {
-            return _db.Owners.FirstOrDefault(o => o.Properties.Any(p => p.Id == id) || o.RentalProperties.Any(p => p.Id == id));
+            var owner = _db.Owners
+                .Include(o => o.Properties)
+                .Include(o => o.RentalProperties)
+                .FirstOrDefault(o => o.Properties.Any(p => p.Id == id) || o.RentalProperties.Any(p => p.Id == id));
+            
+            return owner;
         }
     }
 }

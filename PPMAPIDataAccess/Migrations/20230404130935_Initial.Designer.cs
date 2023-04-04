@@ -12,7 +12,7 @@ using PPMAPIDataAccess;
 namespace PPMAPIDataAccess.Migrations
 {
     [DbContext(typeof(PPMDbContext))]
-    [Migration("20230323193658_Initial")]
+    [Migration("20230404130935_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -71,11 +71,11 @@ namespace IntegrationTests
             var admin = new Dictionary<string, string>()
             {
                 {"Role", "Administrator"},
-                {"Email", "ValidEmail@Host.com"},
+                {"Email", "AdminEmail@Host.com"},
                 {"FirstName", "Jolan"},
                 {"LastName", "Hegyi"},
                 {"Password", "VeryPassword_123"},
-                {"Username", "Hegyine"}
+                {"Username", "Admin"}
             };
 
             FormUrlEncodedContent formAdminRegistration = new FormUrlEncodedContent(admin);
@@ -83,7 +83,7 @@ namespace IntegrationTests
 
             var loginAdminData = new Dictionary<string, string>()
             {
-                {"Email", "ValidEmail@Host.com"},
+                {"Email", "AdminEmail@Host.com"},
                 {"Password", "VeryPassword_123"}
             };
             var loginAdminForm = new FormUrlEncodedContent(loginAdminData);
