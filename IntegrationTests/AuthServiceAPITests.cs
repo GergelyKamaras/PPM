@@ -1,11 +1,16 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using AuthServiceDataAccess;
+using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
+using PPMAPIDTOModelLibrary.SharedDTOs;
+using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace IntegrationTests
 {
@@ -59,9 +64,9 @@ namespace IntegrationTests
         public async Task RegisterAndLogin_Administrator_ReturnsSuccessCode()
         {
             // Arrange
-            var client = _authServiceFactory.CreateClient();
+            HttpClient authClient = _authServiceFactory.CreateClient();
 
-            var user = new Dictionary<string, string>()
+            var admin = new Dictionary<string, string>()
             {
                 {"Role", "Administrator"},
                 {"Email", "ValidEmail@Host.com"},
@@ -71,7 +76,7 @@ namespace IntegrationTests
                 {"Username", "Hegyine"}
             };
 
-            FormUrlEncodedContent form = new FormUrlEncodedContent(user);
+            FormUrlEncodedContent form = new FormUrlEncodedContent(admin);
             
             var loginData = new Dictionary<string, string>()
             {
@@ -81,19 +86,48 @@ namespace IntegrationTests
             var loginForm = new FormUrlEncodedContent(loginData);
             
             // Act
-            await client.PostAsync("/api/authentication/register", form);
-            var response = await client.PostAsync("/api/authentication/login", loginForm);
+            await authClient.PostAsync("/api/authentication/register", form);
+            var responseAddminRegistration = await authClient.PostAsync("/api/authentication/login", loginForm);
 
             // Assert
-            Assert.That(response.IsSuccessStatusCode);
+            Assert.That(responseAddminRegistration.IsSuccessStatusCode);
         }
 
         [Test]
         public async Task HappyPath_Owner_ReturnsSuccessCodes()
         {
-            // Arrange
-            var client = _authServiceFactory.CreateClient();
+            // Setup clients
+            HttpClient authClient = _authServiceFactory.CreateClient();
+            HttpClient apiClient = _ppmAPIFactory.CreateClient();
 
+            // Register admin
+            var admin = new Dictionary<string, string>()
+            {
+                {"Role", "Administrator"},
+                {"Email", "ValidEmail@Host.com"},
+                {"FirstName", "Jolan"},
+                {"LastName", "Hegyi"},
+                {"Password", "VeryPassword_123"},
+                {"Username", "Hegyine"}
+            };
+
+            FormUrlEncodedContent formAdminRegistration = new FormUrlEncodedContent(admin);
+
+            var loginAdminData = new Dictionary<string, string>()
+            {
+                {"Email", "ValidEmail@Host.com"},
+                {"Password", "VeryPassword_123"}
+            };
+            var loginAsdminForm = new FormUrlEncodedContent(loginAdminData);
+
+            await authClient.PostAsync("/api/authentication/register", formAdminRegistration);
+            HttpResponseMessage responseAddminLogin = await authClient.PostAsync("/api/authentication/login", loginAsdminForm);
+            
+            // Get admin's jwt token
+            string responseContentString = await responseAddminLogin.Content.ReadAsStringAsync();
+            LoginResultDTO adminLoginResult = JsonConvert.DeserializeObject<LoginResultDTO>(responseContentString);
+
+            // Register user
             var user = new Dictionary<string, string>()
             {
                 {"Role", "Owner"},
@@ -113,22 +147,65 @@ namespace IntegrationTests
             };
             var loginForm = new FormUrlEncodedContent(loginData);
 
-            // Act
-            // Registration 
-            await client.PostAsync("/api/authentication/register", form);
-
+            // Register on AuthService
+            await authClient.PostAsync("/api/authentication/register", form);
+            
             // Login, get token, get userId
-            HttpResponseMessage responseLogin = await client.PostAsync("/api/authentication/login", loginForm);
+            HttpResponseMessage responseLogin = await authClient.PostAsync("/api/authentication/login", loginForm);
             string s = await responseLogin.Content.ReadAsStringAsync();
             LoginResultDTO r = JsonConvert.DeserializeObject<LoginResultDTO>(s);
             var token = new JwtSecurityTokenHandler().ReadJwtToken(r.Token);
             string userId = token.Claims.FirstOrDefault(c => c.Type == "Id").Value;
+            
+            /* Register on API server
+             * Should be deleted once inter server communication is established in test environment
+             */
 
-            // Add authorization to following requests
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", r.Token);
+            apiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", adminLoginResult.Token);
+            Dictionary<string, string> userData = new Dictionary<string, string>()
+            {
+                { "userId", userId },
+                {"role", "Owner"}
+            };
+            var content = new FormUrlEncodedContent(userData);
+
+            HttpResponseMessage responseOwnerAPIRegistration = await apiClient.PostAsync("api/users", content);
+
+            // Add owner's authorization to following requests
+            authClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", r.Token);
+            apiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", r.Token);
+
+            // Register a property
+            PropertyInputDTO property = new PropertyInputDTO()
+            {
+                IsRental = false,
+                Name = "TestProperty",
+                OwnerId = userId,
+                PurchaseDate = new DateTime(2023, 02, 01),
+                PurchasePrice = 500,
+                Size = 35,
+                Address = new AddressDTO()
+                {
+                    Country = "Nomadisztan",
+                    City = "ARealCity",
+                    ZipCode = "666",
+                    Street = "DontLiveHere",
+                    StreetNumber = 13,
+                    AdditionalInfo = "nope"
+                },
+            };
+
+            HttpResponseMessage responsePropertyRegistration = await apiClient.PostAsJsonAsync<PropertyInputDTO>("api/properties", property);
+
+            List<PropertyOutputDTO> propertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/owners/{userId}");
+            //s = await propertyResponse.Content.ReadAsStringAsync();
+            //= JsonConvert.DeserializeObject<List<PropertyOutputDTO>>(s); ;
+            // Delete the property
+
 
             // Perform deletion of user from AuthService
-            HttpResponseMessage responseDelete = await client.DeleteAsync($"/api/authentication/{userId}");
+            HttpResponseMessage responseDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
+            
             // register a property
             // register a rental property
             // add financial objects each of them, check the response codes
@@ -138,6 +215,9 @@ namespace IntegrationTests
             {
                 Assert.That(responseLogin.IsSuccessStatusCode);
                 Assert.That(responseDelete.IsSuccessStatusCode);
+                Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
+                Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
+                Assert.That(responseAddminLogin.IsSuccessStatusCode);
             });
         }
 
