@@ -166,10 +166,10 @@ namespace IntegrationTests
             HttpResponseMessage responsePropertyRegistration = await apiClient.PostAsJsonAsync<PropertyInputDTO>("api/properties", property);
 
             List<PropertyOutputDTO> propertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/property/owners/{userId}");
-            //s = await propertyResponse.Content.ReadAsStringAsync();
-            //= JsonConvert.DeserializeObject<List<PropertyOutputDTO>>(s); ;
+            PropertyOutputDTO testProperty = propertyDTOs[0];
+            
             // Delete the property
-
+            HttpResponseMessage responsePropertyDelete = await apiClient.DeleteAsync($"api/properties/property/{testProperty.Id}");
 
             // Perform deletion of user from AuthService
             HttpResponseMessage responseOwnerDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
@@ -179,15 +179,14 @@ namespace IntegrationTests
             // add financial objects each of them, check the response codes
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(responseAdminRegistration.IsSuccessStatusCode);
-                Assert.That(responseAddminLogin.IsSuccessStatusCode);
-                Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
-                Assert.That(responseOwnerLogin.IsSuccessStatusCode);
-                Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
-                Assert.That(responseOwnerDelete.IsSuccessStatusCode);
-            });
+            Assert.That(responseAdminRegistration.IsSuccessStatusCode);
+            Assert.That(responseAddminLogin.IsSuccessStatusCode);
+            Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
+            Assert.That(responseOwnerLogin.IsSuccessStatusCode);
+            Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
+            Assert.That(responsePropertyDelete.IsSuccessStatusCode);
+            Assert.That(responseOwnerDelete.IsSuccessStatusCode);
+            
         }
 
         [OneTimeTearDown]
