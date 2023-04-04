@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 using PPMAPIDTOModelLibrary.SharedDTOs;
 using PPMAPIModelLibrary.FinancialObjects;
-using PPMAPIModelLibrary.FinancialObjects.Transactions;
 using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
@@ -211,7 +210,7 @@ namespace IntegrationTests
             // Add a revenue to testProperty
             FinancialInputDTO revenueOne = new FinancialInputDTO()
             {
-                Title = "A valid cost",
+                Title = "A valid revenue",
                 PropertyId = testProperty.Id,
                 Value = 500,
                 Date = DateTime.Now,
@@ -224,7 +223,7 @@ namespace IntegrationTests
             // Add a value increase to testProperty
             FinancialInputDTO valueIncreaseOne = new FinancialInputDTO()
             {
-                Title = "A valid cost",
+                Title = "A valid value increase",
                 PropertyId = testProperty.Id,
                 Value = 500,
                 Date = DateTime.Now,
@@ -237,7 +236,7 @@ namespace IntegrationTests
             // Add a value increase to testProperty
             FinancialInputDTO valueDecreaseOne = new FinancialInputDTO()
             {
-                Title = "A valid cost",
+                Title = "A valid value decrease",
                 PropertyId = testProperty.Id,
                 Value = 500,
                 Date = DateTime.Now,
@@ -247,6 +246,58 @@ namespace IntegrationTests
 
             HttpResponseMessage responseAddValueDecreaseToProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", valueDecreaseOne);
 
+            // Add a cost to testRentalProperty
+            FinancialInputDTO costTwo = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testRentalProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.Cost,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddCostToRentalProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", costTwo);
+
+            // Add a revenue to testProperty
+            FinancialInputDTO revenueTwo = new FinancialInputDTO()
+            {
+                Title = "A valid revenue",
+                PropertyId = testRentalProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.Revenue,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddRevenueToRentalProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", revenueTwo);
+
+            // Add a value increase to testProperty
+            FinancialInputDTO valueIncreaseTwo = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testRentalProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.ValueIncrease,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddValueIncreaseToRentalProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", valueIncreaseTwo);
+
+            // Add a value increase to testProperty
+            FinancialInputDTO valueDecreaseTwo = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testRentalProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.ValueDecrease,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddValueDecreaseToRentalProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", valueDecreaseTwo);
+
             // Delete the property
             HttpResponseMessage responsePropertyDelete = await apiClient.DeleteAsync($"api/properties/property/{testProperty.Id}");
 
@@ -255,8 +306,6 @@ namespace IntegrationTests
 
             // Perform deletion of user from AuthService
             HttpResponseMessage responseOwnerDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
-            
-            // add financial objects each of them, check the response codes
 
             // Assert
             Assert.That(responseAdminRegistration.IsSuccessStatusCode);
@@ -271,6 +320,11 @@ namespace IntegrationTests
             Assert.That(responseAddRevenueToProperty.IsSuccessStatusCode);
             Assert.That(responseAddValueIncreaseToProperty.IsSuccessStatusCode);
             Assert.That(responseAddValueDecreaseToProperty.IsSuccessStatusCode);
+
+            Assert.That(responseAddCostToRentalProperty.IsSuccessStatusCode);
+            Assert.That(responseAddRevenueToRentalProperty.IsSuccessStatusCode);
+            Assert.That(responseAddValueIncreaseToRentalProperty.IsSuccessStatusCode);
+            Assert.That(responseAddValueDecreaseToRentalProperty.IsSuccessStatusCode);
 
             Assert.That(responseRentalPropertyDelete.IsSuccessStatusCode);
             Assert.That(responsePropertyDelete.IsSuccessStatusCode);
