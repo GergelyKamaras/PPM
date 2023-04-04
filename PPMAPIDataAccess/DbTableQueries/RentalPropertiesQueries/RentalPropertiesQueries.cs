@@ -24,7 +24,7 @@ namespace PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries
                 .Include(p => p.Costs)
                 .Include(p => p.Revenues)
                 .Include(p => p.ValueIncreases)
-                .Include(p => p.ValueIncreases)
+                .Include(p => p.ValueDecreases)
                 .FirstOrDefault(p => p.Id.ToString() == id);
 
             _db.RentalProperties.Remove(property);
@@ -44,7 +44,7 @@ namespace PPMAPIDataAccess.DbTableQueries.RentalPropertiesQueries
                 .Include(p => p.Costs)
                 .Include(p => p.Revenues)
                 .Include(p => p.ValueIncreases)
-                .Include(p => p.ValueIncreases)
+                .Include(p => p.ValueDecreases)
                 .FirstOrDefault(p => p.Id.ToString() == id);
         }
 
