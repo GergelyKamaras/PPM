@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using AuthServiceDataAccess;
-using AuthServiceModelLibrary.ApplicationUser;
 using AuthServiceModelLibrary.DTOs;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using PPMAPIDTOModelLibrary.OutputDTOs.Properties;
 using PPMAPIDTOModelLibrary.SharedDTOs;
+using PPMAPIModelLibrary.FinancialObjects;
+using PPMAPIModelLibrary.FinancialObjects.Transactions;
+using PPMDTOModelLibrary.InputDTOs.FinancialInput;
 using PPMDTOModelLibrary.InputDTOs.Properties;
 
 namespace IntegrationTests
@@ -125,7 +127,7 @@ namespace IntegrationTests
             string userId = token.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             
             /*
-             * Register on API server
+             * Register owner on API server
              * TODO Should be deleted once inter server communication is established in test environment
              */
 
@@ -160,22 +162,100 @@ namespace IntegrationTests
                     Street = "DontLiveHere",
                     StreetNumber = 13,
                     AdditionalInfo = "nope"
-                },
+                }
             };
 
             HttpResponseMessage responsePropertyRegistration = await apiClient.PostAsJsonAsync<PropertyInputDTO>("api/properties", property);
 
             List<PropertyOutputDTO> propertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/property/owners/{userId}");
             PropertyOutputDTO testProperty = propertyDTOs[0];
-            
+
+            // Register a rental property
+            PropertyInputDTO rentalProperty = new PropertyInputDTO()
+            {
+                IsRental = true,
+                Name = "TestRentalProperty",
+                OwnerId = userId,
+                PurchaseDate = new DateTime(2023, 02, 01),
+                PurchasePrice = 500,
+                Size = 35,
+                Address = new AddressDTO()
+                {
+                    Country = "Nomadisztan",
+                    City = "ARealCity",
+                    ZipCode = "666",
+                    Street = "DontLiveHere",
+                    StreetNumber = 13,
+                    AdditionalInfo = "nope"
+                },
+            };
+
+            HttpResponseMessage responseRentalPropertyRegistration = await apiClient.PostAsJsonAsync<PropertyInputDTO>("api/properties", rentalProperty);
+
+            List<PropertyOutputDTO> rentalpropertyDTOs = await apiClient.GetFromJsonAsync<List<PropertyOutputDTO>>($"api/properties/rental/owners/{userId}");
+            PropertyOutputDTO testRentalProperty = rentalpropertyDTOs[0];
+
+            // Add a cost to testProperty
+            FinancialInputDTO costOne = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.Cost,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddCostToProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", costOne);
+
+            // Add a revenue to testProperty
+            FinancialInputDTO revenueOne = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.Revenue,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddRevenueToProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", revenueOne);
+
+            // Add a value increase to testProperty
+            FinancialInputDTO valueIncreaseOne = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.ValueIncrease,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddValueIncreaseToProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", valueIncreaseOne);
+
+            // Add a value increase to testProperty
+            FinancialInputDTO valueDecreaseOne = new FinancialInputDTO()
+            {
+                Title = "A valid cost",
+                PropertyId = testProperty.Id,
+                Value = 500,
+                Date = DateTime.Now,
+                FinancialObjectType = FinancialObject.ValueDecrease,
+                Description = "no"
+            };
+
+            HttpResponseMessage responseAddValueDecreaseToProperty = await apiClient.PostAsJsonAsync<FinancialInputDTO>("api/financialobjects", valueDecreaseOne);
+
             // Delete the property
             HttpResponseMessage responsePropertyDelete = await apiClient.DeleteAsync($"api/properties/property/{testProperty.Id}");
+
+            // Delete the rental property
+            HttpResponseMessage responseRentalPropertyDelete = await apiClient.DeleteAsync($"api/properties/rental/{testRentalProperty.Id}");
 
             // Perform deletion of user from AuthService
             HttpResponseMessage responseOwnerDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
             
-            // register a property
-            // register a rental property
             // add financial objects each of them, check the response codes
 
             // Assert
@@ -183,17 +263,19 @@ namespace IntegrationTests
             Assert.That(responseAddminLogin.IsSuccessStatusCode);
             Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
             Assert.That(responseOwnerLogin.IsSuccessStatusCode);
+
             Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
+            Assert.That(responseRentalPropertyRegistration.IsSuccessStatusCode);
+
+            Assert.That(responseAddCostToProperty.IsSuccessStatusCode);
+            Assert.That(responseAddRevenueToProperty.IsSuccessStatusCode);
+            Assert.That(responseAddValueIncreaseToProperty.IsSuccessStatusCode);
+            Assert.That(responseAddValueDecreaseToProperty.IsSuccessStatusCode);
+
+            Assert.That(responseRentalPropertyDelete.IsSuccessStatusCode);
             Assert.That(responsePropertyDelete.IsSuccessStatusCode);
             Assert.That(responseOwnerDelete.IsSuccessStatusCode);
             
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            _authServiceFactory.Dispose();
-            _ppmAPIFactory.Dispose();
         }
     }
 }
