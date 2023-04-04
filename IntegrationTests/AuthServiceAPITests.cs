@@ -61,39 +61,6 @@ namespace IntegrationTests
         }
 
         [Test]
-        public async Task RegisterAndLogin_Administrator_ReturnsSuccessCode()
-        {
-            // Arrange
-            HttpClient authClient = _authServiceFactory.CreateClient();
-
-            var admin = new Dictionary<string, string>()
-            {
-                {"Role", "Administrator"},
-                {"Email", "ValidEmail@Host.com"},
-                {"FirstName", "Jolan"},
-                {"LastName", "Hegyi"},
-                {"Password", "VeryPassword_123"},
-                {"Username", "Hegyine"}
-            };
-
-            FormUrlEncodedContent form = new FormUrlEncodedContent(admin);
-            
-            var loginData = new Dictionary<string, string>()
-            {
-                {"Email", "ValidEmail@Host.com"},
-                {"Password", "VeryPassword_123"}
-            };
-            var loginForm = new FormUrlEncodedContent(loginData);
-            
-            // Act
-            await authClient.PostAsync("/api/authentication/register", form);
-            var responseAddminRegistration = await authClient.PostAsync("/api/authentication/login", loginForm);
-
-            // Assert
-            Assert.That(responseAddminRegistration.IsSuccessStatusCode);
-        }
-
-        [Test]
         public async Task HappyPath_Owner_ReturnsSuccessCodes()
         {
             // Setup clients
@@ -112,16 +79,16 @@ namespace IntegrationTests
             };
 
             FormUrlEncodedContent formAdminRegistration = new FormUrlEncodedContent(admin);
+            HttpResponseMessage responseAdminRegistration = await authClient.PostAsync("/api/authentication/register", formAdminRegistration);
 
             var loginAdminData = new Dictionary<string, string>()
             {
                 {"Email", "ValidEmail@Host.com"},
                 {"Password", "VeryPassword_123"}
             };
-            var loginAsdminForm = new FormUrlEncodedContent(loginAdminData);
+            var loginAdminForm = new FormUrlEncodedContent(loginAdminData);
 
-            await authClient.PostAsync("/api/authentication/register", formAdminRegistration);
-            HttpResponseMessage responseAddminLogin = await authClient.PostAsync("/api/authentication/login", loginAsdminForm);
+            HttpResponseMessage responseAddminLogin = await authClient.PostAsync("/api/authentication/login", loginAdminForm);
             
             // Get admin's jwt token
             string responseContentString = await responseAddminLogin.Content.ReadAsStringAsync();
@@ -151,14 +118,15 @@ namespace IntegrationTests
             await authClient.PostAsync("/api/authentication/register", form);
             
             // Login, get token, get userId
-            HttpResponseMessage responseLogin = await authClient.PostAsync("/api/authentication/login", loginForm);
-            string s = await responseLogin.Content.ReadAsStringAsync();
+            HttpResponseMessage responseOwnerLogin = await authClient.PostAsync("/api/authentication/login", loginForm);
+            string s = await responseOwnerLogin.Content.ReadAsStringAsync();
             LoginResultDTO r = JsonConvert.DeserializeObject<LoginResultDTO>(s);
             var token = new JwtSecurityTokenHandler().ReadJwtToken(r.Token);
             string userId = token.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             
-            /* Register on API server
-             * Should be deleted once inter server communication is established in test environment
+            /*
+             * Register on API server
+             * TODO Should be deleted once inter server communication is established in test environment
              */
 
             apiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", adminLoginResult.Token);
@@ -204,7 +172,7 @@ namespace IntegrationTests
 
 
             // Perform deletion of user from AuthService
-            HttpResponseMessage responseDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
+            HttpResponseMessage responseOwnerDelete = await authClient.DeleteAsync($"/api/authentication/{userId}");
             
             // register a property
             // register a rental property
@@ -213,11 +181,12 @@ namespace IntegrationTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(responseLogin.IsSuccessStatusCode);
-                Assert.That(responseDelete.IsSuccessStatusCode);
-                Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
-                Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
+                Assert.That(responseAdminRegistration.IsSuccessStatusCode);
                 Assert.That(responseAddminLogin.IsSuccessStatusCode);
+                Assert.That(responseOwnerAPIRegistration.IsSuccessStatusCode);
+                Assert.That(responseOwnerLogin.IsSuccessStatusCode);
+                Assert.That(responsePropertyRegistration.IsSuccessStatusCode);
+                Assert.That(responseOwnerDelete.IsSuccessStatusCode);
             });
         }
 
