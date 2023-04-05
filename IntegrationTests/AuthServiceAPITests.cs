@@ -37,6 +37,7 @@ namespace IntegrationTests
                         services.AddDbContext<AuthDbContext>(options =>
                         {
                             options.UseInMemoryDatabase("AuthTestDb");
+                            options.EnableSensitiveDataLogging();
                         });
                     });
                 });
