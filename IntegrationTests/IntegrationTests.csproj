@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.6.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuthServiceDataAccess\AuthServiceDataAccess.csproj" />
+    <ProjectReference Include="..\AuthServiceModelLibrary\AuthServiceModelLibrary.csproj" />
+    <ProjectReference Include="..\AuthServiceServiceLayer\AuthServiceServiceLayer.csproj" />
+    <ProjectReference Include="..\AuthService\AuthServiceAPI.csproj" />
+    <ProjectReference Include="..\PPMAPIDataAccess\PPMAPIDataAccess.csproj" />
+    <ProjectReference Include="..\PPMAPIServiceLayer\PPMAPIServiceLayer.csproj" />
+    <ProjectReference Include="..\PPMAPI\PPMAPI.csproj" />
+    <ProjectReference Include="..\PPMDTOModelLibrary\PPMAPIDTOModelLibrary.csproj" />
+    <ProjectReference Include="..\PPMModelLibrary\PPMAPIModelLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -19,7 +19,15 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
 
         public void DeleteProperty(string id)
         {
-            _db.Properties.Remove(_db.Properties.FirstOrDefault(p => p.Id.ToString() == id));
+            var property = _db.Properties
+                .Include(p => p.Address)
+                .Include(p => p.Costs)
+                .Include(p => p.Revenues)
+                .Include(p => p.ValueIncreases)
+                .Include(p => p.ValueDecreases)
+                .FirstOrDefault(p => p.Id.ToString() == id);
+            
+            _db.Properties.Remove(property);
             _db.SaveChanges();
         }
 
@@ -31,7 +39,13 @@ namespace PPMAPIDataAccess.DbTableQueries.PropertiesQueries
 
         public Property GetPropertyById(string id)
         {
-            return _db.Properties.FirstOrDefault(p => p.Id.ToString() == id);
+            return _db.Properties
+                .Include(p => p.Address)
+                .Include(p => p.Costs)
+                .Include(p => p.Revenues)
+                .Include(p => p.ValueIncreases)
+                .Include(p => p.ValueDecreases)
+                .FirstOrDefault(p => p.Id.ToString() == id);
         }
 
         public List<Property> GetPropertiesByOwnerId(string id)

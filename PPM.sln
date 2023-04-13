@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIDataAccess", "PPMAPID
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPMAPIServiceLayer", "PPMAPIServiceLayer\PPMAPIServiceLayer.csproj", "{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{BDBA4A60-A1B5-4B81-93B7-F4AD5EFCCA1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D43CFF9-24DB-44BF-99A1-DF09AADCC7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBA4A60-A1B5-4B81-93B7-F4AD5EFCCA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBA4A60-A1B5-4B81-93B7-F4AD5EFCCA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBA4A60-A1B5-4B81-93B7-F4AD5EFCCA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBA4A60-A1B5-4B81-93B7-F4AD5EFCCA1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

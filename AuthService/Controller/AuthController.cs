@@ -6,6 +6,7 @@ using AuthServiceServiceLayer.Authentication.AuthOperations;
 using AuthServiceServiceLayer.Authentication.JWTService;
 using AuthServiceServiceLayer.Authentication.Roles.Validator;
 using AuthServiceServiceLayer.ModelConverter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -78,11 +79,30 @@ namespace AuthServiceAPI.Controller
 
             JwtSecurityToken token = _jwtService.GenerateLoginJWT(user);
 
-            return Results.Ok(new
+            return Results.Ok(new LoginResultDTO()
             {
-                message = "Success",
-                token = new JwtSecurityTokenHandler().WriteToken(token)
+                Message = "Success",
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+        }
+
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IResult> DeleteUser(string id)
+        {
+
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return Results.Problem("Error, no such user found!");
+            }
+
+            if (await _userManager.DeleteAsync(user) == IdentityResult.Success)
+            {
+                return Results.Ok("User successfully deleted!");
+            }
+
+            return Results.Problem("Unexpected error during deletion!");
         }
 
         private async Task<IResult> RegisterUserOnAPI(ApplicationUser user)
@@ -106,6 +126,29 @@ namespace AuthServiceAPI.Controller
             string port = _config.GetSection("APIPort").Value;
 
             var response = await client.PostAsync($"https://{domain}:{port}/api/users", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Results.Ok();
+            }
+
+            return Results.Problem("Something went wrong while registering the user on the API");
+        }
+
+        private async Task<IResult> DeleteUserOnAPI(string id)
+        {
+            HttpClient client = new HttpClient();
+
+            ApplicationUser adminOne = _ops.VerifyLoginDTO(new UserLoginDTO() { Email = _config["AdminOneEmail"], Password = _config["AdminOnePassword"] });
+
+            JwtSecurityToken token = _jwtService.GenerateLoginJWT(adminOne);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", new JwtSecurityTokenHandler().WriteToken(token));
+
+            string domain = HttpContext.Request.Host.Host;
+            string port = _config.GetSection("APIPort").Value;
+
+            var response = await client.DeleteAsync($"https://{domain}:{port}/api/users/{id}");
 
             if (response.IsSuccessStatusCode)
             {
