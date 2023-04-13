@@ -36,10 +36,7 @@ namespace PPMAPIDataAccess.DbTableQueries.OwnersQueries
 
         public Owner GetOwnerById(string id)
         {
-            return _db.Owners
-                .Include(o => o.Properties)
-                .Include(o => o.RentalProperties)
-                .FirstOrDefault(o => o.UserId == id);
+            return _db.Owners.FirstOrDefault(o => o.UserId == id);
         }
 
         public Owner GetOwnerByPropertyId(Guid id)
